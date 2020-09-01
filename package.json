@@ -1,0 +1,22 @@
+{
+  "name": "iui",
+  "version": "1.0.0",
+  "description": "一个基于 uni-app 的 UI 组件库（兼容NVUE），主打APP。",
+  "author": "Joeshu <1442702103@qq.com>",
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "uni-app",
+    "vue",
+    "nuve",
+    "ui",
+    "iui"
+  ],
+  "license": "MIT"
+}

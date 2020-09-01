@@ -1,0 +1,184 @@
+// Color Palette
+$black: #000;
+$white: #fff;
+$gray-1: #f7f8fa;
+$gray-2: #f2f3f5;
+$gray-3: #ebedf0;
+$gray-4: #dcdee0;
+$gray-5: #c8c9cc;
+$gray-6: #969799;
+$gray-7: #646566;
+$gray-8: #323233;
+$red: #ee0a24;
+$blue: #1989fa;
+$orange: #ff976a;
+$orange-dark: #ed6a0c;
+$orange-light: #fffbe8;
+$green: #07c160;
+
+// Gradient Colors
+$gradient-red: linear-gradient(to right, #ff6034, #ee0a24);
+$gradient-orange: linear-gradient(to right, #ffd01e, #ff8917);
+
+// Component Colors
+$text-color: $gray-8;
+$active-color: $gray-2;
+$active-opacity: 0.7;
+$disabled-opacity: 0.5;
+$background-color: $gray-1;
+$background-color-light: #fafafa;
+$text-link-color: #576b95;
+
+// Padding
+$padding-base: 4px;
+$padding-xs: $padding-base * 2;
+$padding-sm: $padding-base * 3;
+$padding-md: $padding-base * 4;
+$padding-lg: $padding-base * 6;
+$padding-xl: $padding-base * 8;
+
+// Font
+$font-size-xs: 10px;
+$font-size-sm: 12px;
+$font-size-md: 14px;
+$font-size-lg: 16px;
+$font-weight-bold: 500;
+$base-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+  Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'Hiragino Sans GB',
+  'Microsoft Yahei', sans-serif;
+$price-integer-font-family: Avenir-Heavy, PingFang SC, Helvetica Neue, Arial,
+  sans-serif;
+
+// Animation
+$animation-duration-base: 0.3s;
+$animation-duration-fast: 0.2s;
+$animation-timing-function-enter: ease-out;
+$animation-timing-function-leave: ease-in;
+
+// Border
+$border-color: $gray-3;
+$border-width-base: 1px;
+$border-radius-sm: 2px;
+$border-radius-md: 4px;
+$border-radius-lg: 8px;
+$border-radius-max: 999px;
+
+// z-index
+$z-index: 999;
+
+// Button
+$button-mini-height: 24px;
+$button-mini-font-size: $font-size-xs;
+$button-small-height: 32px;
+$button-small-font-size: $font-size-sm;
+$button-normal-font-size: $font-size-md;
+$button-large-height: 50px;
+$button-default-height: 100rpx;
+$button-default-line-height: 1.2;
+$button-default-font-size: $font-size-lg;
+$button-default-color: $text-color;
+$button-default-background-color: $white;
+$button-default-border-color: $border-color;
+$button-primary-color: $white;
+$button-primary-background-color: $green;
+$button-primary-border-color: $green;
+$button-info-color: $white;
+$button-info-background-color: $blue;
+$button-info-border-color: $blue;
+$button-danger-color: $white;
+$button-danger-background-color: $red;
+$button-danger-border-color: $red;
+$button-warning-color: $white;
+$button-warning-background-color: $orange;
+$button-warning-border-color: $orange;
+$button-border-width: $border-width-base;
+$button-border-radius: $border-radius-sm;
+$button-round-border-radius: $border-radius-max;
+$button-plain-background-color: $white;
+$button-disabled-opacity: $disabled-opacity;
+ 
+// Cell
+$cell-font-size: $font-size-md;
+$cell-line-height: 24px;
+$cell-vertical-padding: 26rpx;
+$cell-horizontal-padding: 30rpx;
+$cell-text-color: $text-color;
+$cell-background-color: $white;
+$cell-border-color: $border-color;
+$cell-active-color: $active-color;
+$cell-required-color: $red;
+$cell-title-color: $text-color;
+$cell-title-font-size: $font-size-lg;
+$cell-title-line-height: 24px;
+$cell-label-color: $gray-6;
+$cell-label-font-size: $font-size-sm;
+$cell-label-line-height: 18px;
+$cell-label-margin-top: $padding-base;
+$cell-value-color: $gray-6;
+$cell-icon-size: 16px;
+$cell-right-icon-color: $gray-6;
+ 
+// Loading
+$loading-text-color: $gray-6;
+$loading-text-font-size: $font-size-md;
+$loading-spinner-color: $gray-5;
+$loading-spinner-size: 60rpx;
+$loading-spinner-animation-duration: 0.8s;
+
+// LoadMore
+$load-more-height: 100rpx;
+$load-more-text-color: $gray-6;
+$load-more-text-font-size: $font-size-md;
+$load-more-spinner-color: $gray-5;
+
+// Overlay
+$overlay-z-index: $z-index;
+$overlay-background-color: rgba(0, 0, 0, 0.7);
+
+// Image
+$image-transition-duration: $animation-duration-base;
+$image-placeholder-background-color: $gray-1;
+$image-placeholder-text-color: $gray-6;
+
+// Switch
+$switch-width: 120rpx;
+$switch-height: 60rpx;
+$switch-border-color: rgba(0, 0, 0, 0.1);
+$switch-node-size: 60rpx;
+$switch-node-z-index: 1;
+$switch-node-background-color: $white;
+$switch-node-box-shadow: 0 1px 3px rgba(0,0,0,.4);
+$switch-background-color: $white;
+$switch-on-background-color: $blue;
+$switch-transition-duration: $animation-duration-base;
+$switch-disabled-opacity: $disabled-opacity;
+
+// Slider
+$slider-active-background-color: $blue;
+$slider-inactive-background-color: $gray-3;
+$slider-disabled-opacity: $disabled-opacity;
+$slider-bar-height: 2px;
+$slider-button-width: 48rpx;
+$slider-button-height: 48rpx; 
+$slider-button-border-radius: 24rpx;
+$slider-button-position-offset: -24rpx;
+$slider-button-background-color: $white;
+$slider-button-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+
+// Radio
+$radio-size: 20px;
+$radio-border-color: $gray-5;
+$radio-transition-duration: $animation-duration-fast;
+$radio-checked-icon-color: $blue;
+$radio-disabled-icon-color: $gray-5;
+$radio-disabled-background-color: $border-color;
+
+// NavBar
+$nav-bar-height: 44px;
+$nav-bar-background-color: $white;
+$nav-bar-arrow-size: 16px;
+$nav-bar-icon-color: $blue;
+$nav-bar-text-color: $blue;
+$nav-bar-text-font-size: $font-size-md;
+$nav-bar-title-font-size: $font-size-lg;
+$nav-bar-title-text-color: $text-color;

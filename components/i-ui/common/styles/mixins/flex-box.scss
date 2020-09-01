@@ -1,0 +1,49 @@
+
+/**
+ * flex-box
+ * @desc 使用flex-box，抹平vue 和 nve页面布局差异，使其表现一致
+ * @param {Number} $direction 弹性盒子内部元素方向
+ */
+@mixin flex-box($direction: 'column') {
+    /* #ifndef APP-NVUE */
+    box-sizing: border-box;
+    display: flex;
+    // line-height: 1.2;
+    /* #endif */
+    flex-direction: #{$direction};
+}
+
+/**
+ * i-row
+ * @desc 使用了24列栅格平分，与 @mixin i-col搭配使用，通过在Col上添加$span 属性设置列所占的宽度百分比
+ * @param {Number} $gutter 列元素之间的间距
+ */
+@mixin i-row($gutter: 0) {
+    @include flex-box('row');
+    flex-wrap: wrap;
+    @if($gutter > 0) {
+        margin-left: -$gutter / 2* 1rpx;
+        margin-right: -$gutter / 2* 1rpx;
+    }
+}
+
+/**
+ * i-col
+ * @desc 提供了24列栅格，与 @mixin i-row搭配使用，通过在Col上添加$span 属性设置列所占的宽度百分比
+ * @param {Number} $span 列元素宽度占比
+ * @param {Number} $space 列元素之间的间距
+ * @param {Number} $rowWidth 布局容器宽度，nvue下为必填项(rpx在转换过程中会有精度丢失问题,所以nvue下的表现会有些瑕疵)
+ */
+@mixin i-col($span: 8, $space: 0, $rowWidth: 375) {
+    @include flex-box();
+    /* #ifndef APP-NVUE */
+    width: $span * 100% / 24;
+    /* #endif */
+    /* #ifdef APP-NVUE */
+    width: $span * ($rowWidth + $space) / 24 * 1rpx;
+    /* #endif */
+    @if($space > 0) {
+        padding-left: $space / 2* 1rpx;
+        padding-right: $space / 2* 1rpx;
+    }
+}
