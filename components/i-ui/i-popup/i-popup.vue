@@ -1,5 +1,5 @@
 <template>
-    <view v-if="show" class="i-popup-wrapper" @touchmove.stop.prevent="noop">
+    <view class="i-popup-wrapper" @touchmove.stop.prevent="noop">
         <!-- #ifdef APP-NVUE -->
         <!-- <i-overlay :show="show" :custom-style="overlayStyle" @click="onOverlayClick" /> -->
         <view v-if="show" class="i-overlay" @click="onOverlayClick" />
