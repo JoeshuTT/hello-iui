@@ -15,8 +15,8 @@ import { addUnit } from '../utils'
 import icon from './type'
 // #ifdef APP-NVUE
 const fontFamily = 'iuiIconFont'
-const url = '/static/iuiIconFont.ttf'
-// const url = 'https://at.alicdn.com/t/font_1949925_qisrzzyoqy8.ttf'
+// const url = '/static/iuiIconFont.ttf'
+const url = 'https://at.alicdn.com/t/font_1949925_qisrzzyoqy8.ttf'
 const dom = weex.requireModule('dom')
 dom.addRule('fontFace', {
     'fontFamily': fontFamily,
