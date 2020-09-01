@@ -13,7 +13,28 @@ iui 的组件设计基本参考了uni-app官方组件库，vant-ui，weexui的�
 
 1. 下载组件库  
 仅仅只需要拷贝下示例源码根目录下的 `/components/iui`，到你的项目`/components`，不会对现有项目有任何影响。
-![代码演示](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-joeshu-cloud/f8382d10-ec63-11ea-81ea-f115fe74321c.png)
+```
+// 代码演示
+<template>
+    <view class="container">
+        <!-- 使用 -->
+        <i-button type="default" text="默认按钮" />
+    </view>
+</template>
+
+<script>
+// 引入
+import IButton  from '@/components/i-ui/i-button/i-button.vue'
+
+export default {
+    // 注册
+    components: {
+        IButton,
+    }
+    // 其他代码
+}
+</script>
+```
 
 2. 关于SCSS  
 iui 有依赖scss，请务必有安装 `sass`
