@@ -32,6 +32,7 @@
 <script>
 import IIcon from '../i-icon/i-icon'
 import { getSystemInfoSync } from '../utils'
+
 export default {
     name: 'INavBar',
     components: {
