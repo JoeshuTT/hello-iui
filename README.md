@@ -4,7 +4,12 @@
 iui 是适用于APP，兼容NVUE的UI组件库，非常适合面向app用户的跨端开发。
 
 ## 快速体验
-截图
+
+- 扫码体验
+![发布页二维码](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-joeshu-cloud/41ebc530-edb7-11ea-9dfb-6da8e309e0d8.png)
+
+- 浏览器打开体验
+[H5页面快速体验，点击跳转](https://static-386415c0-10b5-4a03-a868-8fb41b9e886e.bspapp.com/#/)
 
 ## 设计思路
 iui 的组件和
