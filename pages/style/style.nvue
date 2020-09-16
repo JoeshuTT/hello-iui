@@ -84,7 +84,7 @@ export default {
     }
 
     .demo-col-8 {
-        @include i-col(8,0,690);
+        @include i-col(8, 0, 690);
         margin-bottom: 20rpx;
     }
 
@@ -93,7 +93,7 @@ export default {
     }
 
     .demo-col-space-8 {
-        @include i-col(8,40,690);
+        @include i-col(8, 40, 690);
         margin-bottom: 20rpx;
     }
 </style>

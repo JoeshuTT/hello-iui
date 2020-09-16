@@ -35,6 +35,10 @@ export default [
                 path: '/pages/popup/popup'
             },
             {
+                name: 'page 页面容器',
+                path: '/pages/page/page'
+            },
+            {
                 name: 'Style 内置样式',
                 path: '/pages/style/style'
             },

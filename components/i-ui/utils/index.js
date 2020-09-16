@@ -1,19 +1,7 @@
 /**
- * util
+ * util 工具方法
  */
-
-export function isDef(value) {
-    return value !== undefined && value !== null
-}
-
-export function isObj(x) {
-    const type = typeof x
-    return x !== null && (type === 'object' || type === 'function')
-}
-
-export function isNumber(value) {
-    return /^\d+(\.\d+)?$/.test(value)
-}
+import { isDef, isNumber } from './validate'
 
 /**
  * getSystemInfoSync
@@ -25,6 +13,39 @@ export const getSystemInfoSync = function() {
         systemInfo = uni.getSystemInfoSync()
     }
     return systemInfo
+}
+
+/**
+ * 对页面携带参数(url传参)进行encodeURI编码
+ * @param {Object} query
+ * @description 页面跳转携带参数时使用，尤其是携带中文参数时
+ * @return {String}
+ */
+export const qsStringify = function(query) {
+    if (!query && typeof query !== 'object') {
+        throw new Error('error arguments', 'qsStringify')
+    }
+    const url = Object.keys(query).map(key => key + '=' + encodeURIComponent(query[key])).join('&')
+    return url
+}
+
+/**
+ * 获取上一个页面实例 $vm
+ * @param {Number} delta 页面层数
+ * @description 可用于修改上一页数据
+ * @return {Object} query
+ */
+export const getPrevPage = function(delta = 1) {
+    const pages = getCurrentPages()
+    if (delta > pages.length) {
+        // 页面层数大于现有页面数
+        return null
+    }
+    const prevPage = pages[pages.length - (delta + 1)]
+    if (prevPage) {
+        return prevPage.$vm
+    }
+    return null
 }
 
 /**

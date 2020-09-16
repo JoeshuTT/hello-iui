@@ -1,0 +1,49 @@
+<template>
+    <i-page :status="pageActivity">
+        <view class="main">页面主体</view>
+    </i-page>
+</template>
+
+<script>
+
+import pageMixin from '@/mixins/page'
+
+export default {
+    mixins: [pageMixin],
+    data() {
+        return {
+            pageActivity: 'success',
+            statusList: ['success', 'fail', 'loading'],
+            statusIndex: 0,
+            show: true
+        }
+    },
+    onLoad() {
+
+    },
+    onNavigationBarButtonTap(e) {
+        console.log(e)
+
+        this.statusIndex += 1
+        if (this.statusIndex > this.statusList.length) {
+            this.statusIndex = 0
+        }
+        this.pageActivity = this.statusList[this.statusIndex]
+    },
+    methods: {
+
+    }
+}
+</script>
+
+<style lang="scss">
+
+    .main {
+        margin-top: 300rpx;
+        height: 300rpx;
+        @include flex-box();
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+    }
+</style>

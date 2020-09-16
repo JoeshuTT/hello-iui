@@ -1,0 +1,43 @@
+<template>
+    <i-page :status="pageActivity">
+        <i-cell title="draggable - 拖拽排序" label="适用于H5，App vue页面" is-link @click="onNavigator()" />
+            <!-- <i-cell title="使用render.js，将20K星的Sortable.js，应用与uni-app生态" label="适用于H5，App vue页面" is-link @click="onNavigator()" /> -->
+    </i-page>
+</template>
+
+<script>
+
+import pageMixin from '@/mixins/page'
+
+export default {
+    mixins: [pageMixin],
+    data() {
+        return {
+            pageActivity: 'success',
+            statusList: ['success', 'fail', 'loading'],
+            statusIndex: 0,
+            show: true
+        }
+    },
+    methods: {
+        onNavigator(path) {
+            uni.showToast({
+                icon: 'none',
+                title: '等一下，我马上就来！T.T'
+            })
+        }
+    }
+}
+</script>
+
+<style lang="scss">
+
+    .main {
+        margin-top: 300rpx;
+        height: 300rpx;
+        @include flex-box();
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+    }
+</style>

@@ -73,7 +73,7 @@ $button-small-height: 32px;
 $button-small-font-size: $font-size-sm;
 $button-normal-font-size: $font-size-md;
 $button-large-height: 50px;
-$button-default-height: 100rpx;
+$button-default-height: 88rpx;
 $button-default-line-height: 1.2;
 $button-default-font-size: $font-size-lg;
 $button-default-color: $text-color;
@@ -97,6 +97,12 @@ $button-round-border-radius: $border-radius-max;
 $button-plain-background-color: $white;
 $button-disabled-opacity: $disabled-opacity;
  
+// Page
+$page-bg-color: $gray-1;
+$page-title-color: $gray-6;
+$page-title-size: $font-size-md;
+$page-loading-title-size: $font-size-lg;
+
 // Cell
 $cell-font-size: $font-size-md;
 $cell-line-height: 24px;

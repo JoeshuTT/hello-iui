@@ -10,6 +10,15 @@
             }
 		},
 		{
+			"path": "pages/discover/discover",
+			"style": {
+                "app-plus": {
+                    "bounce": "none",
+                    "scrollIndicator": "none"
+                }
+            }
+		},
+		{
             "path" : "pages/button/button",
             "style": {
                 "app-plus": {
@@ -51,6 +60,22 @@
                 "app-plus": {
                     "bounce": "none",
                     "scrollIndicator": "none"
+                }
+            }
+        },
+		{
+            "path" : "pages/page/page",
+            "style": {
+                "app-plus": {
+                    "bounce": "none",
+                    "scrollIndicator": "none",
+					"titleNView": {
+						"buttons": [{
+							"text": "切换",
+							"fontSize": "16px",
+							"color": "#222"
+						}]
+					}
                 }
             }
         },
@@ -120,11 +145,33 @@
             }
         }
     ],
+    "tabBar": {
+        "color": "#b2b2b2",
+        "selectedColor": "#42b983",
+        "backgroundColor": "#ffffff",
+        // #ifdef APP-PLUS
+        "borderStyle": "#f2f2f2",
+        // #endif
+        "list": [
+            {
+                "pagePath": "pages/home/home",
+                "text": "首页",
+                "iconPath": "static/tabbar/home.png",
+                "selectedIconPath": "static/tabbar/home_on.png"
+            }, 
+            {
+                "pagePath": "pages/discover/discover",
+                "text": "发现",
+                "iconPath": "static/tabbar/discover.png",
+                "selectedIconPath": "static/tabbar/discover_on.png"
+            }
+        ]
+    },
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "Hello IUi",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTitleText": "Hello Iui",
+		"navigationBarBackgroundColor": "#f8f8f8",
+		"backgroundColor": "#f8f8f8"
 	},
 	"easycom": {
 		"autoscan": true,
