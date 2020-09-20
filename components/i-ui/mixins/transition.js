@@ -90,23 +90,23 @@ export default {
         show: {
             type: Boolean,
             default: false
-        },
-        name: {
-            type: String,
-            default: 'fade'
-        },
-        duration: {
-            type: null,
-            default: 300
-        },
-        customStyle: {
-            type: Object,
-            default: () => ({})
-        },
-        animConfig: {
-            type: null,
-            default: null
         }
+        // name: {
+        //     type: String,
+        //     default: 'fade'
+        // },
+        // duration: {
+        //     type: null,
+        //     default: 300
+        // },
+        // customStyle: {
+        //     type: Object,
+        //     default: () => ({})
+        // },
+        // animConfig: {
+        //     type: null,
+        //     default: null
+        // }
         // [{ backgroundColor: 'red', transform: `rotate(-360deg) translate3d(-100%, -100%, 0)` },{ backgroundColor: 'blue', transform: `rotate(0deg) translate3d(0, 0, 0)` }]
         // [{ backgroundColor: 'red', transform: `rotate(-360deg) translate3d(-100%, -100%, 0)` },{ backgroundColor: 'blue', transform: `rotate(0deg) translate3d(0, 0, 0)` }]
 
