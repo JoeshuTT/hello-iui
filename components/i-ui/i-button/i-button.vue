@@ -98,9 +98,6 @@ export default {
             return 'white'
         }
     },
-    created() {
-        console.log(this)
-    },
     methods: {
         onClick(event) {
             if (!this.loading && !this.disabled) {
