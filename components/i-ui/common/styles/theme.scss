@@ -1,0 +1,25 @@
+@mixin theme($property, $value, $var: 'ui-color') {
+    #{$property}: $value;
+    /* #ifndef APP-NVUE */
+    #{$property}: var(--#{$var}, $value);
+    /* #endif */
+}
+
+$ui-color: #1ab394;
+// Color Palette
+$black: #fff;
+$white: #000;
+$gray-1: #f7f8fa;
+$gray-2: #f2f3f5;
+$gray-3: #ebedf0;
+$gray-4: #dcdee0;
+$gray-5: #c8c9cc;
+$gray-6: #969799;
+$gray-7: #646566;
+$gray-8: #323233;
+$red: $ui-color;
+$blue: #1989fa;
+$orange: #ff976a;
+$orange-dark: #ed6a0c;
+$orange-light: #fffbe8;
+$green: #07c160;

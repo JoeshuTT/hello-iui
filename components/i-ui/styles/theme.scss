@@ -1,0 +1,28 @@
+
+@mixin theme($property, $value, $var: 'theme-color') {
+    #{$property}: $value;
+    /* #ifndef APP-NVUE */
+    #{$property}: var(--#{$var}, $value);
+    /* #endif */
+}
+
+
+// 定制主题
+// 覆盖组件样式变量
+$theme-color: #42b983;
+
+// Color Palette
+$black: #000;
+$white: #fff;
+$gray-1: #f7f8fa;
+$gray-2: #f2f3f5;
+$gray-3: #ebedf0;
+$gray-4: #dcdee0;
+$gray-5: #c8c9cc;
+$gray-6: #969799;
+$gray-7: #646566;
+$gray-8: #323233;
+$red: #ee0a24;
+$blue: #1989fa;
+$orange: #ff976a;
+$green: $theme-color;

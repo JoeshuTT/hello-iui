@@ -77,6 +77,5 @@ $uni-font-size-paragraph:30rpx;
 
 
 /* 自定义mixins，复用样式，按需引入 */
-@import '~@/components/i-ui/common/styles/mixins/ellipsis.scss'; 
-@import '~@/components/i-ui/common/styles/mixins/flex-box.scss';
-@import '~@/components/i-ui/common/styles/mixins/theme.scss'; 
+@import '~@/components/i-ui/styles/mixins/ellipsis.scss'; 
+@import '~@/components/i-ui/styles/mixins/flex-box.scss';

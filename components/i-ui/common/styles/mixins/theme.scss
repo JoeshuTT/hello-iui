@@ -1,6 +1,0 @@
-@mixin theme($property, $value, $var: 'ui-color') {
-    #{$property}: $value;
-    /* #ifndef APP-NVUE */
-    #{$property}: var(--#{$var}, $value);
-    /* #endif */
-}

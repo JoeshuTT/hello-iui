@@ -1,7 +1,46 @@
 /**
  * util 工具方法
  */
-import { isDef, isNumber } from './validate'
+
+/**
+ * 验证 - 是否未定义
+ * @param {*} value
+ * @return {Boolean}
+ */
+export function isDef(value) {
+    return value !== undefined && value !== null
+}
+
+/**
+ * 验证 - 是否是对象
+ * @param {*} x
+ * @return {Boolean}
+ */
+export function isObj(x) {
+    const type = typeof x
+    return x !== null && (type === 'object' || type === 'function')
+}
+
+/**
+ * 验证 - 是否是字符串
+ * @param {string} str
+ * @return {Boolean}
+ */
+export function isString(str) {
+    if (typeof str === 'string' || str instanceof String) {
+        return true
+    }
+    return false
+}
+
+/**
+ * 验证 - 是否是数字
+ * @param {Number} value
+ * @return {Boolean}
+ */
+export function isNumber(value) {
+    return /^\d+$/.test(value)
+}
 
 /**
  * getSystemInfoSync
@@ -153,7 +192,7 @@ export function deepClone(source) {
 
 /**
  * 查询指定节点的布局位置信息，其功能类似于 DOM 的 getBoundingClientRect
- * @param {Boolean} context 节点对象实例
+ * @param {Object} context 节点对象实例
  * @param {String} selector .a, #a
  * @param {Boolean} all
  */

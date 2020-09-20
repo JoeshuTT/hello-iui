@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../common/index.scss';
+	@import '../styles/index.scss';
 
     .i-row {
         @include flex-box('row');

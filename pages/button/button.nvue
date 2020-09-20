@@ -1,20 +1,20 @@
 <template>
     <view class="container">
         <demo-block title="按钮类型" padding>
-            <i-button class="mb20" type="default" text="默认按钮" />
-            <i-button class="mb20" type="primary" text="主要按钮" />
-            <i-button class="mb20" type="info" text="信息按钮" />
+            <i-button class="mb20" type="default">默认按钮</i-button>
+            <i-button class="mb20" type="primary">信息按钮</i-button>
+            <i-button class="mb20" type="info"><text>主要按钮</text></i-button>
             <i-button class="mb20" type="warning" text="警告按钮" />
             <i-button class="mb20" type="danger" text="危险按钮" />
         </demo-block>
         <demo-block title="朴素按钮" padding>
-            <i-button class="mb20" type="default" plain text="朴素按钮" />
-            <i-button class="mb20" type="primary" plain text="朴素按钮" />
+            <i-button class="mb20" type="default" plain>朴素按钮</i-button>
+            <i-button class="mb20" type="primary" disabled>朴素按钮</i-button>
 
         </demo-block>
         <demo-block title="禁用状态" padding>
-            <i-button class="mb20" type="default" disabled text="禁用状态" />
-            <i-button class="mb20" type="primary" disabled text="禁用状态" />
+            <i-button class="mb20" type="default" disabled>禁用状态</i-button>
+            <i-button class="mb20" type="primary" disabled>禁用状态</i-button>
         </demo-block>
         <demo-block title="加载状态" padding>
             <i-button class="mb20" loading type="primary" :btn-style="{width: '100rpx'}" />
@@ -23,7 +23,8 @@
         </demo-block>
         <demo-block title="图标按钮" padding>
             <i-button class="mb20" icon="success" :btn-style="{width: '100rpx'}" />
-            <i-button class="mb20" icon="success" type="primary" :btn-style="{width: '150rpx'}" text="按钮" />
+            <i-button class="mb20" icon="success" type="primary" :btn-style="{width: '150rpx'}">按钮</i-button>
+            <i-button class="mb20" icon="success" type="info" :btn-style="{width: '200rpx'}">按钮</i-button>
             <i-button class="mb20" icon="success" type="info" :btn-style="{width: '200rpx'}" text="按钮" />
         </demo-block>
     </view>

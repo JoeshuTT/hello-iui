@@ -48,7 +48,7 @@ export default {
             default: 'center' // top, bottom, left, right, center
         },
         duration: {
-            type: Number,
+            type: null,
             default: 300
         },
         customStyle: {
@@ -104,7 +104,7 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../common/index.scss';
+	@import '../styles/index.scss';
 
 	.i-popup {
 		@include flex-box();

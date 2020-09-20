@@ -15,25 +15,13 @@ export default {
         show: {
             type: Boolean,
             default: false
-        },
-        name: {
-            type: String,
-            default: 'fade'
-        },
-        duration: {
-            type: Number,
-            default: 300
-        },
-        customStyle: {
-            type: Object,
-            default: () => ({})
         }
     }
 }
 </script>
 
 <style lang="scss">
-	@import '../common/index.scss';
+	@import '../styles/index.scss';
 
     .i-transition {
         transition-timing-function: ease;

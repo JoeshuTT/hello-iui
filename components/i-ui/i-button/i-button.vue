@@ -1,15 +1,24 @@
 <template>
     <view class="i-button" :class="['i-button--' + type, plain && 'i-button--plain', disabled && 'i-button--disabled']" :style="btnStyle" @click="onClick">
-        <slot>
-            <template v-if="loading">
-                <i-loading v-if="loading" :type="loadingType" class="i-button__loading" :size="loadingSize" :color="loadingColor" />
-                <text v-if="loadingText" class="i-button__loading-text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]">{{ loadingText }}</text>
+        <template v-if="loading">
+            <i-loading v-if="loading" :type="loadingType" class="i-button__loading" :size="loadingSize" :color="loadingColor" />
+            <text v-if="loadingText" class="i-button__loading-text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]">{{ loadingText }}</text>
+        </template>
+        <template v-else>
+            <i-icon v-if="icon" :name="icon" :font-family="iconFont" :color="iconColor" class="i-button__icon" />
+            <template v-if="text">
+                <text class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']" :style="textStyle">{{ text }}</text>
             </template>
             <template v-else>
-                <i-icon v-if="icon" :name="icon" :font-family="iconFont" :color="iconColor" class="i-button__icon" />
-                <text v-if="text" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]" :style="textStyle">{{ text }}</text>
+                <!-- #ifdef APP-NVUE -->
+                <text v-if="$slots.default && $slots.default[0].tag === 'u-text'" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']" :style="textStyle">{{ $slots.default[0].children[0].text }}</text>
+                <!-- #endif -->
+                <!-- #ifndef APP-NVUE -->
+                <text v-if="$slots.default" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']":style="textStyle"><slot /></text>
+                <!-- #endif -->
             </template>
-        </slot>
+            </text>
+        </template>
     </view>
 </template>
 
@@ -89,6 +98,9 @@ export default {
             return 'white'
         }
     },
+    created() {
+        console.log(this)
+    },
     methods: {
         onClick(event) {
             if (!this.loading && !this.disabled) {
@@ -100,17 +112,19 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../common/index.scss';
+	@import '../styles/index.scss';
 
 	.i-button {
 		@include flex-box('row');
 		align-items: center;
 		justify-content: center;
 		height: $button-default-height;
+        font-size: $button-normal-font-size;
         opacity: 1;
 		transition: opacity $animation-duration-fast;
 
 		&--default {
+            color: $button-default-color;
 			background-color: $button-default-background-color;
 			border-width: $button-border-width;
 			border-style: solid;
@@ -167,6 +181,7 @@ export default {
 	}
 
 	.i-button__text {
+        /* #ifdef APP-NVUE */
 		font-size: $button-normal-font-size;
 
 		&--default {
@@ -211,15 +226,18 @@ export default {
 				color: $button-warning-background-color;
 			}
 		}
+        /* #endif */
 	}
 
 	.i-button__loading-text {
+        /* #ifdef APP-NVUE */
 		font-size: $button-normal-font-size;
-		margin-left: 5px;
+        /* #endif */
+		margin-left: 4px;
 	}
 
-	.i-button__icon {
-		font-size: $button-normal-font-size;
-		margin-right: 5px;
-	}
+    .i-button__text--inline {
+      margin-left: 4px
+    }
+
 </style>

@@ -2,19 +2,6 @@
  * util
  */
 
-export function isDef(value) {
-    return value !== undefined && value !== null
-}
-
-export function isObj(x) {
-    const type = typeof x
-    return x !== null && (type === 'object' || type === 'function')
-}
-
-export function isNumber(value) {
-    return /^\d+(\.\d+)?$/.test(value)
-}
-
 /**
  * getSystemInfoSync
  * @return {Object}
@@ -25,32 +12,6 @@ export const getSystemInfoSync = function() {
         systemInfo = uni.getSystemInfoSync()
     }
     return systemInfo
-}
-
-/**
- * rpx2px
- * @param {Number} val
- * @param {Number} destWidth
- * @return {Number}
- */
-export const rpx2px = function(val, destWidth = 750) {
-    const scale = getSystemInfoSync().windowWidth / destWidth
-
-    return Math.round(val * scale)
-}
-
-/**
- * 添加单位
- * @param {Number|String} value
- * @param {String} unit
- * @return {String}
- */
-export function addUnit(value, unit = 'px') {
-    if (!isDef(value)) {
-        return undefined
-    }
-    value = String(value)
-    return isNumber(value) ? `${value}${unit}` : value
 }
 
 /**

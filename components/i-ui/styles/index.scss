@@ -1,0 +1,18 @@
+/**
+ * 组件内置样式
+ *
+ */
+
+// mixins
+@import './mixins/ellipsis.scss';
+@import './mixins/flex-box.scss';
+@import './mixins/hairline.scss';
+
+//
+@import './animate.scss';
+@import './var.scss';
+
+
+// iconFont
+// $iconFontUrl:  '~@/static/iuiIconFont.ttf';
+$iconFontUrl: 'https://at.alicdn.com/t/font_1949925_qisrzzyoqy8.ttf';

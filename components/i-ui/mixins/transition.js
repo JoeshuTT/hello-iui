@@ -2,12 +2,13 @@
  * transition
  */
 
+import { isObj } from '../utils'
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 1000 / 30))
 const getClassNames = (name) => ({
-    enter: `i-${name}-enter i-${name}-enter-active`,
-    'enter-to': `i-${name}-enter-to i-${name}-enter-active`,
-    leave: `i-${name}-leave i-${name}-leave-active`,
-    'leave-to': `i-${name}-leave-to i-${name}-leave-active`
+    enter: `i-${name}-enter i-${name}-enter-active enter-class enter-active-class`,
+    'enter-to': `i-${name}-enter-to i-${name}-enter-active enter-to-class enter-active-class`,
+    leave: `i-${name}-leave i-${name}-leave-active leave-class leave-active-class`,
+    'leave-to': `i-${name}-leave-to i-${name}-leave-active leave-to-class leave-active-class`
 })
 
 // #ifdef APP-NVUE
@@ -80,7 +81,7 @@ const animationMap = {
         'leave-to': { opacity: 0, transform: `scale(1.2)` }
     }
 }
-const getStyle = (name) => (animationMap[name] || animationMap['fade'])
+const getStyle = (name) => animationMap[name]
 // #endif
 
 export default {
@@ -89,27 +90,38 @@ export default {
         show: {
             type: Boolean,
             default: false
+        },
+        name: {
+            type: String,
+            default: 'fade'
+        },
+        duration: {
+            type: null,
+            default: 300
+        },
+        customStyle: {
+            type: Object,
+            default: () => ({})
+        },
+        animConfig: {
+            type: null,
+            default: null
         }
-        // name: {
-        //     type: String,
-        //     default: 'fade'
-        // },
-        // duration: {
-        //     type: Number,
-        //     default: 300
-        // },
-        // customStyle: {
-        //     type: Object,
-        //     default: () => ({})
-        // }
+        // [{ backgroundColor: 'red', transform: `rotate(-360deg) translate3d(-100%, -100%, 0)` },{ backgroundColor: 'blue', transform: `rotate(0deg) translate3d(0, 0, 0)` }]
+        // [{ backgroundColor: 'red', transform: `rotate(-360deg) translate3d(-100%, -100%, 0)` },{ backgroundColor: 'blue', transform: `rotate(0deg) translate3d(0, 0, 0)` }]
+
     },
     data() {
+        const currentDuration = isObj(this.duration) ? this.duration.enter : this.duration
+
         return {
             inited: false,
             display: false,
             status: '',
             classes: '',
-            viewStyle: {}
+            viewStyle: {},
+            transitionEnded: false,
+            currentDuration
         }
     },
     computed: {
@@ -117,11 +129,11 @@ export default {
             const { viewStyle, customStyle } = this
             return {
                 // #ifndef APP-NVUE
-                transitionDuration: `${this.duration}ms`,
+                transitionDuration: `${this.currentDuration}ms`,
                 display: `${this.display ? '' : 'none'}`,
                 // #endif
-                ...viewStyle,
-                ...customStyle // 避免自定义样式影响到动画属性
+                ...customStyle, // 避免自定义样式影响到动画属性
+                ...viewStyle
             }
         }
     },
@@ -149,6 +161,7 @@ export default {
         enter() {
             const { name, duration } = this
             const classNames = getClassNames(name)
+            const currentDuration = isObj(duration) ? duration.enter : duration
             this.status = 'enter'
             this.$emit('before-enter')
             Promise.resolve()
@@ -159,12 +172,13 @@ export default {
                     this.inited = true
                     this.display = true
                     this.classes = classNames.enter
-                    this.currentDuration = duration
+                    this.currentDuration = currentDuration
                 })
                 .then(nextTick)
                 .then(() => {
                     this.checkStatus('enter')
                     this.$emit('after-enter')
+                    this.transitionEnded = false
                     this.classes = classNames['enter-to']
                 })
                 .catch(() => {})
@@ -175,6 +189,7 @@ export default {
             }
             const { name, duration } = this
             const classNames = getClassNames(name)
+            const currentDuration = isObj(duration) ? duration.leave : duration
             this.status = 'leave'
             this.$emit('before-leave')
             Promise.resolve()
@@ -183,18 +198,13 @@ export default {
                     this.checkStatus('leave')
                     this.$emit('leave')
                     this.classes = classNames.leave
-                    this.currentDuration = duration
+                    this.currentDuration = currentDuration
                 })
                 .then(nextTick)
                 .then(() => {
                     this.checkStatus('leave')
-                    this.$emit('after-leave')
-                    setTimeout(() => {
-                        const { show, display } = this
-                        if (!show && display) {
-                            this.display = false
-                        }
-                    }, duration)
+                    this.transitionEnded = false
+                    setTimeout(() => this.onTransitionEnd(), currentDuration)
                     this.classes = classNames['leave-to']
                 })
                 .catch(() => {})
@@ -203,21 +213,24 @@ export default {
         // #ifdef APP-NVUE
         enter2() {
             const { name, duration } = this
-            const styleObj = getStyle(name)
+            const currentStyle = getStyle(name) || this.animConfig
+            const currentDuration = isObj(duration) ? duration.enter : duration
             this.status = 'enter'
             this.$emit('before-enter')
             this.inited = true
             this.display = true
-            this.viewStyle = Object.assign({}, this.viewStyle, styleObj.enter)
+            this.currentDuration = currentDuration
+            this.viewStyle = Object.assign({}, this.viewStyle, currentStyle.enter)
 
             Promise.resolve()
                 .then(nextTick)
                 .then(() => {
                     this.checkStatus('enter')
                     this.$emit('enter')
+                    this.currentDuration = currentDuration
                     animation.transition(this.$refs['ani'].ref, {
-                        styles: styleObj['enter-to'],
-                        duration,
+                        styles: currentStyle['enter-to'],
+                        duration: currentDuration,
                         timingFunction: 'ease',
                         needLayout: false,
                         delay: 0
@@ -234,31 +247,28 @@ export default {
                 return
             }
             const { name, duration } = this
-            const styleObj = getStyle(name)
+            const currentStyle = getStyle(name) || this.animConfig
+            const currentDuration = isObj(duration) ? duration.leave : duration
             this.status = 'leave'
             this.$emit('before-leave')
-            this.viewStyle = Object.assign({}, this.viewStyle, styleObj.leave)
+            this.viewStyle = Object.assign({}, this.viewStyle, currentStyle.leave)
 
             Promise.resolve()
                 .then(nextTick)
                 .then(() => {
                     this.checkStatus('leave')
+                    this.transitionEnded = false
                     this.$emit('leave-to')
                     animation.transition(this.$refs['ani'].ref, {
-                        styles: styleObj['leave-to'],
-                        duration,
+                        styles: currentStyle['leave-to'],
+                        duration: currentDuration,
                         timingFunction: 'ease',
                         needLayout: false,
                         delay: 0
                     }, () => {
                         // console.log('animation finished')
                         this.checkStatus('leave')
-                        this.$emit('after-leave')
-                        const { show, inited } = this
-                        if (!show && inited) {
-                            this.inited = false
-                            this.display = false
-                        }
+                        this.onTransitionEnd()
                     })
                 })
                 .catch(() => {})
@@ -267,6 +277,21 @@ export default {
         checkStatus(status) {
             if (status !== this.status) {
                 console.error(`incongruent status: ${status}`)
+            }
+        },
+        // 完成过渡后触发
+        onTransitionEnd() {
+            if (this.transitionEnded) {
+                return
+            }
+            this.transitionEnded = true
+            this.$emit(`after-${this.status}`)
+            const { show, display } = this
+            if (!show && display) {
+                this.display = false
+                // #ifdef APP-NVUE
+                this.inited = false
+                // #endif
             }
         }
     }

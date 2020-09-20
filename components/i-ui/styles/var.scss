@@ -1,4 +1,6 @@
 
+@import './theme.scss';
+
 // Color Palette
 $black: #000 !default;
 $white: #fff !default;
@@ -13,8 +15,6 @@ $gray-8: #323233 !default;
 $red: #ee0a24 !default;
 $blue: #1989fa !default;
 $orange: #ff976a !default;
-$orange-dark: #ed6a0c !default;
-$orange-light: #fffbe8 !default;
 $green: #07c160 !default;
 
 // Gradient Colors

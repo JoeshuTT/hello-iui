@@ -3,8 +3,9 @@
  *
  */
 
-@import './styles/var.scss';
 @import './styles/animate.scss';
+@import './styles/var.scss';
+@import './styles/theme.scss';
 
 // iconFont
 // $iconFontUrl:  '~@/static/iuiIconFont.ttf';
@@ -14,4 +15,3 @@ $iconFontUrl: 'https://at.alicdn.com/t/font_1949925_qisrzzyoqy8.ttf';
 @import './styles/mixins/ellipsis.scss';
 @import './styles/mixins/flex-box.scss';
 @import './styles/mixins/hairline.scss';
-@import './styles/mixins/theme.scss';
