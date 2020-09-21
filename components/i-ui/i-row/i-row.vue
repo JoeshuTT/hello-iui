@@ -1,12 +1,16 @@
 <template>
-    <view ref="iRow" class="i-row" :style="mergeStyle" @click="onClick">
+    <view ref="iRow" class="i-row" :class="[customClass]" :style="[mergeStyle]" @click="onClick">
         <slot />
     </view>
 </template>
 
 <script>
+
+import IComponent from '../mixins/component'
+
 export default {
     name: 'IRow',
+    mixins: [IComponent],
     props: {
         type: {
             type: String,
@@ -51,8 +55,18 @@ export default {
 <style lang="scss">
 	@import '../styles/index.scss';
 
+    /* #ifdef APP-PLUS-NVUE || H5 */
     .i-row {
         @include flex-box('row');
         flex-wrap: wrap;
     }
+    /* #endif */
+
+    /* #ifdef MP-WEIXIN */
+    .i-row::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    /* #endif */
 </style>

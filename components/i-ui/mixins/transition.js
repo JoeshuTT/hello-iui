@@ -143,6 +143,7 @@ export default {
                 if (value === old) {
                     return
                 }
+
                 // #ifndef APP-NVUE
                 value ? this.enter() : this.leave()
                 // #endif

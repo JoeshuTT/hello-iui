@@ -123,10 +123,11 @@ export const guid = function() {
    * @param {*} text
    */
 export const log = (type = 'danger', key = '错误', text = '系统异常') => {
-    /* #ifndef H5 */
+    // #ifdef APP-PLUS-NVUE
     console.log(`%c ${key} %c ${text}`)
-    /* #endif */
-    /* #ifdef  H5 */
+    // #endif
+
+    // #ifdef H5 || MP
     let bgColor = '#ee0a24'
     switch (type) {
         case 'default':
@@ -148,6 +149,6 @@ export const log = (type = 'danger', key = '错误', text = '系统异常') => {
             break
     }
     console.log(`%c ${key} %c ${text}`, 'background:#7ebea0; padding: 2px 4px; border-radius: 3px 0 0 3px; color: #fff;', `background:${bgColor};padding: 2px 4px; border-radius: 0 3px 3px 0;  color: #fff;`)
-    /* #endif */
+    // #endif
 }
 

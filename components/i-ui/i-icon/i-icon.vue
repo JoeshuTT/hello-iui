@@ -1,10 +1,10 @@
 <template>
     <view class="i-icon-block">
         <template v-if="isImageName">
-            <image class="i-img" :style="mergeStyle" :src="name" mode="aspectFit" />
+            <image class="i-img" :style="[mergeStyle]" :src="name" mode="aspectFit" />
         </template>
         <template v-else>
-            <text class="i-icon" :style="mergeStyle">{{ icon[name] || name }}</text>
+            <text class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
         </template>
     </view>
 </template>

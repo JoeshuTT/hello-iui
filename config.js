@@ -18,18 +18,10 @@ export default [
                 name: 'Image 图片',
                 path: '/pages/image/image'
             },
-            // #ifndef APP-NVUE
             {
                 name: 'layout 布局',
                 path: '/pages/layout/layout'
             },
-            // #endif
-            // #ifdef APP-NVUE
-            {
-                name: 'layout 布局（nvue 不推荐使用）',
-                path: '/pages/layout/layout'
-            },
-            // #endif
             {
                 name: 'popup 弹出层',
                 path: '/pages/popup/popup'
@@ -73,10 +65,12 @@ export default [
     {
         name: '导航组件',
         children: [
+            // #ifndef MP
             {
                 name: 'NavBar 导航栏',
                 path: '/pages/nav-bar/nav-bar'
             }
+            // #endif
         ]
     }
 ]

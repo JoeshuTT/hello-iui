@@ -1,5 +1,5 @@
 <template>
-    <view v-if="inited" ref="iOverlay" class="i-overlay" :style="overlayStyle" @click="onClick" @touchmove.stop.prevent="noop">
+    <view v-if="inited" ref="iOverlay" class="i-overlay" :style="[overlayStyle]" @click="onClick" @touchmove.stop.prevent="noop">
         <slot />
     </view>
 </template>

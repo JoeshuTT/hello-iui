@@ -1,17 +1,19 @@
 <template>
-    <view class="i-col" :class="['i-col--' + span]" :style="mergeStyle" @click="onClick">
+    <view class="i-col" :class="[customClass, 'i-col--' + span]" :style="[mergeStyle]" @click="onClick">
         <slot />
     </view>
 </template>
 
 <script>
-import { rpx2px } from '../utils'
+
 // #ifdef APP-NVUE
 const dom = weex.requireModule('dom')
 // #endif
+import IComponent from '../mixins/component'
 
 export default {
     name: 'Icol',
+    mixins: [IComponent],
     props: {
         span: {
             type: [Number, String],
@@ -20,6 +22,10 @@ export default {
         customStyle: {
             type: Object,
             default: () => ({})
+        },
+        customClass: {
+            type: String,
+            default: ''
         }
     },
     inject: {
@@ -40,8 +46,9 @@ export default {
             const { gutter, customStyle, width } = this
             const style = {
                 // #ifdef APP-NVUE
-                width
+                width,
                 // #endif
+                display: 'block'
             }
             if (gutter) {
                 const padding = `${Number(gutter) / 2}rpx`
@@ -78,10 +85,17 @@ export default {
     @import '../styles/index.scss';
 
     .i-col {
+        /* #ifdef APP-PLUS-NVUE || H5 */
         @include flex-box();
+        /* #endif */
         /* #ifndef APP-NVUE */
         min-height: 1px;
         /* #endif */
+        /* #ifdef MP-WEIXIN */
+        box-sizing: border-box;
+        float: left;
+        /* #endif */
+
     }
 
     /* #ifndef APP-NVUE */

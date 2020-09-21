@@ -1,15 +1,15 @@
 <template>
     <view class="container">
         <demo-block title="基础用法" padding>
-            <i-image class="image" :src="src" />
+            <i-image width="200" height="200" :src="src" />
         </demo-block>
         <demo-block title="动画效果淡入" padding>
             <i-image width="200" height="200" fade-show :src="src" />
         </demo-block>
         <demo-block title="填充模式" padding>
-            <i-row>
-                <i-col v-for="(item,index) in modes" :key="index" class="demo-col" :span="8">
-                    <i-image width="200" height="200" :src="src" :mode="item" />
+            <i-row gutter="40">
+                <i-col v-for="(item,index) in modes" :key="index" custom-class="demo-col" :span="8">
+                    <i-image width="100" height="100" :src="src" :mode="item" />
                     <text class="text">{{ item }}</text>
                 </i-col>
             </i-row>
@@ -53,11 +53,6 @@ export default {
 
 <style lang="scss">
 
-    .image {
-        width: 200rpx;
-        height: 200rpx;
-    }
-
     .container {
         padding-bottom: 100rpx;
         background-color: #fff;
@@ -71,7 +66,7 @@ export default {
     }
 
     .demo-col {
-        @include flex-box();
-        align-items: center;
+        // @include flex-box();
+        // align-items: center;
     }
 </style>

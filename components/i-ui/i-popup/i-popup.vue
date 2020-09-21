@@ -2,18 +2,18 @@
     <view class="i-popup-wrapper" @touchmove.stop.prevent="noop">
         <!-- #ifdef APP-NVUE -->
         <!-- <i-overlay :show="show" :custom-style="overlayStyle" @click="onOverlayClick" /> -->
-        <view v-if="show" class="i-overlay" @click="onOverlayClick" />
+        <view v-if="value" class="i-overlay" @click="onOverlayClick" />
         <!-- #endif -->
         <!-- #ifndef APP-NVUE -->
-        <i-overlay :show="show" :custom-style="overlayStyle" @click="onOverlayClick" />
+        <i-overlay :show="value" :custom-style="overlayStyle" @click="onOverlayClick" />
         <!-- #endif -->
         <template v-if="position === 'center'">
-            <view v-if="inited" ref="ani" class="i-popup" :class="['i-popup--' + position, classes]" :style="mergeStyle" @click="onOverlayClick">
-                <view class="i-popup__content" :style="customStyle" @click.stop="noop"><slot /></view>
+            <view v-if="inited" ref="ani" class="i-popup" :class="['i-popup--' + position, classes]" :style="[mergeStyle]" @click="onOverlayClick">
+                <view class="i-popup__content" :style="[customStyle]" @click.stop="noop"><slot /></view>
             </view>
         </template>
         <template v-else>
-            <view v-if="inited" ref="ani" class="i-popup" :class="['i-popup--' + position, classes]" :style="mergeStyle">
+            <view v-if="inited" ref="ani" class="i-popup" :class="['i-popup--' + position, classes]" :style="[mergeStyle]">
                 <slot />
             </view>
         </template>
@@ -30,14 +30,14 @@ export default {
         IOverlay
     },
     mixins: [transition],
-    model: {
-        prop: 'show',
-        event: 'input'
-    },
+    // model: {
+    //     prop: 'show',
+    //     event: 'input'
+    // },
     props: {
-        show: {
+        value: {
             type: Boolean,
-            default: false
+            default: false // 小程序端 model 自定义无效
         },
         overlay: {
             type: Boolean,
@@ -71,6 +71,23 @@ export default {
             overlayShow: false
         }
     },
+    watch: {
+        value: {
+            handler(value, old) {
+                if (value === old) {
+                    return
+                }
+
+                // #ifndef APP-NVUE
+                value ? this.enter() : this.leave()
+                // #endif
+                // #ifdef APP-NVUE
+                value ? this.enter2() : this.leave2()
+                // #endif
+            },
+            immediate: true
+        }
+    },
     created() {
         this.setAniName()
     },
@@ -97,6 +114,21 @@ export default {
             // #ifndef APP-NVUE
             this.name = position
             // #endif
+        },
+        // 完成过渡后触发
+        onTransitionEnd() {
+            if (this.transitionEnded) {
+                return
+            }
+            this.transitionEnded = true
+            this.$emit(`after-${this.status}`)
+            const { value, display } = this
+            if (!value && display) {
+                this.display = false
+                // #ifdef APP-NVUE
+                this.inited = false
+                // #endif
+            }
         },
         noop() { }
     }

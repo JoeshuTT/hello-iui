@@ -1,5 +1,5 @@
 <template>
-    <view v-if="inited" ref="ani" class="i-transition" :class="[classes]" :style="mergeStyle" @click="onClick">
+    <view v-if="inited" ref="ani" class="i-transition" :class="[classes]" :style="[mergeStyle]" @click="onClick">
         <slot />
     </view>
 </template>
@@ -12,9 +12,25 @@ export default {
     name: 'ITransition',
     mixins: [transition],
     props: {
-        show: {
+        value: {
             type: Boolean,
-            default: false
+            default: false // 不支持model自定义
+        },
+        name: {
+            type: String,
+            default: 'fade'
+        },
+        duration: {
+            type: null,
+            default: 300
+        },
+        customStyle: {
+            type: Object,
+            default: () => ({})
+        },
+        animConfig: {
+            type: null,
+            default: null
         }
     }
 }

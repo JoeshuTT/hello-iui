@@ -1,7 +1,7 @@
 <template>
     <view class="i-loading" :class="'i-loading--'+ type">
         <!-- #ifndef APP-NVUE -->
-        <view v-if="!webviewHide" class="i-loading__spinner" :class="'i-loading__spinner--' + type" :style="mergeStyle">
+        <view v-if="!webviewHide" class="i-loading__spinner" :class="'i-loading__spinner--' + type" :style="[mergeStyle]">
             <template v-if="type === 'circular'" />
             <template v-else>
                 <view v-for="(v,i ) in 12" :key="i" class="i-loading__dot" />
@@ -9,7 +9,7 @@
         </view>
         <!-- #endif -->
         <!-- #ifdef APP-NVUE -->
-        <loading-indicator v-if="!webviewHide" class="i-loading-indicator" :animating="true" :style="mergeStyle" />
+        <loading-indicator v-if="!webviewHide" class="i-loading-indicator" :animating="true" :style="[mergeStyle]" />
         <!-- #endif -->
     </view>
 </template>

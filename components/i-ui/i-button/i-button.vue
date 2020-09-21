@@ -1,5 +1,5 @@
 <template>
-    <view class="i-button" :class="['i-button--' + type, plain && 'i-button--plain', disabled && 'i-button--disabled']" :style="btnStyle" @click="onClick">
+    <view class="i-button" :class="[customClass, 'i-button--' + type, plain && 'i-button--plain', disabled && 'i-button--disabled']" :style="[btnStyle]" @click="onClick">
         <template v-if="loading">
             <i-loading v-if="loading" :type="loadingType" class="i-button__loading" :size="loadingSize" :color="loadingColor" />
             <text v-if="loadingText" class="i-button__loading-text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]">{{ loadingText }}</text>
@@ -7,14 +7,14 @@
         <template v-else>
             <i-icon v-if="icon" :name="icon" :font-family="iconFont" :color="iconColor" class="i-button__icon" />
             <template v-if="text">
-                <text class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']" :style="textStyle">{{ text }}</text>
+                <text class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']" :style="[textStyle]">{{ text }}</text>
             </template>
             <template v-else>
                 <!-- #ifdef APP-NVUE -->
-                <text v-if="$slots.default && $slots.default[0].tag === 'u-text'" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']" :style="textStyle">{{ $slots.default[0].children[0].text }}</text>
+                <text v-if="$slots.default && $slots.default[0].tag === 'u-text'" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']" :style="[textStyle]">{{ $slots.default[0].children[0].text }}</text>
                 <!-- #endif -->
                 <!-- #ifndef APP-NVUE -->
-                <text v-if="$slots.default" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']":style="textStyle"><slot /></text>
+                <text v-if="$slots.default" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']" :style="[textStyle]"><slot /></text>
                 <!-- #endif -->
             </template>
             </text>
@@ -25,6 +25,7 @@
 <script>
 import ILoading from '../i-loading/i-loading'
 import IIcon from '../i-icon/i-icon'
+import IComponent from '../mixins/component'
 
 export default {
     name: 'IButton',
@@ -32,6 +33,7 @@ export default {
         IIcon,
         ILoading
     },
+    mixins: [IComponent],
     props: {
         text: {
             type: String,

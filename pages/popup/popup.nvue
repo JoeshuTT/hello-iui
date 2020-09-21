@@ -12,7 +12,7 @@
         <i-popup v-model="show_center">
             <view style="padding:20px 40px;">内容</view>
         </i-popup>
-        <i-popup v-model="show_top" position="top" :custom-style="{height: '200rpx'}">
+       <i-popup v-model="show_top" position="top" :custom-style="{height: '200rpx'}">
             <view style="padding:20px 40px;">内容</view>
         </i-popup>
         <i-popup v-model="show_bottom" position="bottom" :custom-style="{height: '200rpx'}">

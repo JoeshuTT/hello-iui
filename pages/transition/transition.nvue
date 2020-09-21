@@ -3,9 +3,9 @@
         <demo-block title="基础用法" padding>
             <i-cell v-for="(item, index) in list" :key="index" :title="item.label" is-link @click="onClick(item)" />
             <!-- transition -->
-            <i-transition class="block" :show="show" :name="name" :custom-style="style" />
+            <i-transition :show="show" :name="name" :custom-style="style" />
             <!-- custom transition -->
-            <i-transition class="block" :show="showCustom" name="custom" :duration="{ enter: 300, leave: 1000 }" :anim-config="customAnimConfig" :custom-style="style" />
+            <i-transition :show="showCustom" name="custom" :duration="{ enter: 300, leave: 1000 }" :anim-config="customAnimConfig" :custom-style="style" />
         </demo-block>
     </view>
 </template>
@@ -40,7 +40,8 @@ export default {
                 top: `${getSystemInfoSync().windowHeight / 2 - 50}px`,
                 left: `${getSystemInfoSync().windowWidth / 2 - 50}px`,
                 width: '100px',
-                height: '100px'
+                height: '100px',
+                backgroundColor: '#1989fa'
             },
             // custom
             showCustom: false,
@@ -73,7 +74,7 @@ export default {
                 this.showCustom = true
                 setTimeout(() => {
                     this.showCustom = false
-                }, 500)
+                }, 1000)
                 return
             }
             this.show = true
@@ -93,13 +94,13 @@ export default {
 
     .i-custom-enter-active,
     .i-custom-leave-active {
-      transition-property: background-color, transform;
+        transition-property: opacity, transform;
     }
 
     .i-custom-enter,
     .i-custom-leave-to {
-      background-color: red;
-      transform: rotate(-360deg) translate3d(-100%, -100%, 0);
+        opacity: 0;
+        transform: rotate(-360deg) translate3d(-100%, -100%, 0);
     }
 
 </style>

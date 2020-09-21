@@ -1,9 +1,10 @@
 <template>
     <!-- #ifndef APP-NVUE -->
-    <view class="i-image" :style="style">
-        <!--图片加载器 -->
+    <view class="i-image" :style="[mergeStyle]">
+        <!--图片加载器 start -->
         <image style="width: 0;height: 0;display: none;" :src="src" @load="onImgLoad" @error="onImgError" />
-        <image :src="url" class="i-image__img" :mode="mode" :style="style" :class="[fadeShow && 'fade-out', fadeShow && loaded ? 'fade-in' : '']" />
+        <!--图片加载器 end -->
+        <image :src="url" class="i-image__img" :mode="mode" :style="[mergeStyle]" :class="[fadeShow && 'fade-out', fadeShow && loaded ? 'fade-in' : '']" />
         <view v-if="showLoading && loading" class="i-image__loading">
             <slot name="loading"><i-icon name="photo-o" size="24" /></slot>
         </view>
@@ -14,7 +15,7 @@
     <!-- #endif -->
     <!-- #ifdef APP-NVUE -->
     <!-- eslint-disable-next-line -->
-    <image :style="style" :src="src" :mode="mode" class="i-image__img" @load="onImgLoad" @error="onImgError" />
+    <image :style="[style]" :src="src" :mode="mode" class="i-image__img" @load="onImgLoad" @error="onImgError" />
     <!-- #endif -->
 </template>
 
@@ -76,7 +77,7 @@ export default {
         }
     },
     computed: {
-        style() {
+        mergeStyle() {
             const { width, height, mode } = this
             let viewStyle = {}
             if (width && height) {
