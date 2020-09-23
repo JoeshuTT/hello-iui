@@ -11,6 +11,7 @@ export default {
     pageLoadingTitle: '页面加载中，请稍后 ...',
     imagePlaceholder,
     tabbarPaths: [
-        'pages/home/home'
+        'pages/home/home',
+        'pages/discover/discover'
     ]
 }

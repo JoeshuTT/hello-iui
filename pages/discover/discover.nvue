@@ -14,10 +14,7 @@ export default {
     mixins: [pageMixin],
     data() {
         return {
-            pageActivity: 'success',
-            statusList: ['success', 'fail', 'loading'],
-            statusIndex: 0,
-            show: true
+            pageActivity: 'success'
         }
     },
     methods: {

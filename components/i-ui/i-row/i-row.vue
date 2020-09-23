@@ -19,10 +19,6 @@ export default {
         gutter: {
             type: [Number, String],
             default: 0
-        },
-        customStyle: {
-            type: Object,
-            default: () => ({})
         }
     },
     computed: {

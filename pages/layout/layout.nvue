@@ -1,6 +1,5 @@
 <template>
     <view class="container">
-        <!-- 达不到完美效果，不管是NVUE还是小程序，推荐使用内置样式 -->
         <demo-block title="基础用法" padding>
             <i-row>
                 <i-col custom-class="demo-col" span="8"><text class="demo-col-text dark">span: 8</text></i-col>

@@ -1,5 +1,5 @@
 <template>
-    <view class="i-button" :class="[customClass, 'i-button--' + type, plain && 'i-button--plain', disabled && 'i-button--disabled']" :style="[btnStyle]" @click="onClick">
+    <view class="i-button" :class="[customClass, 'i-button--' + type, plain && 'i-button--plain', disabled && 'i-button--disabled']" :style="[customStyle]" @click="onClick">
         <template v-if="loading">
             <i-loading v-if="loading" :type="loadingType" class="i-button__loading" :size="loadingSize" :color="loadingColor" />
             <text v-if="loadingText" class="i-button__loading-text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]">{{ loadingText }}</text>
@@ -23,9 +23,10 @@
 </template>
 
 <script>
+
+import IComponent from '../mixins/component'
 import ILoading from '../i-loading/i-loading'
 import IIcon from '../i-icon/i-icon'
-import IComponent from '../mixins/component'
 
 export default {
     name: 'IButton',
@@ -74,10 +75,6 @@ export default {
         loadingText: {
             type: String,
             default: ''
-        },
-        btnStyle: {
-            type: Object,
-            default: () => ({})
         },
         textStyle: {
             type: Object,
@@ -182,7 +179,7 @@ export default {
 	.i-button__text {
         /* #ifdef APP-NVUE */
 		font-size: $button-normal-font-size;
-
+        /* #endif */
 		&--default {
 			color: $button-default-color;
 		}
@@ -225,7 +222,7 @@ export default {
 				color: $button-warning-background-color;
 			}
 		}
-        /* #endif */
+
 	}
 
 	.i-button__loading-text {

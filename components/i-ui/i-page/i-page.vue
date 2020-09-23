@@ -7,7 +7,7 @@
         </template>
         <template v-else-if="status === 'fail'">
             <i-transition class="i-page__fail" :show="true" :name="transitionName">
-                <text class="i-page__fail-title">{{ offlineTitle }}</text>
+                <view class="i-page__fail-tip"><text class="i-page__fail-title">{{ offlineTitle }}</text></view>
                 <i-button class="i-page__fail-btn" type="info" plain :text="reloadTitle" @click="onReload" />
             </i-transition>
         </template>
@@ -58,16 +58,19 @@ export default {
         onReload() {
             const pages = getCurrentPages()
             const page = pages[pages.length - 1]
-            const fullPath = page.$page.fullPath
-            const path = page.$page.path
+            // const fullPath = page.$page.fullPath
+            const route = page.route // todo: nuve页面调试
             // tabbar页面
-            if (this.tabbarPaths.indexOf(path) > -1) {
+            const query = page.options
+            const url = Object.keys(query).map(key => key + '=' + decodeURIComponent(query[key])).join('&')
+            // console.log(url)
+            if (this.tabbarPaths.indexOf(route) > -1) {
                 uni.reLaunch({
-                    url: fullPath
+                    url: `/${route}?${url}`
                 })
             } else {
                 uni.redirectTo({
-                    url: fullPath
+                    url: `/${route}?${url}`
                 })
             }
         }
@@ -87,6 +90,9 @@ export default {
     /* #endif */
 
     .i-page{
+        /* #ifndef H5 || APP-NVUE */
+        height: 100vh;
+        /* #endif */
         @include flex-box();
         flex: 1;
         position: relative;
@@ -100,10 +106,12 @@ export default {
             &-btn {
                 width: 250rpx;
             }
+            &-tip {
+                margin-bottom: 40rpx;
+            }
             &-title {
                 font-size: $page-title-size;
                 color: $page-title-color;
-                margin-bottom: 40rpx;
             }
         }
 

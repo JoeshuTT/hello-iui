@@ -12,35 +12,36 @@ const path = require('path')
 const dir = 'pages'
 const oExt = '.vue'
 const tExt = '.nvue'
-const action = 'delete' // delete, put, copy
-batches()
+const action = 'put' // delete, put, copy
+batches(dir)
 const whiteList = ['draggable']
 
-function batches() {
+function batches(dir) {
     const dirs = fs.readdirSync(dir, { withFileTypes: true })
     dirs.forEach(dirent => {
         const fullPath = path.resolve(dir, dirent.name)
         if (dirent.isDirectory()) {
+            console.log(fullPath)
             batches(fullPath)
         } else {
             const { base, name, ext } = path.parse(dirent.name)
             if (ext === oExt) {
                 if (action === 'delete') {
                     console.log(`delete ${fullPath}`)
-                    whiteList.indexOf(fullPath) !== -1 && fs.unlinkSync(fullPath)
+                    // whiteList.indexOf(fullPath) !== -1 && fs.unlinkSync(fullPath)
                 }
 
                 if (action === 'put') {
                     const oldPath = path.resolve(dir, dirent.name)
                     const newPath = path.resolve(dir, name + tExt)
                     console.log(`rename ${dirent.name} to ${name}${tExt}`)
-                    whiteList.indexOf(oldPath) !== -1 && fs.renameSync(oldPath, newPath)
+                    fs.renameSync(oldPath, newPath)
                 }
                 if (action === 'copy') {
                     const fromPath = path.resolve(dir, dirent.name)
                     const toPath = path.resolve(dir, name + tExt)
                     console.log(`copy ${dirent.name} to ${name}${tExt}`)
-                    whiteList.indexOf(fromPath) !== -1 && fs.writeFileSync(toPath, fs.readFileSync(fromPath))
+                    // whiteList.indexOf(fromPath) !== -1 && fs.writeFileSync(toPath, fs.readFileSync(fromPath))
                 }
             }
         }

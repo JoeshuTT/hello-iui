@@ -6,10 +6,10 @@
 
 <script>
 
+import IComponent from '../mixins/component'
 // #ifdef APP-NVUE
 const dom = weex.requireModule('dom')
 // #endif
-import IComponent from '../mixins/component'
 
 export default {
     name: 'Icol',
@@ -18,14 +18,6 @@ export default {
         span: {
             type: [Number, String],
             default: 0
-        },
-        customStyle: {
-            type: Object,
-            default: () => ({})
-        },
-        customClass: {
-            type: String,
-            default: ''
         }
     },
     inject: {
@@ -83,6 +75,12 @@ export default {
 
 <style lang="scss">
     @import '../styles/index.scss';
+
+    /* #ifdef MP */
+    view {
+        display: block; // 处理 nvue 页面会默认会加上display:flex
+    }
+    /* #endif */
 
     .i-col {
         /* #ifdef APP-PLUS-NVUE || H5 */

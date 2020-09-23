@@ -1,6 +1,6 @@
 <template>
     <!-- #ifndef APP-NVUE -->
-    <view class="i-image" :style="[mergeStyle]">
+    <view class="i-image" :class="[customClass]" :style="[mergeStyle]">
         <!--图片加载器 start -->
         <image style="width: 0;height: 0;display: none;" :src="src" @load="onImgLoad" @error="onImgError" />
         <!--图片加载器 end -->
@@ -21,6 +21,7 @@
 
 <script>
 
+import IComponent from '../mixins/component'
 import IIcon from '../i-icon/i-icon'
 import { addUnit } from '../utils'
 var imagePlaceholder = ''
@@ -34,6 +35,7 @@ export default {
     components: {
         IIcon
     },
+    mixins: [IComponent],
     props: {
         src: {
             type: String,
@@ -78,7 +80,7 @@ export default {
     },
     computed: {
         mergeStyle() {
-            const { width, height, mode } = this
+            const { width, height, mode, customStyle } = this
             let viewStyle = {}
             if (width && height) {
                 viewStyle = { width: addUnit(width, 'rpx'), height: addUnit(height, 'rpx') }
@@ -90,7 +92,7 @@ export default {
             if (mode === 'aspectFit') {
                 viewStyle.backgroundColor = 'rgba(0,0,0,0)'
             }
-            return viewStyle
+            return Object.assign({}, viewStyle, customStyle)
         }
     },
     methods: {

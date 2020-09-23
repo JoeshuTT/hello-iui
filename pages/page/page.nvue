@@ -1,6 +1,8 @@
 <template>
     <i-page :status="pageActivity">
         <view class="main">页面主体</view>
+        <view class="main">页面主体</view>
+        <view class="main">页面主体</view>
     </i-page>
 </template>
 
@@ -12,14 +14,17 @@ export default {
     mixins: [pageMixin],
     data() {
         return {
-            pageActivity: 'success',
+            pageActivity: 'loading',
             statusList: ['success', 'fail', 'loading'],
             statusIndex: 0,
             show: true
         }
     },
     onLoad() {
-
+        // 模拟页面加载。。。
+        setTimeout(() => {
+            this.pageActivity = 'fail'
+        }, 3000)
     },
     onNavigationBarButtonTap(e) {
         console.log(e)

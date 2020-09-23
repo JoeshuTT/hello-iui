@@ -2,8 +2,8 @@
     <view class="container">
         <view class="main">
             <demo-block title="基础图标" padding>
-                <i-row class="demo-row">
-                    <i-col v-for="(item, index) in list" :key="index" :span="8" class="demo-col">
+                <i-row custom-class="demo-row">
+                    <i-col v-for="(item, index) in list" :key="index" :span="8" custom-class="demo-col">
                         <i-icon class="demo-col-icon" :name="item.value" />
                         <text class="demo-col-txt">{{ item.label }}</text>
                     </i-col>
@@ -21,8 +21,8 @@
                 <i-icon name="success" size="50px" />
             </demo-block>
             <demo-block title="自定义图标" padding>
-                <i-row class="demo-row">
-                    <i-col v-for="(item, index) in list2" :key="index" :span="8" class="demo-col">
+                <i-row custom-class="demo-row">
+                    <i-col v-for="(item, index) in list2" :key="index" :span="8" custom-class="demo-col">
                         <i-icon class="demo-col-icon" font-family="myIcon" :name="item.value" size="20" />
                         <text class="demo-col-txt">{{ item.label }}</text>
                     </i-col>
