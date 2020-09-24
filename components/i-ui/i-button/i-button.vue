@@ -1,5 +1,5 @@
 <template>
-    <view class="i-button" :class="[customClass, 'i-button--' + type, plain && 'i-button--plain', disabled && 'i-button--disabled']" :style="[customStyle]" @click="onClick">
+    <view class="i-button" :class="[customClass, 'i-button--' + type, plain && 'i-button--plain', disabled && 'i-button--disabled']" :style="[mergeStyle]" @click="onClick">
         <template v-if="loading">
             <i-loading v-if="loading" :type="loadingType" class="i-button__loading" :size="loadingSize" :color="loadingColor" />
             <text v-if="loadingText" class="i-button__loading-text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]">{{ loadingText }}</text>
@@ -7,17 +7,16 @@
         <template v-else>
             <i-icon v-if="icon" :name="icon" :font-family="iconFont" :color="iconColor" class="i-button__icon" />
             <template v-if="text">
-                <text class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']" :style="[textStyle]">{{ text }}</text>
+                <text class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]" :style="[mergeTextStyle]">{{ text }}</text>
             </template>
             <template v-else>
                 <!-- #ifdef APP-NVUE -->
-                <text v-if="$slots.default && $slots.default[0].tag === 'u-text'" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']" :style="[textStyle]">{{ $slots.default[0].children[0].text }}</text>
+                <text v-if="$slots.default && $slots.default[0].tag === 'u-text'" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]" :style="[mergeTextStyle]">{{ $slots.default[0].children[0].text }}</text>
                 <!-- #endif -->
                 <!-- #ifndef APP-NVUE -->
-                <text v-if="$slots.default" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type, icon && 'i-button__text--inline']" :style="[textStyle]"><slot /></text>
+                <text v-if="$slots.default" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]" :style="[mergeTextStyle]"><slot /></text>
                 <!-- #endif -->
             </template>
-            </text>
         </template>
     </view>
 </template>
@@ -43,6 +42,10 @@ export default {
         type: {
             type: String,
             default: 'default'
+        },
+        color: {
+            type: String,
+            default: ''
         },
         disabled: {
             type: Boolean,
@@ -95,6 +98,37 @@ export default {
             }
 
             return 'white'
+        },
+        mergeStyle() {
+            const { color, plain, customStyle } = this
+            const viewStyle = {}
+            // #ifndef APP-NVUE
+            if (color) {
+                if (!plain) {
+                    viewStyle.background = color
+                }
+                if (color.indexOf('gradient') !== -1) {
+                    viewStyle.borderWidth = 0
+                } else {
+                    viewStyle.borderColor = color
+                }
+            }
+            // #endif
+
+            return Object.assign({}, customStyle, viewStyle)
+        },
+        mergeTextStyle() {
+            const { color, icon, plain, textStyle } = this
+            const viewStyle = {}
+
+            if (color) {
+                viewStyle.color = plain ? color : 'white'
+            }
+
+            if (icon) {
+                viewStyle.marginLeft = '4px'
+            }
+            return Object.assign({}, viewStyle, textStyle)
         }
     },
     methods: {
@@ -110,71 +144,93 @@ export default {
 <style lang="scss">
 	@import '../styles/index.scss';
 
-	.i-button {
-		@include flex-box('row');
-		align-items: center;
-		justify-content: center;
-		height: $button-default-height;
+    .i-button {
+        @include flex-box('row');
+        align-items: center;
+        justify-content: center;
+        height: $button-default-height;
         font-size: $button-normal-font-size;
         opacity: 1;
-		transition: opacity $animation-duration-fast;
+        transition: opacity $animation-duration-fast;
 
-		&--default {
+        &--default {
             color: $button-default-color;
-			background-color: $button-default-background-color;
-			border-width: $button-border-width;
-			border-style: solid;
-			border-color: $button-default-border-color;
-		}
+            background-color: $button-default-background-color;
+            border-width: $button-border-width;
+            border-style: solid;
+            border-color: $button-default-border-color;
+        }
 
-		&--primary {
-			color: $button-primary-color;
-			background-color: $button-primary-background-color;
-			border-width: $button-border-width;
-			border-style: solid;
-			border-color: $button-primary-border-color;
-		}
+        &--primary {
+            color: $button-primary-color;
+            background-color: $button-primary-background-color;
+            border-width: $button-border-width;
+            border-style: solid;
+            border-color: $button-primary-border-color;
+        }
 
-		&--info {
-			color: $button-info-color;
-			background-color: $button-info-background-color;
-			border-width: $button-border-width;
-			border-style: solid;
-			border-color: $button-info-border-color;
-		}
+        &--info {
+            color: $button-info-color;
+            background-color: $button-info-background-color;
+            border-width: $button-border-width;
+            border-style: solid;
+            border-color: $button-info-border-color;
+        }
 
-		&--danger {
-			color: $button-danger-color;
-			background-color: $button-danger-background-color;
-			border-width: $button-border-width;
-			border-style: solid;
-			border-color: $button-danger-border-color;
-		}
+        &--danger {
+            color: $button-danger-color;
+            background-color: $button-danger-background-color;
+            border-width: $button-border-width;
+            border-style: solid;
+            border-color: $button-danger-border-color;
+        }
 
-		&--warning {
-			color: $button-warning-color;
-			background-color: $button-warning-background-color;
-			border-width: $button-border-width;
-			border-style: solid;
-			border-color: $button-warning-border-color;
-		}
+        &--warning {
+            color: $button-warning-color;
+            background-color: $button-warning-background-color;
+            border-width: $button-border-width;
+            border-style: solid;
+            border-color: $button-warning-border-color;
+        }
 
-		&--active {
-			opacity: $active-opacity;
-		}
+        &--active {
+            opacity: $active-opacity;
+        }
 
-		&:active {
-			opacity: $active-opacity;
-		}
+        &:active {
+            opacity: $active-opacity;
+        }
 
-		&--plain {
-			background-color: $button-plain-background-color;
-		}
+        &--plain {
+            background-color: $button-plain-background-color;
+        }
 
-		&--disabled {
-			opacity: $button-disabled-opacity;
-		}
-	}
+        &--disabled {
+            opacity: $button-disabled-opacity;
+        }
+        &--plain {
+
+            &--default {
+                color: $button-default-color;
+            }
+
+            &--primary {
+                color: $button-primary-background-color;
+            }
+
+            &--info {
+                color: $button-info-background-color;
+            }
+
+            &--danger {
+                color: $button-danger-background-color;
+            }
+
+            &--warning {
+                color: $button-warning-background-color;
+            }
+        }
+    }
 
 	.i-button__text {
         /* #ifdef APP-NVUE */
@@ -231,9 +287,5 @@ export default {
         /* #endif */
 		margin-left: 4px;
 	}
-
-    .i-button__text--inline {
-      margin-left: 4px
-    }
 
 </style>

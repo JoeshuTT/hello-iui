@@ -1,25 +1,20 @@
 <template>
-    <view class="i-nav-bar">
-        <view class="i-nav-bar__content" :class="[fixed ? 'i-nav-bar--fixed' : '']">
-            <view v-if="fixed" class="i-status-bar" :style="{height: statusBarHeight}" />
-            <view class="i-nav-bar__left" @click="onBackClick">
-                <template v-if="leftText || leftArrow">
-                    <i-icon
-                        v-if="leftArrow"
-                        size="16px"
-                        name="arrow-left"
-                        color="#000"
-                        class="i-nav-bar__arrow"
-                    />
-                    <text class="i-nav-bar__text">{{ leftText }}</text>
-                </template>
-                <slot v-else name="left" />
-            </view>
-            <view class="i-nav-bar__title">
-                <slot name="title"><text class="i-nav-bar__title-text">{{ title }}</text></slot>
-            </view>
-            <view class="i-nav-bar__right">
-                <slot name="right" />
+    <view class="i-nav-bar__wrap">
+        <view class="i-nav-bar" :class="[fixed ? 'i-nav-bar--fixed' : '']" :style="{paddingTop: fixed ? `${statusBarHeight}px` : '0px'}">
+            <view class="i-nav-bar__content">
+                <view class="i-nav-bar__left">
+                    <view v-if="leftText || leftArrow" class="i-nav-bar__left-back" @click="onBackClick">
+                        <i-icon v-if="leftArrow" size="16px" name="arrow-left" color="#000" class="i-nav-bar__arrow" />
+                        <text class="i-nav-bar__text">{{ leftText }}</text>
+                    </view>
+                    <slot v-else name="left" />
+                </view>
+                <view class="i-nav-bar__title">
+                    <slot name="title"><text class="i-nav-bar__title-text">{{ title }}</text></slot>
+                </view>
+                <view class="i-nav-bar__right">
+                    <slot name="right" />
+                </view>
             </view>
         </view>
         <view v-if="fixed" class="i-nav-bar-placeholder">
@@ -79,13 +74,6 @@ export default {
 	$nav-bar-height: 44px;
 	$nav-bar-background-color: #fff;
 
-	.i-status-bar {
-		/* #ifndef APP-NVUE */
-		height: var(--status-bar-height);
-		/* #endif */
-
-	}
-
 	.i-navbar-perch {
 		height: $nav-bar-height;
 	}
@@ -109,10 +97,17 @@ export default {
 
 	.i-nav-bar {
 		background-color: $nav-bar-background-color;
+
 		&__arrow {
 			color: $nav-bar-icon-color;
 		}
+
 		&__left {
+			@include flex-box('row');
+            width: 75px;
+		}
+
+		&__left-back {
 			@include flex-box('row');
             width: 75px;
 		}

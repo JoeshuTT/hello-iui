@@ -46,10 +46,10 @@ export default {
             // custom
             showCustom: false,
             customAnimConfig: {
-                'enter': { backgroundColor: 'red', transform: `rotate(-360deg) translate3d(-100%, -100%, 0)` },
-                'enter-to': { backgroundColor: 'blue', transform: `rotate(0deg) translate3d(0, 0, 0)` },
-                'leave': { backgroundColor: 'blue', transform: `rotate(0deg) translate3d(0, 0, 0)` },
-                'leave-to': { backgroundColor: 'red', transform: `rotate(-360deg) translate3d(-100%, -100%, 0)` }
+                'enter': { backgroundColor: 'red', transform: `rotate(-360deg)` },
+                'enter-to': { backgroundColor: 'blue', transform: `rotate(0deg)` },
+                'leave': { backgroundColor: 'blue', transform: `rotate(0deg)` },
+                'leave-to': { backgroundColor: 'red', transform: `rotate(-360deg)` }
             }
         }
     },
@@ -68,13 +68,13 @@ export default {
             this.title = label
             this.name = value
             this.trigger(value)
-        }, 1000),
+        }, 3000),
         trigger(name) {
             if (!name || name === 'custom') {
                 this.showCustom = true
                 setTimeout(() => {
                     this.showCustom = false
-                }, 1000)
+                }, 1500)
                 return
             }
             this.show = true
@@ -88,10 +88,6 @@ export default {
 
 <style lang="scss">
 
-    .block {
-        background-color: #1989fa;
-    }
-
     .i-custom-enter-active,
     .i-custom-leave-active {
         transition-property: opacity, transform;
@@ -100,7 +96,7 @@ export default {
     .i-custom-enter,
     .i-custom-leave-to {
         opacity: 0;
-        transform: rotate(-360deg) translate3d(-100%, -100%, 0);
+        transform: rotate(-360deg);
     }
 
 </style>

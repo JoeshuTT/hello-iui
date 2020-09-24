@@ -11,6 +11,7 @@
 
 <script>
 
+import IComponent from '../mixins/component'
 import { addUnit } from '../utils'
 import icon from './type'
 // #ifdef APP-NVUE
@@ -26,6 +27,7 @@ dom.addRule('fontFace', {
 
 export default {
     name: 'IIcon',
+    mixins: [IComponent],
     props: {
         name: {
             required: true,

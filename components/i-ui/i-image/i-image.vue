@@ -15,7 +15,7 @@
     <!-- #endif -->
     <!-- #ifdef APP-NVUE -->
     <!-- eslint-disable-next-line -->
-    <image :style="[style]" :src="src" :mode="mode" class="i-image__img" @load="onImgLoad" @error="onImgError" />
+    <image :style="[mergeStyle]" :src="src" :mode="mode" class="i-image__img" @load="onImgLoad" @error="onImgError" />
     <!-- #endif -->
 </template>
 

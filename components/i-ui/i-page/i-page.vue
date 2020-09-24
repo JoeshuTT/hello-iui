@@ -58,19 +58,18 @@ export default {
         onReload() {
             const pages = getCurrentPages()
             const page = pages[pages.length - 1]
-            // const fullPath = page.$page.fullPath
-            const route = page.route // todo: nuve页面调试
+            const route = page.route
             // tabbar页面
             const query = page.options
-            const url = Object.keys(query).map(key => key + '=' + decodeURIComponent(query[key])).join('&')
-            // console.log(url)
+            const params = Object.keys(query).map(key => key + '=' + decodeURIComponent(query[key])).join('&')
+
             if (this.tabbarPaths.indexOf(route) > -1) {
                 uni.reLaunch({
-                    url: `/${route}?${url}`
+                    url: `/${route}?${params}`
                 })
             } else {
                 uni.redirectTo({
-                    url: `/${route}?${url}`
+                    url: `/${route}?${params}`
                 })
             }
         }
@@ -91,7 +90,7 @@ export default {
 
     .i-page{
         /* #ifndef H5 || APP-NVUE */
-        height: 100vh;
+        min-height: 100vh;
         /* #endif */
         @include flex-box();
         flex: 1;

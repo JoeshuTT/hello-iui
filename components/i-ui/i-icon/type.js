@@ -6,7 +6,7 @@ export default {
     arrow: '\ue619',
     'arrow-left': '\ue616',
     'arrow-up': '\ue618',
-    'arrow-down': '\ue619',
+    'arrow-down': '\ue615',
     'photo': '\ue61c',
     'photo-o': '\ue61d',
     'warning': '\ue61e',

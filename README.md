@@ -7,6 +7,8 @@ iui 是适用于APP，兼容NVUE的UI组件库，非常适合面向app用户的�
 
 [Hello Iui 演示示例发布页面，点击跳转](https://dev.dcloud.net.cn/publish/app/preview?id=helloiui)
 
+记得帮我点点 [start](https://github.com/JoeshuTT/hello-iui)，鼓励鼓励我这个切图仔
+
 ## 快速上手
 
 1. 下载组件库
@@ -57,6 +59,9 @@ iui 有依赖scss，请务必有安装 `sass`
 
 ## 项目目录结构
 
+```
+...
+```
 ## 设计思路
 
 iui 的组件设计基本参考了uni-app官方组件库，vant-ui，weexui的实现，尽可能的保持各平台特色，力求打造高性能，高质量的组件库，上手简单，易于使用的目标。
@@ -66,7 +71,6 @@ iui 的组件设计基本参考了uni-app官方组件库，vant-ui，weexui的�
 - 语义化版本号，规范参考 [Semantic Versioning 2.0.0](https://semver.org/lang/zh-CN/)。
 - Git 提交信息规范化，[git-commit-emoji-cn](https://github.com/liuchengxu/git-commit-emoji-cn)。
 - 统一代码风格，[ESLint](https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/advanced/eslint.html#%E9%85%8D%E7%BD%AE%E9%A1%B9)
-- 审视内心，而不是浮于表面
 
 ## 如何设计一个前端通用组件
 
