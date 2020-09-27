@@ -46,10 +46,10 @@ export default {
             // custom
             showCustom: false,
             customAnimConfig: {
-                'enter': { backgroundColor: 'red', transform: `rotate(-360deg)` },
-                'enter-to': { backgroundColor: 'blue', transform: `rotate(0deg)` },
-                'leave': { backgroundColor: 'blue', transform: `rotate(0deg)` },
-                'leave-to': { backgroundColor: 'red', transform: `rotate(-360deg)` }
+                'enter': { opacity: '0', transform: `rotate(-360deg)` },
+                'enter-to': { opacity: '1', transform: `rotate(0deg)` },
+                'leave': { opacity: '1', transform: `rotate(0deg)` },
+                'leave-to': { opacity: '0', transform: `rotate(-360deg)` }
             }
         }
     },
@@ -88,6 +88,7 @@ export default {
 
 <style lang="scss">
 
+    /* #ifndef APP-NVUE */
     .i-custom-enter-active,
     .i-custom-leave-active {
         transition-property: opacity, transform;
@@ -98,5 +99,6 @@ export default {
         opacity: 0;
         transform: rotate(-360deg);
     }
+    /* #endif */
 
 </style>

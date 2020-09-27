@@ -1,5 +1,5 @@
 <template>
-    <view class="i-cell" :class="[center && 'i-cell--center', (isLink || clickable) && 'i-cell--clickable', border && 'i-cell--border']" @click="onClick">
+    <view class="i-cell" :class="[customClass, center && 'i-cell--center', (isLink || clickable) && 'i-cell--clickable', border && 'i-cell--border']" :style="[customStyle]" @click="onClick">
         <view class="i-cell__title">
             <slot name="title"><text v-if="title" class="i-cell__title-text">{{ title }}</text></slot>
             <slot name="label"><text v-if="label" class="i-cell__label">{{ label }}</text></slot>
@@ -18,6 +18,7 @@
 
 <script>
 
+import IComponent from '../mixins/component'
 import IIcon from '../i-icon/i-icon'
 
 export default {
@@ -25,6 +26,7 @@ export default {
     components: {
         IIcon
     },
+    mixins: [IComponent],
     props: {
         title: {
             type: [Number, String],
@@ -53,48 +55,6 @@ export default {
         clickable: {
             type: Boolean,
             default: false
-        },
-        titleStyle: {
-            type: Object,
-            default: () => ({})
-        }
-    },
-    data() {
-        return {
-            inited: false,
-            display: false,
-            status: '',
-            classes: '',
-            viewStyle: { }
-        }
-    },
-    computed: {
-        style() {
-            const { viewStyle, customStyle } = this
-            return {
-                // #ifndef APP-NVUE
-                transitionDuration: `${this.duration}ms`,
-                display: `${this.display ? '' : 'none'}`,
-                // #endif
-                ...viewStyle,
-                ...customStyle
-            }
-        }
-    },
-    watch: {
-        show: {
-            handler(value, old) {
-                if (value === old) {
-                    return
-                }
-                // #ifndef APP-NVUE
-                value ? this.enter() : this.leave()
-                // #endif
-                // #ifdef APP-NVUE
-                value ? this.enter2() : this.leave2()
-                // #endif
-            },
-            immediate: true
         }
     },
     methods: {
@@ -115,8 +75,10 @@ export default {
         position: relative;
         padding: $cell-vertical-padding $cell-horizontal-padding;
         background-color: $cell-background-color;
+        /* #ifndef APP-NVUE */
         font-size: $cell-font-size;
         line-height: $cell-line-height;
+        /* #endif */
 
         &--center {
             align-items: center;
@@ -141,18 +103,14 @@ export default {
 
         &__title ,&__value {
             flex: 1;
-            &-text {
-                font-size: $cell-font-size;
-                line-height: $cell-line-height;
-            }
         }
 
         &__title {
             @include flex-box();
             &-text {
                 font-size: $cell-title-font-size;
-                color: $cell-title-color;
                 line-height: $cell-title-line-height;
+                color: $cell-title-color;
             }
         }
 
@@ -160,15 +118,17 @@ export default {
             @include flex-box('row');
             justify-content: flex-end;
             &-text {
+                font-size: $cell-font-size;
+                line-height: $cell-line-height;
                 color: $cell-value-color;
             }
         }
 
         &__label {
+            margin-top: 4px;
             font-size: $cell-label-font-size;
             color: $cell-label-color;
             line-height: $cell-label-line-height;
-            margin-top: 4px;
         }
 
         &__right-icon-wrap{

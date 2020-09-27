@@ -123,8 +123,8 @@ export const guid = function() {
    * @param {*} text
    */
 export const log = (type = 'danger', key = '错误', text = '系统异常') => {
-    // #ifdef APP-PLUS-NVUE
-    console.log(`%c ${key} %c ${text}`)
+    // #ifdef APP-PLUS || APP-NVUE
+    console.log(`${key}: [${text}]`)
     // #endif
 
     // #ifdef H5 || MP
@@ -151,4 +151,3 @@ export const log = (type = 'danger', key = '错误', text = '系统异常') => {
     console.log(`%c ${key} %c ${text}`, 'background:#7ebea0; padding: 2px 4px; border-radius: 3px 0 0 3px; color: #fff;', `background:${bgColor};padding: 2px 4px; border-radius: 0 3px 3px 0;  color: #fff;`)
     // #endif
 }
-

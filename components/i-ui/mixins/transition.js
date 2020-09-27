@@ -3,84 +3,19 @@
  */
 
 import { isObj } from '../utils'
+import { TRANSITION } from '../common/config'
+
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 1000 / 30))
 const getClassNames = (name) => ({
-    enter: `i-${name}-enter i-${name}-enter-active enter-class enter-active-class`,
-    'enter-to': `i-${name}-enter-to i-${name}-enter-active enter-to-class enter-active-class`,
-    leave: `i-${name}-leave i-${name}-leave-active leave-class leave-active-class`,
-    'leave-to': `i-${name}-leave-to i-${name}-leave-active leave-to-class leave-active-class`
+    enter: `i-${name}-enter i-${name}-enter-active`,
+    'enter-to': `i-${name}-enter-to i-${name}-enter-active`,
+    leave: `i-${name}-leave i-${name}-leave-active`,
+    'leave-to': `i-${name}-leave-to i-${name}-leave-active`
 })
 
 // #ifdef APP-NVUE
 const animation = uni.requireNativePlugin('animation')
-const animationMap = {
-    'fade': {
-        enter: { opacity: 0 },
-        'enter-to': { opacity: 1 },
-        leave: { opacity: 1 },
-        'leave-to': { opacity: 0 }
-    },
-    'fade-up': {
-        enter: { opacity: 0, transform: `translateY(100%)` },
-        'enter-to': { opacity: 1, transform: `translateY(0)` },
-        leave: { opacity: 1, transform: `translateY(0)` },
-        'leave-to': { opacity: 0, transform: `translateY(100%)` }
-    },
-    'fade-down': {
-        enter: { opacity: 0, transform: `translateY(-100%)` },
-        'enter-to': { opacity: 1, transform: `translateY(0)` },
-        leave: { opacity: 1, transform: `translateY(0)` },
-        'leave-to': { opacity: 0, transform: `translateY(-100%)` }
-    },
-    'fade-left': {
-        enter: { opacity: 0, transform: `translateX(-100%)` },
-        'enter-to': { opacity: 1, transform: `translateY(0)` },
-        leave: { opacity: 1, transform: `translateY(0)` },
-        'leave-to': { opacity: 0, transform: `translateX(-100%)` }
-    },
-    'fade-right': {
-        enter: { opacity: 0, transform: `translateX(100%)` },
-        'enter-to': { opacity: 1, transform: `translateY(0)` },
-        leave: { opacity: 1, transform: `translateY(0)` },
-        'leave-to': { opacity: 0, transform: `translateX(100%)` }
-    },
-    'slide-up': {
-        enter: { transform: `translateY(100%)` },
-        'enter-to': { transform: `translateY(0)` },
-        leave: { transform: `translateY(0)` },
-        'leave-to': { transform: `translateY(100%)` }
-    },
-    'slide-down': {
-        enter: { transform: `translateY(-100%)` },
-        'enter-to': { transform: `translateY(0)` },
-        leave: { transform: `translateY(0)` },
-        'leave-to': { transform: `translateY(-100%)` }
-    },
-    'slide-left': {
-        enter: { transform: `translateX(-100%)` },
-        'enter-to': { transform: `translateY(0)` },
-        leave: { transform: `translateY(0)` },
-        'leave-to': { transform: `translateX(-100%)` }
-    },
-    'slide-right': {
-        enter: { transform: `translateX(100%)` },
-        'enter-to': { transform: `translateY(0)` },
-        leave: { transform: `translateY(0)` },
-        'leave-to': { transform: `translateX(100%)` }
-    },
-    'zoom-in': {
-        enter: { opacity: 0, transform: `scale(0.8)` },
-        'enter-to': { opacity: 1, transform: `scale(1)` },
-        leave: { opacity: 1, transform: `scale(1)` },
-        'leave-to': { opacity: 0, transform: `scale(0.8)` }
-    },
-    'zoom-out': {
-        enter: { opacity: 0, transform: `scale(1.2)` },
-        'enter-to': { opacity: 1, transform: `scale(1)` },
-        leave: { opacity: 1, transform: `scale(1)` },
-        'leave-to': { opacity: 0, transform: `scale(1.2)` }
-    }
-}
+const animationMap = TRANSITION.animationMap
 const getStyle = (name) => animationMap[name]
 // #endif
 

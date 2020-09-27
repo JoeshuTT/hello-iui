@@ -32,8 +32,8 @@
 @mixin hairline-bottom($color: $border-color, $left: 0, $right: 0) {
   @include hairline-common();
 
-  right: #{$right};
   bottom: 0;
+  right: #{$right};
   left: #{$left};
   border-bottom: 1px solid #{$color};
   transform: scaleY(0.5);

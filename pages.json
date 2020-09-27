@@ -143,6 +143,24 @@
                     "scrollIndicator": "none"
                 }
             }
+        },
+        {
+            "path" : "pages/charts/charts",
+            "style": {
+                "app-plus": {
+                    "bounce": "none",
+                    "scrollIndicator": "none"
+                }
+            }
+        },
+        {
+            "path" : "pages/charts/column",
+            "style": {
+                "app-plus": {
+                    "bounce": "none",
+                    "scrollIndicator": "none"
+                }
+            }
         }
     ],
     "tabBar": {
@@ -158,7 +176,7 @@
                 "text": "首页",
                 "iconPath": "static/tabbar/home.png",
                 "selectedIconPath": "static/tabbar/home_on.png"
-            }, 
+            },
             {
                 "pagePath": "pages/discover/discover",
                 "text": "发现",

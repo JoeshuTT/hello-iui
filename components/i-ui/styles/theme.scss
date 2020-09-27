@@ -1,15 +1,22 @@
+/**
+ * 定制组件主题样式
+ * 可以引入本项目的 theme.scss，来覆盖组件样式变量
+ */
+@import '~@/styles/theme.scss';
 
-@mixin theme($property, $value, $var: 'theme-color') {
+/**
+ * theme
+ * @desc 使用 theme，可以给页面元素设置css变量，以实现主题的动态切换
+ * @param {String} $property CSS 属性名
+ * @param {String} $value CSS 属性值
+ * @param {String} $var CSS 变量名
+ */
+@mixin theme($property, $value, $var: 'ui-color') {
     #{$property}: $value;
     /* #ifndef APP-NVUE */
     #{$property}: var(--#{$var}, $value);
     /* #endif */
 }
-
-
-// 定制主题
-// 覆盖组件样式变量
-$theme-color: #42b983;
 
 // Color Palette
 $black: #000;
@@ -25,4 +32,4 @@ $gray-8: #323233;
 $red: #ee0a24;
 $blue: #1989fa;
 $orange: #ff976a;
-$green: $theme-color;
+$green: $ui-color;

@@ -15,10 +15,13 @@
 </template>
 
 <script>
+
+import IComponent from '../mixins/component'
 import { addUnit } from '../utils'
 
 export default {
     name: 'ILoading',
+    mixins: [IComponent],
     props: {
         type: {
             type: String,

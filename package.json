@@ -18,5 +18,8 @@
     "ui",
     "iui"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@antv/wx-f2": "^2.1.1"
+  }
 }

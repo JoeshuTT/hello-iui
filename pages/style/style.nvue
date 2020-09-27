@@ -15,6 +15,11 @@
             <text class="ellipsis--2">这是一段最多显示两行的文字，多余的内容会被省略。这是一段最多显示两行的文字，多余的内容会被省略。</text>
             <text class="ellipsis--3">这是一段最多显示三行的文字，多余的内容会被省略。这是一段最多显示两行的文字，多余的内容会被省略。这是一段最多显示两行的文字，多余的内容会被省略。</text>
         </demo-block>
+        <!-- #ifndef APP-NVUE -->
+        <demo-block title="1px边框" padding>
+            <view class="layout-box"> 盒子 </view>
+        </demo-block>
+        <!-- #endif -->
     </view>
 </template>
 
@@ -96,4 +101,24 @@ export default {
         @include i-col(8, 40, 690);
         margin-bottom: 20rpx;
     }
+
+    /* #ifndef APP-NVUE */
+    .layout-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 200rpx;
+        height: 200rpx;
+        background-color: $ui-color;
+        color: #fff;
+        margin-bottom: 20rpx;
+        &:before {
+            @include hairline-top();
+        }
+        &:after {
+            @include hairline-bottom();
+        }
+    }
+    /* #endif */
 </style>

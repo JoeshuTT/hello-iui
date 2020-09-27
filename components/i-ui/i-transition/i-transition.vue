@@ -12,9 +12,9 @@ export default {
     name: 'ITransition',
     mixins: [transition],
     props: {
-        value: {
+        show: {
             type: Boolean,
-            default: false // 不支持model自定义
+            default: false
         },
         name: {
             type: String,

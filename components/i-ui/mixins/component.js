@@ -9,5 +9,8 @@ export default {
             type: String,
             default: ''
         }
+    },
+    methods: {
+        noop() {}
     }
 }

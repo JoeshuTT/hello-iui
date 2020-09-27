@@ -2,7 +2,7 @@
     <view class="i-page">
         <template v-if="status === 'loading'">
             <i-transition :show="true" class="i-page__loading" :name="transitionName">
-                <text class="i-page__loading-title">{{ pageLoadingTitle }}</text>
+                <text class="i-page__loading-title">{{ loadingTitle }}</text>
             </i-transition>
         </template>
         <template v-else-if="status === 'fail'">
@@ -20,7 +20,7 @@
 <script>
 
 import IButton from '../i-button/i-button'
-import config from '../config'
+import { PAGE } from '../common/config'
 
 export default {
     name: 'IPage',
@@ -46,10 +46,10 @@ export default {
         }
     },
     data() {
-        const { reloadTitle, pageLoadingTitle, offlineTitle, tabbarPaths } = config
+        const { reloadTitle, loadingTitle, offlineTitle, tabbarPaths } = PAGE
         return {
             reloadTitle,
-            pageLoadingTitle,
+            loadingTitle,
             offlineTitle,
             tabbarPaths
         }

@@ -1,10 +1,10 @@
 <template>
-    <view class="i-icon-block">
+    <view :class="['i-icon', classPrefix, classPrefix ? classPrefix + '-' + name : 'i-icon-block']">
         <template v-if="isImageName">
-            <image class="i-img" :style="[mergeStyle]" :src="name" mode="aspectFit" />
+            <image class="i-icon-block_img" :style="[mergeStyle]" :src="name" mode="aspectFit" />
         </template>
         <template v-else>
-            <text class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
+            <text v-if="!classPrefix" class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
         </template>
     </view>
 </template>
@@ -45,6 +45,10 @@ export default {
         fontFamily: {
             type: String,
             default: 'iuiIconFont'
+        },
+        classPrefix: {
+            type: String,
+            default: ''
         },
         customStyle: {
             type: Object,
@@ -91,13 +95,12 @@ export default {
         font-family: 'iuiIconFont';
         src: url($iconFontUrl) format('truetype');
     }
-    /* #endif */
 
     .i-icon {
-        /* #ifndef APP-NVUE */
-        line-height: 1;
+        line-height: inherit;
         font-weight: normal;
-        /* #endif */
+        -webkit-font-smoothing: antialiased;
     }
+     /* #endif */
 
 </style>

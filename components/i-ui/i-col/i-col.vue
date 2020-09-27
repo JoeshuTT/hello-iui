@@ -38,9 +38,8 @@ export default {
             const { gutter, customStyle, width } = this
             const style = {
                 // #ifdef APP-NVUE
-                width,
+                width
                 // #endif
-                display: 'block'
             }
             if (gutter) {
                 const padding = `${Number(gutter) / 2}rpx`
@@ -83,7 +82,7 @@ export default {
     /* #endif */
 
     .i-col {
-        /* #ifdef APP-PLUS-NVUE || H5 */
+        /* #ifdef APP-PLUS || APP-NVUE || H5 */
         @include flex-box();
         /* #endif */
         /* #ifndef APP-NVUE */

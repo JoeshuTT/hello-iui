@@ -19,8 +19,7 @@ iui 是适用于APP，兼容NVUE的UI组件库，非常适合面向app用户的�
 // 代码演示
 <template>
     <view class="container">
-        <!-- 使用 -->
-        <i-button type="default" text="默认按钮" />
+        <i-button type="default">默认按钮</i-button>
     </view>
 </template>
 
@@ -33,7 +32,7 @@ export default {
     components: {
         IButton,
     }
-    // 其他代码
+    // 其他代码...
 }
 </script>
 ```

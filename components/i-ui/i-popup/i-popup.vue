@@ -2,6 +2,7 @@
     <view class="i-popup-wrapper" @touchmove.stop.prevent="noop">
         <!-- #ifdef APP-NVUE -->
         <!-- <i-overlay :show="show" :custom-style="overlayStyle" @click="onOverlayClick" /> -->
+        <!-- nvue 平台降级处理，遮罩无动画 -->
         <view v-if="value" class="i-overlay" @click="onOverlayClick" />
         <!-- #endif -->
         <!-- #ifndef APP-NVUE -->
@@ -37,7 +38,7 @@ export default {
     props: {
         value: {
             type: Boolean,
-            default: false // 小程序端 model 自定义无效
+            default: false // 小程序端使用 model 定制 prop 和 event无效，只好在 popup 中使用 value 代替 show
         },
         overlay: {
             type: Boolean,

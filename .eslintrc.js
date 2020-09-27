@@ -10,6 +10,7 @@ module.exports = {
     es6: true,
   },
   globals: {
+    wx: true, 
     AMap: true, 
     weex: true,
     uni:true,

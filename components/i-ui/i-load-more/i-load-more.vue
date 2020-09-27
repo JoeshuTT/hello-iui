@@ -6,13 +6,17 @@
 </template>
 
 <script>
+
+import IComponent from '../mixins/component'
 import ILoading from '../i-loading/i-loading'
+import { LOAD_MORE } from '../common/config'
 
 export default {
     name: 'ILoadMore',
     components: {
         ILoading
     },
+    mixins: [IComponent],
     props: {
         status: {
             type: String,
@@ -36,13 +40,8 @@ export default {
         }
     },
     data() {
-        const statusTypeMap = {
-            more: '上拉显示更多',
-            loading: '正在加载...',
-            noMore: '没有更多数据了'
-        }
         return {
-            statusTypeMap: Object.assign({}, statusTypeMap, this.contentText)
+            statusTypeMap: Object.assign({}, LOAD_MORE.statusTypeMap, this.contentText)
         }
     },
     methods: {

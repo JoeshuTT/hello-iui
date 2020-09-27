@@ -26,8 +26,8 @@ import IIcon from '../i-icon/i-icon'
 import { addUnit } from '../utils'
 var imagePlaceholder = ''
 // #ifdef APP-NVUE
-import config from '../config'
-imagePlaceholder = config.imagePlaceholder
+import { IMAGE } from '../common/config'
+imagePlaceholder = IMAGE.imagePlaceholder
 // #endif
 
 export default {

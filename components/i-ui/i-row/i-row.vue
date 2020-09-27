@@ -51,7 +51,7 @@ export default {
 <style lang="scss">
 	@import '../styles/index.scss';
 
-    /* #ifdef APP-PLUS-NVUE || H5 */
+    /* #ifdef APP-PLUS || APP-NVUE || H5 */
     .i-row {
         @include flex-box('row');
         flex-wrap: wrap;

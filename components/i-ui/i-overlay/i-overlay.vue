@@ -5,6 +5,8 @@
 </template>
 
 <script>
+
+import IComponent from '../mixins/component'
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 1000 / 30))
 // #ifdef APP-NVUE
 const animation = uni.requireNativePlugin('animation')
@@ -12,6 +14,7 @@ const animation = uni.requireNativePlugin('animation')
 
 export default {
     name: 'IOverlay',
+    mixins: [IComponent],
     props: {
         show: {
             type: Boolean,
@@ -20,27 +23,25 @@ export default {
         duration: {
             type: Number,
             default: 300
-        },
-        customStyle: {
-            type: Object,
-            default: () => ({})
         }
     },
     data() {
         return {
             inited: false,
-            viewStyle: { opacity: this.show ? 0 : 1 }
+            display: false,
+            aniStyle: {}
         }
     },
     computed: {
         overlayStyle() {
-            const { viewStyle, customStyle } = this
+            const { aniStyle, customStyle } = this
             const style = {
+                // #ifndef APP-NVUE
                 transitionDuration: `${this.duration}ms`,
-                ...viewStyle,
-                ...customStyle
+                display: `${this.display ? '' : 'none'}`
+                // #endif
             }
-            return style
+            return Object.assign({}, style, aniStyle, customStyle)
         }
     },
     watch: {
@@ -49,7 +50,12 @@ export default {
                 if (value === old) {
                     return
                 }
+                // #ifndef APP-NVUE
                 this.appearOverlay(value)
+                // #endif
+                // #ifdef APP-NVUE
+                this.appearOverlay2(value)
+                // #endif
             },
             immediate: true
         }
@@ -60,28 +66,37 @@ export default {
         },
         appearOverlay(bool) {
             const { duration } = this
-            // #ifndef APP-NVUE
+            if (!this.show && !this.inited) {
+                return
+            }
             this.show && (this.inited = true)
-            // this.viewStyle = { opacity: bool ? 0 : 1 }
-            Promise.resolve()
-                .then(nextTick)
-                .then(() => {
-                    this.viewStyle = { opacity: bool ? 1 : 0 }
-                    !this.show && setTimeout(() => {
-                        this.inited = false
-                    }, duration)
-                })
-                .catch(() => {})
-            // #endif
-            // #ifdef APP-NVUE
-            this.show && (this.inited = true)
-            // this.viewStyle = { opacity: bool ? 0 : 1 }
-            const overlayEl = this.$refs.iOverlay
+            this.show && (this.display = true)
+            this.aniStyle = { opacity: bool ? 0 : 1 }
 
             Promise.resolve()
                 .then(nextTick)
                 .then(() => {
-                    animation.transition(overlayEl, {
+                    this.aniStyle = { opacity: bool ? 1 : 0 }
+                    if (!this.show && this.display) {
+                        setTimeout(() => {
+                            this.display = false
+                        }, duration)
+                    }
+                })
+                .catch(() => {})
+        },
+        appearOverlay2(bool) {
+            const { duration } = this
+            if (!this.show && !this.inited) {
+                return
+            }
+            this.show && (this.inited = true)
+            this.aniStyle = { opacity: bool ? 0 : 1 }
+
+            Promise.resolve()
+                .then(nextTick)
+                .then(() => {
+                    animation.transition(this.$refs.iOverlay, {
                         styles: {
                             opacity: bool ? 1 : 0
                         },
@@ -91,12 +106,14 @@ export default {
                         delay: 0
                     }, () => {
                         // console.log('animation finished')
+
+                        if (!this.show && this.inited) {
+                            this.inited = false
+                        }
                     })
                 })
                 .catch(() => {})
-            // #endif
-        },
-        noop() {}
+        }
     }
 }
 </script>
@@ -110,11 +127,11 @@ export default {
 		top: 0;
 		left: 0;
 		/* #ifndef APP-NVUE */
-        transition-property: opacity;
-		transition-timing-function: ease;
 		width: 100%;
 		height: 100%;
         z-index: $z-index;
+        transition-property: opacity;
+		transition-timing-function: ease;
 		/* #endif */
 		/* #ifdef APP-NVUE */
 		width: 750rpx;
@@ -123,4 +140,5 @@ export default {
 		/* #endif */
 		background-color: $overlay-background-color;
 	}
+
 </style>

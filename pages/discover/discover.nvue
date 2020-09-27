@@ -1,8 +1,9 @@
 <template>
     <i-page :status="pageActivity">
-        <!-- #ifdef APP-PLUS-NVUE || H5 -->
-        <i-cell title="draggable - 拖拽排序" label="适用于H5，App vue页面" is-link @click="onNavigator()" />
-        <!-- #endif -->
+
+        <i-cell center title="draggable - 拖拽排序" label="移植自sortablejs，适用于H5，App vue页面" is-link @click="onNavigator()" />
+        <i-cell center title="f2-canvas - 移动可视化" label="移植自@antv/f2，适用于H5，App vue页面" is-link @click="onNavigator('/pages/charts/charts')" />
+
     </i-page>
 </template>
 
@@ -18,12 +19,7 @@ export default {
         }
     },
     methods: {
-        onNavigator(path) {
-            uni.showToast({
-                icon: 'none',
-                title: '等一下，我马上就来！T.T'
-            })
-        }
+
     }
 }
 </script>

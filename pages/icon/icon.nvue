@@ -1,6 +1,5 @@
 <template>
     <view class="container">
-        <view class="main">
             <demo-block title="基础图标" padding>
                 <i-row custom-class="demo-row" class="demo-row">
                     <i-col v-for="(item, index) in list" :key="index" :span="8" custom-class="demo-col" class="demo-col">
@@ -20,7 +19,7 @@
                 <i-icon name="success" size="50rpx" />
                 <i-icon name="success" size="50px" />
             </demo-block>
-            <demo-block title="自定义图标" padding>
+            <demo-block title="使用 UniCode 方式，自定义图标" padding>
                 <i-row custom-class="demo-row" class="demo-row">
                     <i-col v-for="(item, index) in list2" :key="index" :span="8" custom-class="demo-col" class="demo-col">
                         <i-icon class="demo-col-icon" font-family="myIcon" :name="item.value" size="20" />
@@ -28,11 +27,16 @@
                     </i-col>
                 </i-row>
             </demo-block>
-            <demo-block title="单个图标使用" padding>
-                <i-icon class="demo-col-icon" font-family="myIcon" :name="myIconWeibo" size="20" />
-                <text class="demo-col-txt">weibo</text>
+            <!-- #ifndef APP-NVUE -->
+            <demo-block title="使用 Font Class 方式，自定义图标" padding>
+                <i-row custom-class="demo-row" class="demo-row">
+                    <i-col v-for="(item, index) in list2" :key="index" :span="8" custom-class="demo-col" class="demo-col">
+                        <i-icon class="demo-col-icon" class-prefix="my-icon" :name="item.label" size="20" />
+                        <text class="demo-col-txt">{{ item.label }}</text>
+                    </i-col>
+                </i-row>
             </demo-block>
-        </view>
+            <!-- #endif -->
     </view>
 </template>
 
@@ -115,15 +119,6 @@ export default {
 </script>
 
 <style lang="scss">
-    /* 引入第三方或自定义的字体图标样式 */
-    @font-face {
-      font-family: 'myIcon';
-      src: url('https://at.alicdn.com/t/font_720567_dnwdc9tepfd.ttf') format('truetype');
-    }
-
-    .main {
-        flex: 1;
-    }
 
     .demo-row {
         background-color: #fff;
@@ -140,4 +135,33 @@ export default {
             color: #666;
         }
     }
+
+    /* #ifndef APP-NVUE */
+    /* 引入第三方或自定义的字体图标样式 */
+    @font-face {
+      font-family: 'myIcon';
+      src: url('https://at.alicdn.com/t/font_720567_dnwdc9tepfd.ttf') format('truetype');
+    }
+
+    .my-icon {
+        font-family: "myIcon";
+    }
+
+    .my-icon-wechat:before {
+      content: "\e632";
+    }
+
+    .my-icon-qq:before {
+      content: "\e624";
+    }
+
+    .my-icon-weibo:before {
+      content: "\e630";
+    }
+
+    .my-icon-share:before {
+      content: "\e62a";
+    }
+
+    /* #endif */
 </style>

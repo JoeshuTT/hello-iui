@@ -7,6 +7,7 @@
 ## v2.2.4
 
 `2020-09-25`
+
 - 不得不说 `nvue` 的布局，样式问题简直就是个黑盒子
 - 修复了 `i-button`， `i-icon`， `i-image`，`i-page`，`i-nav-bar` 几个小问题
 - 新增部分组件根元素默认拥有 `custom-style`，`custom-class`属性，方便自定义样式

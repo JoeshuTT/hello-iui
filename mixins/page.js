@@ -46,5 +46,12 @@ export default {
                 uni.report('title', this.pageTitle)
             }
         }
+    },
+    methods: {
+        onNavigator(url) {
+            uni.navigateTo({
+                url
+            })
+        }
     }
 }
