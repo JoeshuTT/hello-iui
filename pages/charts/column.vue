@@ -1,6 +1,6 @@
 <template>
     <view class="container">
-        <ff-canvas canvas-id="canvas-column" :data="data" />
+        <ff-canvas canvas-id="canvas-column" :dataa="data" />
     </view>
 </template>
 
