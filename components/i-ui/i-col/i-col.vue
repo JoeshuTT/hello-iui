@@ -75,24 +75,11 @@ export default {
 <style lang="scss">
     @import '../styles/index.scss';
 
-    /* #ifdef MP */
-    view {
-        display: block; // 处理 nvue 页面会默认会加上display:flex
-    }
-    /* #endif */
-
     .i-col {
-        /* #ifdef APP-PLUS || APP-NVUE || H5 */
         @include flex-box();
-        /* #endif */
         /* #ifndef APP-NVUE */
         min-height: 1px;
         /* #endif */
-        /* #ifdef MP-WEIXIN */
-        box-sizing: border-box;
-        float: left;
-        /* #endif */
-
     }
 
     /* #ifndef APP-NVUE */

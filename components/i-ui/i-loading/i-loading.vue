@@ -1,5 +1,5 @@
 <template>
-    <view class="i-loading" :class="'i-loading--'+ type">
+    <view class="i-loading" :class="[customClass,'i-loading--' + type]">
         <!-- #ifndef APP-NVUE -->
         <view v-if="!webviewHide" class="i-loading__spinner" :class="'i-loading__spinner--' + type" :style="[mergeStyle]">
             <template v-if="type === 'circular'" />

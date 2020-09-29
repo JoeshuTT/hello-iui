@@ -36,6 +36,11 @@
           <i-button class="mb20" custom-class="mb20" color="linear-gradient(to right, #4bb0ff, #6149f6)" :style="{backgroundImage: 'linear-gradient(to right, #4bb0ff, #6149f6)', borderWidth: 0}">渐变色按钮</i-button>
         </demo-block>
         <!-- #endif -->
+        <!-- #ifdef MP -->
+        <demo-block title="开放能力" padding>
+            <i-button open-type="getUserInfo" type="primary" class="mb20" custom-class="mb20" @getuserinfo="getUserInfo">获取用户信息</i-button>
+        </demo-block>
+        <!-- #endif -->
     </view>
 </template>
 
@@ -53,7 +58,9 @@ export default {
 
     },
     methods: {
-
+        getUserInfo(detail) {
+            console.log(detail)
+        }
     }
 }
 </script>

@@ -1,29 +1,74 @@
 <template>
-    <view class="i-button" :class="[customClass, 'i-button--' + type, plain && 'i-button--plain', disabled && 'i-button--disabled']" :style="[mergeStyle]" @click="onClick">
+    <!-- #ifndef APP-NVUE -->
+    <button
+        class="i-button"
+        :class="[customClass, 'i-button--' + type, plain && 'i-button--plain', disabled && 'i-button--disabled']"
+        :hover-class="hoverClass"
+        :lang="lang"
+        :form-type="formType"
+        :style="[mergeStyle]"
+        :open-type="disabled ? '' : openType "
+        :sbusiness-id="businessId"
+        :session-from="sessionFrom"
+        :send-message-title="sendMessageTitle"
+        :send-message-path="sendMessagePath"
+        :send-message-img="sendMessageImg"
+        :show-message-card="showMessageCard"
+        :app-parameter="appParameter"
+        :aria-label="ariaLabel"
+        @click="onClick"
+        @getuserinfo="bindGetUserInfo"
+        @contact="bindContact"
+        @getphonenumber="bindGetPhoneNumber"
+        @error="bindError"
+        @launchapp="bindLaunchApp"
+        @opensetting="bindOpenSetting"
+    >
         <template v-if="loading">
-            <i-loading class="i-button__loading" :type="loadingType" :size="loadingSize" :color="leftColor" />
+            <slot name="loading"><i-loading custom-class="i-button__loading" class="i-button__loading" :type="loadingType" :size="loadingSize" :color="leftColor" /></slot>
         </template>
         <template v-if="icon">
-            <i-icon class="i-button__icon" :name="icon" :font-family="iconFont" :color="leftColor" />
+            <slot name="icon"><i-icon custom-class="i-button__icon" class="i-button__icon" :name="icon" :font-family="iconFont" :color="leftColor" /></slot>
         </template>
         <!-- 兼容使用 text 的情况 -->
         <template v-if="text">
             <text class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]" :style="[mergeTextStyle]">{{ text }}</text>
         </template>
         <template v-else>
-            <!-- #ifdef APP-NVUE -->
-            <text v-if="$slots.default && $slots.default[0].tag === 'u-text'" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]" :style="[mergeTextStyle]">{{ $slots.default[0].children[0].text }}</text>
-            <!-- #endif -->
-            <!-- #ifndef APP-NVUE -->
             <text v-if="$slots.default" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]" :style="[mergeTextStyle]"><slot /></text>
-            <!-- #endif -->
+        </template>
+    </button>
+    <!-- #endif -->
+    <!-- #ifdef APP-NVUE -->
+    <!-- eslint-disable-next-line -->
+        <view
+        class="i-button"
+        :class="[customClass, 'i-button--' + type, plain && 'i-button--plain', disabled && 'i-button--disabled']"
+        :style="[mergeStyle]"
+        @click="onClick"
+    >
+        <template v-if="loading">
+            <i-loading custom-class="i-button__loading" class="i-button__loading" :type="loadingType" :size="loadingSize" :color="leftColor" />
+        </template>
+        <template v-if="icon">
+            <i-icon custom-class="i-button__icon" class="i-button__icon" :name="icon" :font-family="iconFont" :color="leftColor" />
+        </template>
+        <!-- 兼容使用 text 的情况 -->
+        <template v-if="text">
+            <text class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]" :style="[mergeTextStyle]">{{ text }}</text>
+        </template>
+        <template v-else>
+            <text v-if="$slots.default && $slots.default[0] && $slots.default[0].tag === 'u-text'" class="i-button__text" :class="['i-button__text--' + type, plain && 'i-button__text--plain--' + type]" :style="[mergeTextStyle]">{{ $slots.default[0].children[0].text }}</text>
         </template>
     </view>
+    <!-- #endif -->
 </template>
 
 <script>
 
 import IComponent from '../mixins/component'
+import button from '../mixins/button'
+import openType from '../mixins/open-type'
 import ILoading from '../i-loading/i-loading'
 import IIcon from '../i-icon/i-icon'
 import { BUTTON } from '../common/config'
@@ -34,7 +79,7 @@ export default {
         IIcon,
         ILoading
     },
-    mixins: [IComponent],
+    mixins: [IComponent, button, openType],
     props: {
         text: {
             type: String,
@@ -79,6 +124,10 @@ export default {
         textStyle: {
             type: Object,
             default: () => ({})
+        },
+        formType: {
+            type: String,
+            default: ''
         }
     },
     computed: {
@@ -153,12 +202,22 @@ export default {
 	@import '../styles/index.scss';
 
     .i-button {
+        position: relative;
         @include flex-box('row');
         align-items: center;
         justify-content: center;
         height: $button-default-height;
-        font-size: $button-default-font-size;
         /* #ifndef APP-NVUE */
+        line-height: $button-default-line-height;
+        padding: 0;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-appearance: none;
+        -webkit-text-size-adjust: 100%;
+        font-size: $button-default-font-size;
+        border-radius: $button-border-radius;
         opacity: 1;
         transition: opacity $animation-duration-fast;
         /* #endif */
@@ -228,24 +287,30 @@ export default {
             /* #endif */
         }
 
+        /* #ifndef APP-NVUE */
+        &::after {
+            border-width: 0;
+            display: none;
+        }
+        /* #endif */
+
         &--active {
             opacity: $active-opacity;
         }
-
+        /* #ifdef APP-NVUE */
         &:active {
             opacity: $active-opacity;
         }
-
+        /* #endif */
         &--disabled {
             opacity: $button-disabled-opacity;
         }
-    }
 
-	/* #ifndef APP-NVUE */
-	.i-button__icon+.i-button__text:not(:empty),
-	.i-button__loading+.i-button__text:not(:empty) {
-        margin-left: 4px
-	}
-	/* #endif */
+        /* #ifndef APP-NVUE */
+        &__text {
+            margin-left: 4px;
+        }
+        /* #endif */
+    }
 
 </style>

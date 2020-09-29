@@ -1,5 +1,5 @@
 <template>
-    <view :class="['i-icon', classPrefix, classPrefix ? classPrefix + '-' + name : 'i-icon-block']">
+    <view :class="['i-icon', customClass, classPrefix, classPrefix ? classPrefix + '-' + name : 'i-icon-block']">
         <template v-if="isImageName">
             <image class="i-icon-block_img" :style="[mergeStyle]" :src="name" mode="aspectFit" />
         </template>
