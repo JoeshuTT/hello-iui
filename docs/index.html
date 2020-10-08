@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>iui - 一个基于 uni-app 的 UI 组件库（兼容NVUE）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="./static/style.css">
+  <script>
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      location.href = 'https://static-386415c0-10b5-4a03-a868-8fb41b9e886e.bspapp.com/h5/'
+    }
+  </script>
+</head>
+<body>
+  <nav> 
+    <ul>
+      <!-- <li><a href="#/zh-cn/">指南</a></li> -->
+      <li><a href="#/components/button/">组件</a></li>
+      <li><a href="#/changelog">日志</a></li>
+      <!-- <li><a href="#/zh-cn/">gitee</a></li> -->
+      <li><a href="https://github.com/JoeshuTT/hello-iui">👍^-^⭐</a></li>
+    </ul>
+  </nav>
+  <div id="app">加载中...</div>
+  <div class="simulator"> 
+    <!-- <iframe id="simulator-iframe" src="https://static-386415c0-10b5-4a03-a868-8fb41b9e886e.bspapp.com/h5/" frameborder="0" style="height: 640px;"></iframe> -->
+    <iframe id="simulator-iframe" src="http://localhost:1005/h5/" frameborder="0"  style="height: 640px;"></iframe>
+  </div>
+  <script>
+    var simulatorIframe = null 
+    window.$docsify = {
+      name: 'iui - 跨端UI组件库',
+      logo: '/static/logo.png',
+      repo: 'https://github.com/JoeshuTT/hello-iui',
+      mergeNavbar: true,
+      search: 'auto', // 默认值
+      loadSidebar: true, // 侧边栏配置
+      // loadNavbar: true,
+      auto2top: true, // 切换页面后是否自动跳转到页面顶部
+      // coverpage: true, // 封面
+      themeColor: '#42b983',
+      homepage: 'intro.md',
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+      },
+      plugins: [
+        function(hook, vm) {
+          // 底部
+          hook.beforeEach(function(content) {
+             
+            var url ='https://github.com/JoeshuTT/hello-iui/docs/' + vm.route.file;
+            var editHtml = '> 🧐发现错误，想一起完善？[在 Github 编辑此页](' + url +')！\n'
+
+            var footer = [
+              '----',
+              '> Last modified {docsify-updated} ',
+              '> [Joeshu](https://github.com/JoeshuTT) &copy;2020. Proudly published with [docsify](https://github.com/docsifyjs/docsify) and powered by love.', 
+            ].join("\n");
+
+            return editHtml
+              + "\n----\n"
+              + content 
+              + "\n\n" 
+              + footer
+          })
+      
+          
+          // 每次路由切换时数据全部加载完成后调用，没有参数
+          hook.doneEach(function() {
+              const path = vm.route.path 
+              if(path.indexOf('components') !== -1){
+                if(!simulatorIframe){
+                  simulatorIframe = document.getElementById('simulator-iframe')
+                }
+             
+                const name = path.split('/components/')[1].replace(/\//g, '')
+                const title = name
+                simulatorIframe.src = `http://localhost:1005/h5/#/pages/${name}/${name}?pageTitle=${title}`
+              }
+          })
+
+        }
+      ]
+    }
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="./static/index.js"></script>
+</body>
+</html>
