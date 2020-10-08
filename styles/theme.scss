@@ -1,2 +1,39 @@
+/**
+ * 定制项目的基本样式变量
+ * 还可以新增样式变量，来覆盖组件的默认样式变量，使得组件和项目的样式，保持一致。
+ */
+
+/**
+ * theme
+ * @desc 可以通过给页面元素的 style，设置css变量，以实现主题的动态切换
+ * @param {String} $property CSS 属性名
+ * @param {String} $value CSS 属性值
+ * @param {String} $var CSS 变量名
+ */
+@mixin theme($property, $value, $var: 'ui-color') {
+    #{$property}: $value;
+    /* #ifndef APP-NVUE */
+    #{$property}: var(--#{$var}, $value);
+    /* #endif */
+}
+
+
 // 项目主题色
 $ui-color: #42b983;
+$gray-8: #333;
+
+// Color Palette
+$black: #000;
+$white: #fff;
+$gray-1: #f7f8fa;
+$gray-2: #f2f3f5;
+$gray-3: #ebedf0;
+$gray-4: #dcdee0;
+$gray-5: #c8c9cc;
+$gray-6: #969799;
+$gray-7: #646566;
+$gray-8: #323233;
+$red: #ee0a24;
+$blue: #1989fa;
+$orange: #ff976a;
+$green: $ui-color;

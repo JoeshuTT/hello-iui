@@ -1,9 +1,9 @@
 <template>
     <i-page :status="pageActivity">
-
-        <i-cell center title="draggable - 拖拽排序" label="移植自sortablejs，适用于H5，App vue页面" is-link @click="onNavigator()" />
-        <i-cell center title="f2-canvas - 移动可视化" label="移植自@antv/f2，适用于H5，App vue页面" is-link @click="onNavigator('/pages/charts/charts')" />
-
+        <view class="container">
+            <i-cell center title="draggable - 拖拽排序" label="移植自sortablejs，适用于H5，App vue页面" is-link @click="onNavigator()" />
+            <i-cell center title="f2-canvas - 移动可视化" label="移植自@antv/f2，适用于H5，App vue页面" is-link @click="onNavigator('/pages/charts/charts')" />
+        </view>
     </i-page>
 </template>
 

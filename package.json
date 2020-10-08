@@ -1,11 +1,12 @@
 {
   "name": "iui",
   "version": "1.0.0",
-  "description": "一个基于 uni-app 的 UI 组件库（兼容NVUE），主打APP。",
+  "description": "一个基于 uni-app 的 UI 组件库（兼容NVUE）",
   "author": "Joeshu <1442702103@qq.com>",
   "dependencies": {
     "@antv/f2": "^3.7.7",
-    "@antv/wx-f2": "^2.1.1"
+    "@antv/wx-f2": "^2.1.1",
+    "dayjs": "^1.9.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
@@ -13,7 +14,8 @@
     "eslint-plugin-vue": "^5.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "docsify serve docs"
   },
   "keywords": [
     "uni-app",

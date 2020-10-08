@@ -1,5 +1,5 @@
 <template>
-    <view ref="iRow" class="i-row" :class="[customClass]" :style="[mergeStyle]" @click="onClick">
+    <view ref="iRow" class="i-row" :class="[customClass, justify && `i-row--justify-${justify}`, align && `i-row--align-${align}`]" :style="[mergeStyle]" @click="onClick">
         <slot />
     </view>
 </template>
@@ -19,6 +19,14 @@ export default {
         gutter: {
             type: [Number, String],
             default: 0
+        },
+        justify: {
+            type: String,
+            default: ''
+        },
+        align: {
+            type: String,
+            default: ''
         }
     },
     computed: {
@@ -52,8 +60,33 @@ export default {
 	@import '../styles/index.scss';
 
     .i-row {
+        position: relative;
         @include flex-box('row');
         flex-wrap: wrap;
+
+        &--justify-center {
+            justify-content: center;
+        }
+
+        &--justify-end {
+            justify-content: flex-end;
+        }
+
+        &--justify-space-between {
+            justify-content: space-between;
+        }
+
+        &--justify-space-around {
+            justify-content: space-around;
+        }
+
+        &--align-center {
+            align-items: center;
+        }
+
+        &--align-bottom {
+            align-items: flex-end;
+        }
     }
 
 </style>

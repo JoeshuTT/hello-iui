@@ -1,16 +1,16 @@
 <template>
-    <view v-if="inited" ref="ani" class="i-transition" :class="[classes]" :style="[mergeStyle]" @click="onClick">
+    <view v-if="inited" ref="ani" class="i-transition" :class="[customClass, classes]" :style="[mergeStyle]" @click="onClick">
         <slot />
     </view>
 </template>
 
 <script>
-
+import IComponent from '../mixins/component'
 import transition from '../mixins/transition'
 
 export default {
     name: 'ITransition',
-    mixins: [transition],
+    mixins: [IComponent, transition],
     props: {
         show: {
             type: Boolean,

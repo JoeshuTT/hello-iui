@@ -1,10 +1,10 @@
 <template>
-    <view :class="['i-icon', customClass, classPrefix, classPrefix ? classPrefix + '-' + name : 'i-icon-block']">
-        <template v-if="isImageName">
+    <view :class="['i-icon', customClass, classPrefix, classPrefix ? classPrefix + '-' + name : 'i-icon-block']" @click="onClick">
+        <template v-if="isImage">
             <image class="i-icon-block_img" :style="[mergeStyle]" :src="name" mode="aspectFit" />
         </template>
         <template v-else>
-            <text v-if="!classPrefix" class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
+            <text v-if="!classPrefix" class="i-icon" :style="[mergeStyle]">{{ icon }}</text>
         </template>
     </view>
 </template>
@@ -14,6 +14,7 @@
 import IComponent from '../mixins/component'
 import { addUnit } from '../utils'
 import icon from './type'
+import { COLOR_PALETTE } from '../common/config'
 // #ifdef APP-NVUE
 const fontFamily = 'iuiIconFont'
 // const url = '/static/iuiIconFont.ttf'
@@ -40,7 +41,7 @@ export default {
         },
         color: {
             type: String,
-            default: '#999'
+            default: COLOR_PALETTE['gray-6']
         },
         fontFamily: {
             type: String,
@@ -49,15 +50,6 @@ export default {
         classPrefix: {
             type: String,
             default: ''
-        },
-        customStyle: {
-            type: Object,
-            default: () => ({})
-        }
-    },
-    data() {
-        return {
-            icon
         }
     },
     computed: {
@@ -73,15 +65,24 @@ export default {
                     console.error('image size is required')
                 }
             } else {
-                fontFamily && (style.fontFamily = fontFamily)
-                size && (style.fontSize = addUnit(size))
-                color && (style.color = color)
+                style.fontFamily = fontFamily
+                style.fontSize = addUnit(size)
+                style.color = color
             }
 
             return Object.assign({}, style, customStyle)
         },
-        isImageName() {
-            return this.name.indexOf('/') !== -1
+        isImage() {
+            return this.name ? this.name.indexOf('/') !== -1 : false
+        },
+        icon() {
+            // 古古怪怪
+            return icon[this.name] || this.name
+        }
+    },
+    methods: {
+        onClick() {
+            this.$emit('click')
         }
     }
 }

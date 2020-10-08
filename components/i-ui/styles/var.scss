@@ -1,5 +1,4 @@
 
-@import './theme.scss';
 
 // Color Palette
 $black: #000 !default;
@@ -119,6 +118,31 @@ $cell-value-color: $gray-6 !default;
 $cell-icon-size: 16px !default;
 $cell-right-icon-color: $gray-6 !default;
 
+// CellGroup
+$cell-group-background-color: $white;
+$cell-group-title-color: $gray-6;
+$cell-group-title-padding: $padding-md $padding-md $padding-xs;
+$cell-group-title-font-size: $font-size-md;
+$cell-group-title-line-height: 16px;
+
+// Popup
+$popup-background-color: $white;
+
+// Picker
+$picker-background-color: $white;
+$picker-toolbar-height: 88rpx;
+$picker-title-font-size: $font-size-lg;
+$picker-action-padding: 0 $padding-md;
+$picker-action-font-size: $font-size-md;
+$picker-confirm-action-color: $blue;
+$picker-cancel-action-color: $gray-6;
+$picker-option-font-size: $font-size-lg;
+$picker-option-text-color: $black;
+$picker-loading-icon-color: $gray-6;
+$picker-loading-mask-color: rgba(255, 255, 255, 0.9);
+$picker-option-disabled-opacity: 0.3;
+$picker-option-selected-text-color: $text-color;
+
 // Loading
 $loading-text-color: $gray-6 !default;
 $loading-text-font-size: $font-size-md !default;
@@ -176,10 +200,9 @@ $radio-disabled-background-color: $border-color !default;
 
 // NavBar
 $nav-bar-height: 44px !default;
+$nav-bar-padding: $padding-md !default;
 $nav-bar-background-color: $white !default;
-$nav-bar-arrow-size: 16px !default;
-$nav-bar-icon-color: $blue !default;
-$nav-bar-text-color: $blue !default;
+$nav-bar-text-color: $gray-7 !default;
 $nav-bar-text-font-size: $font-size-md !default;
 $nav-bar-title-font-size: $font-size-lg !default;
 $nav-bar-title-text-color: $text-color !default;

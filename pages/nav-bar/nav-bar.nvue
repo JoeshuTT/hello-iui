@@ -8,16 +8,9 @@
        <view class="container">
            <demo-block title="基础用法">
                <i-nav-bar
-                  left-text="返回"
-                 title="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
-                 right-text="按钮"
-                 @back="onClickLeft"
-                 @right="onClickRight"
-               >
-               <template slot="right">
-                  <text>按钮</text>
-                </template>
-                </i-nav-bar>
+                   left-text="返回"
+                   title="标题"
+               />
            </demo-block>
            <demo-block title="使用插槽">
                <i-nav-bar title="标题" left-text="返回" left-arrow>

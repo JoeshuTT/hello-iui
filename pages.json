@@ -55,7 +55,7 @@
             }
         },
 		{
-            "path" : "pages/layout/layout",
+            "path" : "pages/col/col",
             "style": {
                 "app-plus": {
                     "bounce": "none",
@@ -89,7 +89,25 @@
             }
         },
 		{
-            "path" : "pages/style/style",
+            "path" : "pages/styles/styles",
+            "style": {
+                "app-plus": {
+                    "bounce": "none",
+                    "scrollIndicator": "none"
+                }
+            }
+        },
+		{
+            "path" : "pages/datetime-picker/datetime-picker",
+            "style": {
+                "app-plus": {
+                    "bounce": "none",
+                    "scrollIndicator": "none"
+                }
+            }
+        },
+		{
+            "path" : "pages/picker/picker",
             "style": {
                 "app-plus": {
                     "bounce": "none",
@@ -163,28 +181,6 @@
             }
         }
     ],
-    "tabBar": {
-        "color": "#b2b2b2",
-        "selectedColor": "#42b983",
-        "backgroundColor": "#ffffff",
-        // #ifdef APP-PLUS
-        "borderStyle": "#f2f2f2",
-        // #endif
-        "list": [
-            {
-                "pagePath": "pages/home/home",
-                "text": "首页",
-                "iconPath": "static/tabbar/home.png",
-                "selectedIconPath": "static/tabbar/home_on.png"
-            },
-            {
-                "pagePath": "pages/discover/discover",
-                "text": "发现",
-                "iconPath": "static/tabbar/discover.png",
-                "selectedIconPath": "static/tabbar/discover_on.png"
-            }
-        ]
-    },
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "Hello Iui",

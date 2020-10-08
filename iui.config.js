@@ -20,7 +20,7 @@ export default [
             },
             {
                 name: 'layout 布局',
-                path: '/pages/layout/layout'
+                path: '/pages/col/col'
             },
             {
                 name: 'popup 弹出层',
@@ -31,8 +31,8 @@ export default [
                 path: '/pages/page/page'
             },
             {
-                name: 'Style 内置样式',
-                path: '/pages/style/style'
+                name: 'Styles 内置样式',
+                path: '/pages/styles/styles'
             },
             {
                 name: 'Transition 过渡动画',
@@ -40,6 +40,19 @@ export default [
             }
         ]
     },
+    // {
+    //     name: '表单组件',
+    //     children: [
+    //         {
+    //             name: 'DatetimePicker 时间选择',
+    //             path: '/pages/datetime-picker/datetime-picker'
+    //         },
+    //         {
+    //             name: 'Picker 选择器',
+    //             path: '/pages/picker/picker'
+    //         }
+    //     ]
+    // },
     {
         name: '反馈组件',
         children: [
@@ -65,12 +78,10 @@ export default [
     {
         name: '导航组件',
         children: [
-            // #ifndef MP
             {
                 name: 'NavBar 导航栏',
                 path: '/pages/nav-bar/nav-bar'
             }
-            // #endif
         ]
     }
 ]

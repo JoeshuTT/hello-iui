@@ -6,7 +6,7 @@
 
 <script>
 import pageMixin from '@/mixins/page'
-import FfCanvas from '@/components/ff-canvas/ff-canvas'
+// import FfCanvas from '@/components/ff-canvas/ff-canvas'
 
 const chart = null
 
@@ -26,9 +26,9 @@ function initChart(canvas, width, height, F2) {
 }
 
 export default {
-    components: {
-        FfCanvas
-    },
+    // components: {
+    //     FfCanvas
+    // },
     mixins: [pageMixin],
     data() {
         console.log('initChart', initChart)

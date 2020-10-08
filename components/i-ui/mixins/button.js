@@ -1,6 +1,5 @@
 export default {
     props: {
-        id: String,
         lang: String,
         businessId: Number,
         sessionFrom: String,
@@ -9,7 +8,6 @@ export default {
         sendMessageImg: String,
         showMessageCard: Boolean,
         appParameter: String,
-        ariaLabel: String,
         hoverClass: {
             type: String,
             default: 'i-button--active'

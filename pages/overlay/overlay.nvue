@@ -6,7 +6,7 @@
         </demo-block>
         <demo-block title="嵌入内容">
             <i-button type="primary" text="嵌入内容" @click="show2 = true" />
-            <i-overlay :show="show2" :custom-style="{alignItems:'center',justifyContent:'center'}" @click="onMaskToggle2">
+            <i-overlay :show="show2" :custom-style="{alignItems: 'center', justifyContent: 'center'}" @click="onMaskToggle2">
                 <view class="block">
                     <text class="blokc-txt">111</text>
                 </view>

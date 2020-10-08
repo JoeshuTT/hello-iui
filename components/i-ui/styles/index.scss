@@ -4,13 +4,16 @@
  */
 
 // mixins
-@import './mixins/ellipsis.scss';
-@import './mixins/flex-box.scss';
-@import './mixins/hairline.scss';
-
-//
-@import './animate.scss';
 @import './var.scss';
+@import './mixins/flex-box.scss';
+// @import './mixins/ellipsis.scss';
+// @import './mixins/hairline.scss';
+
+// 常用样式
+@import './animate.scss';
+@import './ellipsis.scss';
+@import './hairline.scss';
+
 
 
 // iconFont

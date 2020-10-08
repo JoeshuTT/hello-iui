@@ -1,5 +1,6 @@
 @import '../var.scss';
 
+/* #ifndef APP-NVUE */
 @mixin hairline-common() {
     position: absolute;
     box-sizing: border-box;
@@ -10,7 +11,6 @@
 
 @mixin hairline($color: $border-color) {
   @include hairline-common();
-
   top: -50%;
   right: -50%;
   bottom: -50%;
@@ -21,7 +21,6 @@
 
 @mixin hairline-top($color: $border-color, $left: 0, $right: 0) {
   @include hairline-common();
-
   top: 0;
   right: #{$right};
   left: #{$left};
@@ -31,10 +30,10 @@
 
 @mixin hairline-bottom($color: $border-color, $left: 0, $right: 0) {
   @include hairline-common();
-
   bottom: 0;
   right: #{$right};
   left: #{$left};
   border-bottom: 1px solid #{$color};
   transform: scaleY(0.5);
 }
+/* #endif */

@@ -1,0 +1,46 @@
+@import './var';
+@import './mixins/hairline';
+
+/* #ifndef APP-NVUE */
+[class*='i-hairline'] {
+    &::after {
+        @include hairline();
+    }
+}
+/* #endif */
+
+.i-hairline {
+    &,
+    &--top,
+    &--left,
+    &--right,
+    &--bottom,
+    &--surround,
+    &--top-bottom {
+        position: relative;
+    }
+
+    &--top::after {
+        border-top-width: $border-width-base;
+    }
+
+    &--left::after {
+        border-left-width: $border-width-base;
+    }
+
+    &--right::after {
+        border-right-width: $border-width-base;
+    }
+
+    &--bottom::after {
+        border-bottom-width: $border-width-base;
+    }
+
+    &--top-bottom::after {
+        border-width: $border-width-base 0;
+    }
+
+    &--surround::after {
+        border-width: $border-width-base;
+    }
+}

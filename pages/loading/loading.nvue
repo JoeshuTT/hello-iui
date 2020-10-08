@@ -12,6 +12,12 @@
             <i-loading class="demo-loading" size="48" />
             <i-loading class="demo-loading" size="48rpx" type="spinner" />
         </demo-block>
+        <demo-block title="加载文案" padding>
+            <i-loading size="24px" tip="加载中..." />
+        </demo-block>
+        <demo-block title="垂直排列" padding>
+            <i-loading size="24px" tip="加载中..." vertical />
+        </demo-block>
     </view>
 </template>
 

@@ -1,24 +1,25 @@
 <template>
     <view class="i-page">
-        <template v-if="status === 'loading'">
-            <i-transition :show="true" class="i-page__loading" :name="transitionName">
-                <text class="i-page__loading-title">{{ loadingTitle }}</text>
-            </i-transition>
-        </template>
-        <template v-else-if="status === 'fail'">
-            <i-transition class="i-page__fail" :show="true" :name="transitionName">
-                <view class="i-page__fail-tip"><text class="i-page__fail-title">{{ offlineTitle }}</text></view>
-                <i-button class="i-page__fail-btn" type="info" plain :text="reloadTitle" @click="onReload" />
-            </i-transition>
-        </template>
-        <template v-else>
+        <template v-if="status === 'success'">
             <slot />
         </template>
+        <view v-else-if="status === 'loading'" class="i-page__loading">
+            <text class="i-page__loading-title">{{ loadingTitle }}</text>
+        </view>
+        <view v-else class="i-page__fail">
+            <text class="i-page__fail-title">{{ offlineTitle }}</text>
+            <i-button class="i-page__fail-btn" custom-class="i-page__fail-btn" :custom-style="{width: '250rpx'}" type="info" plain :text="reloadTitle" @click="onReload" />
+        </view>
     </view>
 </template>
 
 <script>
-
+// #ifndef MP
+import IComponent from '../mixins/component'
+// #endif
+// #ifdef MP
+var MpComponent = require('../mixins/component') // fix: 解决在微信小程序上，data内数据在模板内渲染显示 undefined 问题
+// #endif
 import IButton from '../i-button/i-button'
 import { PAGE } from '../common/config'
 
@@ -27,22 +28,18 @@ export default {
     components: {
         IButton
     },
+    mixins: [
+        // #ifndef MP
+        IComponent,
+        // #endif
+        // #ifdef MP
+        MpComponent
+        // #endif
+    ],
     props: {
         status: {
             type: String,
             default: 'success' // success, fail, loading
-        },
-        transition: {
-            type: Boolean,
-            default: false
-        },
-        transitionName: {
-            type: String,
-            default: 'fade'
-        },
-        customStyle: {
-            type: Object,
-            default: () => ({})
         }
     },
     data() {
@@ -81,6 +78,13 @@ export default {
 <style lang="scss">
     @import '../styles/index.scss';
 
+    /* #ifdef H5 */
+    uni-page-body {
+        @include flex-box();
+        min-height: 100%;
+    }
+    /* #endif */
+
     /* #ifndef APP-NVUE */
     page {
         @include flex-box();
@@ -89,32 +93,41 @@ export default {
     /* #endif */
 
     .i-page{
+        position: relative;
+        @include flex-box();
+        /* #ifndef APP-NVUE */
+        flex: 1;
+        /* #endif */
         /* #ifndef H5 || APP-NVUE */
         min-height: 100vh;
         /* #endif */
-        @include flex-box();
-        flex: 1;
-        position: relative;
+
         background-color: $page-bg-color;
 
         &__fail {
+            /* #ifdef APP-NVUE */
+            padding-top: 325rpx;
+            /* #endif */
             flex: 1;
             @include flex-box();
             justify-content: center;
             align-items: center;
+
             &-btn {
                 width: 250rpx;
             }
-            &-tip {
-                margin-bottom: 40rpx;
-            }
+
             &-title {
+                margin-bottom: 40rpx;
                 font-size: $page-title-size;
                 color: $page-title-color;
             }
         }
 
         &__loading{
+            /* #ifdef APP-NVUE */
+            padding-top: 325rpx;
+            /* #endif */
             flex: 1;
             @include flex-box();
             justify-content: center;

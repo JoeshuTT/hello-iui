@@ -17,8 +17,8 @@ export default {
 <style>
     /*每个页面公共css */
     /* #ifndef APP-NVUE */
+
     page {
-        /* min-height: 100vh; */
         line-height: 1.2;
         color: #323233;
         font-size: 16px;
@@ -30,5 +30,13 @@ export default {
         background-color: #f7f8fa;
     }
 
+    /* 隐藏滚动条 */
+    ::-webkit-scrollbar {
+        display: none;
+    }
     /* #endif */
+
+    .container {
+        padding-bottom: 40rpx;
+    }
 </style>

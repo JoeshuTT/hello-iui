@@ -1,5 +1,5 @@
 <template>
-    <view v-if="inited" ref="iOverlay" class="i-overlay" :style="[overlayStyle]" @click="onClick" @touchmove.stop.prevent="noop">
+    <view v-if="inited" ref="iOverlay" class="i-overlay" :class="[customClass]" :style="[overlayStyle]" @click="onClick" @touchmove.stop.prevent="noop">
         <slot />
     </view>
 </template>
@@ -50,12 +50,8 @@ export default {
                 if (value === old) {
                     return
                 }
-                // #ifndef APP-NVUE
+
                 this.appearOverlay(value)
-                // #endif
-                // #ifdef APP-NVUE
-                this.appearOverlay2(value)
-                // #endif
             },
             immediate: true
         }
@@ -66,12 +62,16 @@ export default {
         },
         appearOverlay(bool) {
             const { duration } = this
+
             if (!this.show && !this.inited) {
                 return
             }
+
             this.show && (this.inited = true)
-            this.show && (this.display = true)
             this.aniStyle = { opacity: bool ? 0 : 1 }
+
+            // #ifndef APP-NVUE
+            this.show && (this.display = true)
 
             Promise.resolve()
                 .then(nextTick)
@@ -84,14 +84,9 @@ export default {
                     }
                 })
                 .catch(() => {})
-        },
-        appearOverlay2(bool) {
-            const { duration } = this
-            if (!this.show && !this.inited) {
-                return
-            }
-            this.show && (this.inited = true)
-            this.aniStyle = { opacity: bool ? 0 : 1 }
+                // #endif
+
+            // #ifdef APP-NVUE
 
             Promise.resolve()
                 .then(nextTick)
@@ -113,6 +108,7 @@ export default {
                     })
                 })
                 .catch(() => {})
+                // #endif
         }
     }
 }

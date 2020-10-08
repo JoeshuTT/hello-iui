@@ -1,10 +1,10 @@
 <template>
     <!-- #ifndef APP-NVUE -->
-    <view class="i-image" :class="[customClass]" :style="[mergeStyle]">
+    <view class="i-image" :class="[customClass, round && 'i-image--round']" :style="[mergeStyle]">
         <!--图片加载器 start -->
         <image style="width: 0;height: 0;display: none;" :src="src" @load="onImgLoad" @error="onImgError" />
         <!--图片加载器 end -->
-        <image :src="url" class="i-image__img" :mode="mode" :style="[mergeStyle]" :class="[fadeShow && 'fade-out', fadeShow && loaded ? 'fade-in' : '']" />
+        <image :src="url" class="i-image__img" :mode="mode" :lazy-load="lazyLoad" :show-menu-by-longpress="showMenuByLongpress" :style="[mergeStyle]" :class="[fadeShow && 'fade-out', fadeShow && loaded ? 'fade-in' : '']" />
         <view v-if="showLoading && loading" class="i-image__loading">
             <slot name="loading"><i-icon name="photo-o" size="24" /></slot>
         </view>
@@ -15,7 +15,7 @@
     <!-- #endif -->
     <!-- #ifdef APP-NVUE -->
     <!-- eslint-disable-next-line -->
-    <image :style="[mergeStyle]" :src="src" :mode="mode" class="i-image__img" @load="onImgLoad" @error="onImgError" />
+    <image :style="[mergeStyle]" :src="src" :lazy-load="lazyLoad" :mode="mode" :fade-show="fadeShow" class="i-image__img" @load="onImgLoad" @error="onImgError" />
     <!-- #endif -->
 </template>
 
@@ -23,11 +23,11 @@
 
 import IComponent from '../mixins/component'
 import IIcon from '../i-icon/i-icon'
-import { addUnit } from '../utils'
+import { addUnit, isNumber } from '../utils'
 var imagePlaceholder = ''
 // #ifdef APP-NVUE
 import { IMAGE } from '../common/config'
-imagePlaceholder = IMAGE.imagePlaceholder
+imagePlaceholder = IMAGE.placeHolder
 // #endif
 
 export default {
@@ -53,9 +53,25 @@ export default {
             type: [Number, String],
             default: ''
         },
+        radius: {
+            type: [Number, String],
+            default: ''
+        },
         preLoad: {
             type: Boolean,
             default: true
+        },
+        lazyLoad: {
+            type: Boolean,
+            default: false
+        },
+        showMenuByLongpress: {
+            type: Boolean,
+            default: false
+        },
+        fadeShow: {
+            type: Boolean,
+            default: false
         },
         showError: {
             type: Boolean,
@@ -65,7 +81,7 @@ export default {
             type: Boolean,
             default: true
         },
-        fadeShow: {
+        round: {
             type: Boolean,
             default: false
         }
@@ -80,18 +96,36 @@ export default {
     },
     computed: {
         mergeStyle() {
-            const { width, height, mode, customStyle } = this
-            let viewStyle = {}
+            const { width, height, mode, radius, round, customStyle } = this
+            const viewStyle = {}
+
             if (width && height) {
-                viewStyle = { width: addUnit(width, 'rpx'), height: addUnit(height, 'rpx') }
+                viewStyle.width = addUnit(width, 'rpx')
+                viewStyle.height = addUnit(height, 'rpx')
             } else {
                 // #ifdef APP-NVUE
                 // viewStyle = { width: '300px', height: '225px' }
                 // #endif
             }
+
+            // #ifdef APP-NVUE
+            if (round) {
+                if (isNumber(width)) {
+                    viewStyle.borderRadius = addUnit(width / 2, 'rpx')
+                } else {
+                    viewStyle.borderRadius = addUnit(width.replace(/\d+/g, $1 => `${Number($1) / 2}`), 'rpx')
+                }
+            }
+            // #endif
+
+            if (radius) {
+                viewStyle.borderRadius = addUnit(radius)
+            }
+
             if (mode === 'aspectFit') {
                 viewStyle.backgroundColor = 'rgba(0,0,0,0)'
             }
+
             return Object.assign({}, viewStyle, customStyle)
         }
     },
@@ -124,6 +158,12 @@ export default {
 
     .i-image {
         position: relative;
+        overflow: hidden;
+        /* #ifndef APP-NVUE */
+        &--round {
+            border-radius: 50%;
+        }
+        /* #endif */
     }
 
     .i-image__img {

@@ -43,6 +43,17 @@ export function isNumber(value) {
 }
 
 /**
+ * 取区间内合法值 - 是否是数字
+ * @param {Number} num,
+ * @param {Number} min
+ * @param {Number} max
+ * @return {Number}
+ */
+export function range(num, min, max) {
+    return Math.min(Math.max(num, min), max)
+}
+
+/**
  * getSystemInfoSync
  * @return {Object}
  */
@@ -96,7 +107,7 @@ export const getPrevPage = function(delta = 1) {
 export const rpx2px = function(val, destWidth = 750) {
     const scale = getSystemInfoSync().windowWidth / destWidth
 
-    return Math.round(val * scale)
+    return parseFloat(val * scale)
 }
 
 /**
@@ -113,6 +124,37 @@ export function addUnit(value, unit = 'px') {
     return isNumber(value) ? `${value}${unit}` : value
 }
 
+/**
+ * 转换为rpx单位数值
+ * @param {Number|String} value
+ * @param {String} unit
+ * @return {String}
+ */
+function convertRPx(value) {
+    if (typeof value === 'number') {
+        return value
+    }
+    value = value.replace(/rpx/g, '')
+    return +value
+}
+
+/**
+ * 转换为px单位数值
+ * @param {Number|String} value
+ * @param {String} unit
+ * @return {String}
+ */
+export function unitToPx(value) {
+    if (typeof value === 'number') {
+        return value
+    }
+
+    if (value.indexOf('rpx') !== -1) {
+        return rpx2px(convertRPx(value))
+    }
+
+    return parseFloat(value)
+}
 /**
  * 函数节流
  * @param {*} fn 事件回调

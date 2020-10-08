@@ -1,5 +1,5 @@
 <template>
-    <view class="i-loading" :class="[customClass,'i-loading--' + type]">
+    <view class="i-loading" :class="[customClass, 'i-loading--' + type, vertical && 'i-loading--vertical']">
         <!-- #ifndef APP-NVUE -->
         <view v-if="!webviewHide" class="i-loading__spinner" :class="'i-loading__spinner--' + type" :style="[mergeStyle]">
             <template v-if="type === 'circular'" />
@@ -11,6 +11,7 @@
         <!-- #ifdef APP-NVUE -->
         <loading-indicator v-if="!webviewHide" class="i-loading-indicator" :animating="true" :style="[mergeStyle]" />
         <!-- #endif -->
+        <text v-if="tip" :class="[vertical ? 'i-loading--vertical__text' : 'i-loading__text']" :style="[textStyle]">{{ tip }}</text>
     </view>
 </template>
 
@@ -34,6 +35,18 @@ export default {
         size: {
             type: [Number, String],
             default: ''
+        },
+        vertical: {
+            type: Boolean,
+            default: false
+        },
+        tip: {
+            type: String,
+            default: ''
+        },
+        textStyle: {
+            type: Object,
+            default: () => ({})
         }
     },
     data() {
@@ -44,12 +57,13 @@ export default {
     },
     computed: {
         mergeStyle() {
-            const { color, size } = this
-            const style = {}
-            color && (style.color = color)
-            size && (style.width = addUnit(size, 'rpx'))
-            size && (style.height = addUnit(size, 'rpx'))
-            return style
+            const { color, size, customStyle } = this
+            const viewStyle = {}
+            color && (viewStyle.color = color)
+            size && (viewStyle.width = addUnit(size, 'rpx'))
+            size && (viewStyle.height = addUnit(size, 'rpx'))
+
+            return Object.assign({}, viewStyle, customStyle)
         }
     },
     mounted() {
@@ -78,9 +92,29 @@ export default {
 <style lang="scss">
     @import '../styles/index.scss';
 
-    /* #ifndef APP-NVUE */
     .i-loading {
         position: relative;
+        @include flex-box('row');
+        align-items: center;
+        &--vertical {
+            flex-direction: column;
+            justify-content: center;
+            &__text {
+                margin-top: 8px;
+                color: $loading-text-color;
+                font-size: $loading-text-font-size;
+            }
+        }
+
+        &__text {
+            margin-left: 8px;
+            color: $loading-text-color;
+            font-size: $loading-text-font-size;
+        }
+    }
+
+    /* #ifndef APP-NVUE */
+    .i-loading {
         color: $loading-spinner-color;
         font-size: 0;
         vertical-align: middle;

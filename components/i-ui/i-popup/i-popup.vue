@@ -1,20 +1,20 @@
 <template>
     <view class="i-popup-wrapper" @touchmove.stop.prevent="noop">
         <!-- #ifdef APP-NVUE -->
-        <!-- <i-overlay :show="show" :custom-style="overlayStyle" @click="onOverlayClick" /> -->
+        <!-- <i-overlay :show="overlay && value" :custom-style="overlayStyle" @click="onOverlayClick" /> -->
         <!-- nvue 平台降级处理，遮罩无动画 -->
-        <view v-if="value" class="i-overlay" @click="onOverlayClick" />
+        <view v-if="overlay && value" class="i-overlay" :style="[overlayStyle]" @click="onOverlayClick" />
         <!-- #endif -->
         <!-- #ifndef APP-NVUE -->
-        <i-overlay :show="value" :custom-style="overlayStyle" @click="onOverlayClick" />
+        <i-overlay :show="overlay && value" :custom-style="overlayStyle" @click="onOverlayClick" />
         <!-- #endif -->
         <template v-if="position === 'center'">
-            <view v-if="inited" ref="ani" class="i-popup" :class="['i-popup--' + position, classes]" :style="[mergeStyle]" @click="onOverlayClick">
+            <view v-if="inited" ref="ani" class="i-popup" :class="[customClass, 'i-popup--' + position, classes]" :style="[mergeStyle]" @click="onOverlayClick">
                 <view class="i-popup__content" :style="[customStyle]" @click.stop="noop"><slot /></view>
             </view>
         </template>
         <template v-else>
-            <view v-if="inited" ref="ani" class="i-popup" :class="['i-popup--' + position, classes]" :style="[mergeStyle]">
+            <view v-if="inited" ref="ani" class="i-popup" :class="[customClass, 'i-popup--' + position, classes]" :style="[mergeStyle]">
                 <slot />
             </view>
         </template>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+
+import IComponent from '../mixins/component'
 import IOverlay from '../i-overlay/i-overlay'
 import transition from '../mixins/transition'
 
@@ -30,7 +32,7 @@ export default {
     components: {
         IOverlay
     },
-    mixins: [transition],
+    mixins: [IComponent, transition],
     // model: {
     //     prop: 'show',
     //     event: 'input'
@@ -51,10 +53,6 @@ export default {
         duration: {
             type: null,
             default: 300
-        },
-        customStyle: {
-            type: Object,
-            default: () => ({})
         },
         overlayStyle: {
             type: Object,
@@ -147,7 +145,7 @@ export default {
 		z-index: $z-index;
 		/* #endif */
 		&__content {
-			background-color: #fff;
+			background-color: $popup-background-color;
 		}
 
 		&--center {
@@ -161,21 +159,21 @@ export default {
 		}
 
 		&--top {
-			background-color: #fff;
+			background-color: $popup-background-color;
 			top: 0;
 			left: 0;
 			width: 750rpx;
 		}
 
 		&--bottom {
-			background-color: #fff;
+			background-color: $popup-background-color;
 			bottom: 0;
 			left: 0;
 			width: 750rpx;
 		}
 
 		&--left {
-			background-color: #fff;
+			background-color: $popup-background-color;
 			top: 0;
 			left: 0;
 			/* #ifndef APP-NVUE */
@@ -187,7 +185,7 @@ export default {
 		}
 
 		&--right {
-			background-color: #fff;
+			background-color: $popup-background-color;
 			top: 0;
 			right: 0;
 			/* #ifndef APP-NVUE */

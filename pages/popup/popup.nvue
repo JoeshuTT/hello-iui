@@ -9,7 +9,7 @@
             <i-cell title="左侧弹出" is-link @click="onCellClick('left')" />
             <i-cell title="右侧弹出" is-link @click="onCellClick('right')" />
         </demo-block>
-        <i-popup v-model="show_center">
+      <i-popup v-model="show_center">
             <view style="padding:20px 40px;">内容</view>
         </i-popup>
        <i-popup v-model="show_top" position="top" :custom-style="{height: '200rpx'}">

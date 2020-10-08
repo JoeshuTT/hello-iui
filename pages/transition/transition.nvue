@@ -5,7 +5,13 @@
             <!-- transition -->
             <i-transition :show="show" :name="name" :custom-style="style" />
             <!-- custom transition -->
-            <i-transition :show="showCustom" name="custom" :duration="{ enter: 300, leave: 1000 }" :anim-config="customAnimConfig" :custom-style="style" />
+            <i-transition
+                :show="showCustom"
+                name="custom"
+                :duration="{ enter: 300, leave: 1000 }"
+                :anim-config="customAnimConfig"
+                :custom-style="style"
+            />
         </demo-block>
     </view>
 </template>

@@ -18,7 +18,9 @@
 </template>
 
 <script>
-import list from '@/config'
+
+import list from '@/iui.config.js'
+
 export default {
     data() {
         return {

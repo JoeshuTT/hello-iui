@@ -19,7 +19,10 @@
                 <i-icon name="success" size="50rpx" />
                 <i-icon name="success" size="50px" />
             </demo-block>
-            <demo-block title="使用 UniCode 方式，自定义图标" padding>
+            <demo-block title="Unicode方式单个适用" padding>
+                <i-icon font-family="myIcon" :name="myIconWechat" />
+            </demo-block>
+            <demo-block title="使用 Unicode 方式，自定义图标" padding>
                 <i-row custom-class="demo-row" class="demo-row">
                     <i-col v-for="(item, index) in list2" :key="index" :span="8" custom-class="demo-col" class="demo-col">
                         <i-icon class="demo-col-icon" font-family="myIcon" :name="item.value" size="20" />
@@ -106,7 +109,7 @@ export default {
                     value: '\ue62a'
                 }
             ],
-            myIconWeibo: '\ue630'
+            myIconWechat: '\ue632'
         }
     },
     onLoad() {

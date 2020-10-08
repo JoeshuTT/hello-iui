@@ -4,7 +4,7 @@
             <view class="i-nav-bar__content">
                 <view class="i-nav-bar__left">
                     <view v-if="leftText || leftArrow" class="i-nav-bar__left-back" @click="onBackClick">
-                        <i-icon v-if="leftArrow" size="16px" name="arrow-left" color="#000" class="i-nav-bar__arrow" />
+                        <i-icon v-if="leftArrow" name="arrow-left" :color="COLOR_PALETTE['gray-7']" class="i-nav-bar__arrow" />
                         <text class="i-nav-bar__text">{{ leftText }}</text>
                     </view>
                     <slot v-else name="left" />
@@ -18,21 +18,36 @@
             </view>
         </view>
         <view v-if="fixed" class="i-nav-bar-placeholder">
-            <view class="i-status-bar" :style="{height: statusBarHeight}" />
+            <view class="i-status-bar" :style="{height: `${statusBarHeight}px`}" />
             <view class="i-navbar-perch" />
         </view>
     </view>
 </template>
 
 <script>
+// #ifndef MP
+import IComponent from '../mixins/component'
+// #endif
+// #ifdef MP
+var MpComponent = require('../mixins/component') // fix: 解决在微信小程序上，data内数据在模板内渲染显示 undefined 问题
+// #endif
 import IIcon from '../i-icon/i-icon'
 import { getSystemInfoSync } from '../utils'
+import { COLOR_PALETTE } from '../common/config'
 
 export default {
     name: 'INavBar',
     components: {
         IIcon
     },
+    mixins: [
+        // #ifndef MP
+        IComponent,
+        // #endif
+        // #ifdef MP
+        MpComponent
+        // #endif
+    ],
     props: {
         title: {
             type: String,
@@ -54,7 +69,8 @@ export default {
     data() {
         const { statusBarHeight } = getSystemInfoSync()
         return {
-            statusBarHeight
+            statusBarHeight,
+            COLOR_PALETTE
         }
     },
     methods: {
@@ -71,9 +87,6 @@ export default {
 <style lang="scss">
 	@import '../styles/index.scss';
 
-	$nav-bar-height: 44px;
-	$nav-bar-background-color: #fff;
-
 	.i-navbar-perch {
 		height: $nav-bar-height;
 	}
@@ -83,8 +96,6 @@ export default {
         align-items: center;
         justify-content: space-between;
 		height: $nav-bar-height;
-		padding: 0 30rpx;
-
 	}
 
 	.i-nav-bar--fixed {
@@ -98,29 +109,36 @@ export default {
 	.i-nav-bar {
 		background-color: $nav-bar-background-color;
 
-		&__arrow {
-			color: $nav-bar-icon-color;
+		&__left, &__right {
+			@include flex-box('row');
+            align-items: center;
+            width: 75px;
+            height: $nav-bar-height;
 		}
 
 		&__left {
-			@include flex-box('row');
-            width: 75px;
+            padding-left: $nav-bar-padding;
 		}
 
 		&__left-back {
+            flex: 1;
 			@include flex-box('row');
-            width: 75px;
+            align-items: center;
+            height: $nav-bar-height;
 		}
 
 		&__text {
 			font-size: $nav-bar-text-font-size;
-            color: #000;
+            color: $nav-bar-text-color;
 		}
 
 		&__title {
 			flex: 1;
 			/* #ifndef APP-NVUE */
 			max-width: 55%;
+			/* #endif */
+			/* #ifdef MP */
+			max-width: 43%;
 			/* #endif */
 			&-text {
 				text-align: center;
@@ -132,9 +150,8 @@ export default {
 		}
 
 		&__right {
-			@include flex-box('row');
-			width: 75px;
 			justify-content: flex-end;
+			padding-right: $nav-bar-padding;
 		}
 	}
 </style>

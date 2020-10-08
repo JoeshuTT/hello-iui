@@ -1,5 +1,8 @@
 <template>
     <view class="i-cell" :class="[customClass, center && 'i-cell--center', (isLink || clickable) && 'i-cell--clickable', border && 'i-cell--border']" :style="[customStyle]" @click="onClick">
+        <view v-if="$slots.icon" class="i-cell__left-icon-wrap">
+            <slot name="icon" />
+        </view>
         <view class="i-cell__title">
             <slot name="title"><text v-if="title" class="i-cell__title-text">{{ title }}</text></slot>
             <slot name="label"><text v-if="label" class="i-cell__label">{{ label }}</text></slot>
@@ -9,10 +12,10 @@
                 <text class="i-cell__value-text">{{ value }}</text>
             </view>
         </slot>
-        <view v-if="isLink" class="i-cell__right-icon-wrap">
-            <i-icon name="arrow" />
+        <view v-if="$slots.rightIcon || isLink" class="i-cell__right-icon-wrap">
+            <i-icon v-if="isLink" :name="arrowDirection ? 'arrow' + '-' + arrowDirection : 'arrow'" />
+            <slot v-else name="right-icon" />
         </view>
-        <slot v-else name="rightIcon" />
     </view>
 </template>
 
@@ -29,11 +32,11 @@ export default {
     mixins: [IComponent],
     props: {
         title: {
-            type: [Number, String],
+            type: null,
             default: ''
         },
         value: {
-            type: [Number, String],
+            type: null,
             default: ''
         },
         label: {
@@ -52,14 +55,18 @@ export default {
             type: Boolean,
             default: false
         },
+        arrowDirection: {
+            type: String,
+            default: ''
+        },
         clickable: {
             type: Boolean,
             default: false
         }
     },
     methods: {
-        onClick(event) {
-            this.$emit('click', event)
+        onClick() {
+            this.$emit('click')
         }
 
     }
@@ -86,8 +93,8 @@ export default {
 
         &--border {
             /* #ifndef APP-NVUE */
-            &:after {
-                @include hairline-bottom();
+            &::after {
+                @include hairline-bottom($border-color, $padding-md, $padding-md);
             }
             /* #endif */
             /* #ifdef APP-NVUE */
@@ -111,6 +118,7 @@ export default {
                 font-size: $cell-title-font-size;
                 line-height: $cell-title-line-height;
                 color: $cell-title-color;
+                // @include ellipsis();
             }
         }
 
@@ -131,10 +139,12 @@ export default {
             line-height: $cell-label-line-height;
         }
 
-        &__right-icon-wrap{
-            @include flex-box();
-            justify-content: center;
+        &__left-icon-wrap{
+            margin-right: 4px;
         }
 
+        &__right-icon-wrap{
+            margin-left: 4px;
+        }
     }
 </style>

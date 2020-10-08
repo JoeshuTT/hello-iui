@@ -1,0 +1,47 @@
+// var bem = require('./bem.wxs').bem;
+// var memoize = require('./memoize.wxs').memoize;
+// var addUnit = require('./add-unit.wxs').addUnit;
+// /* eslint-disable */
+var REGEXP = getRegExp('{|}|"', 'g')
+var PREFIX = 'i-'
+
+function keys(obj) {
+    return JSON.stringify(obj)
+        .replace(REGEXP, '')
+        .split(',')
+        .map(function(item) {
+            return item.split(':')[0]
+        })
+}
+
+function join(name, mods) {
+    name = PREFIX + name
+    mods = mods.map(function(mod) {
+        return name + '--' + mod
+    })
+    mods.unshift(name)
+    return mods.join(' ')
+}
+
+function bem(name, conf) {
+    if (!conf) {
+        return
+    }
+    var mods = []
+    conf.forEach(function(item) {
+        if (typeof item === 'string' || typeof item === 'number') {
+            mods.push(item)
+        } else if (typeof item === 'object') {
+            keys(item).forEach(function(key) {
+                item[key] && mods.push(key)
+            })
+        }
+    })
+    return join(name, mods)
+}
+
+module.exports = {
+    bem: bem
+    // memoize: memoize,
+    // addUnit: addUnit
+}

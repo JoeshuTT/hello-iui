@@ -1,13 +1,17 @@
 <template>
-    <view class="i-load-more" @click="onClick">
+    <view class="i-load-more" :class="[customClass]" :style="[customStyle]" @click="onClick">
         <i-loading v-if="status === 'loading'" :type="iconType" :size="iconSize" :color="color" class="i-load-more__loading" />
         <text class="i-load-more__text" :style="{color: color}">{{ statusTypeMap[status] }}</text>
     </view>
 </template>
 
 <script>
-
+// #ifndef MP
 import IComponent from '../mixins/component'
+// #endif
+// #ifdef MP
+var MpComponent = require('../mixins/component') // fix: 解决在微信小程序上，data内数据在模板内渲染显示 undefined 问题
+// #endif
 import ILoading from '../i-loading/i-loading'
 import { LOAD_MORE } from '../common/config'
 
@@ -16,7 +20,14 @@ export default {
     components: {
         ILoading
     },
-    mixins: [IComponent],
+    mixins: [
+        // #ifndef MP
+        IComponent,
+        // #endif
+        // #ifdef MP
+        MpComponent
+        // #endif
+    ],
     props: {
         status: {
             type: String,
@@ -61,11 +72,9 @@ export default {
 		justify-content: center;
 		height: $load-more-height;
 		&__text {
+            margin-left: 5px;
 			font-size: $load-more-text-font-size;
 			color: $load-more-text-color;
-		}
-		&__loading{
-			margin-right: 5px;
 		}
 	}
 </style>
