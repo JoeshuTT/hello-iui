@@ -10,9 +10,9 @@ iui 中内置了一些常用的 `sass mixins`，方便开发者自由定义[详�
 
 ```scss
 /* 自定义mixins，复用样式，按需引入 */
-@import '~@/components/i-ui/styles/mixins/ellipsis.scss'; 
-@import '~@/components/i-ui/styles/mixins/flex-box.scss';
-@import '~@/components/i-ui/styles/mixins/hairline.scss';
+@import '@/components/i-ui/styles/mixins/ellipsis.scss'; 
+@import '@/components/i-ui/styles/mixins/flex-box.scss';
+@import '@/components/i-ui/styles/mixins/hairline.scss';
 
 ```
 

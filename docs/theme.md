@@ -95,7 +95,7 @@ $green: $ui-color;
 
 ```scss
 /*主题 */
-@import '~@/styles/theme.scss';
+@import '@/styles/theme.scss';
 ```
 
 ### 通过 js

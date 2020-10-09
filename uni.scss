@@ -77,9 +77,9 @@ $uni-font-size-paragraph:30rpx;
 
 
 /*主题 */
-@import '~@/styles/theme.scss';
+@import '@/styles/theme.scss';
 
 /* 自定义mixins，复用样式，按需引入 */
-@import '~@/components/i-ui/styles/mixins/ellipsis.scss'; 
-@import '~@/components/i-ui/styles/mixins/flex-box.scss';
-@import '~@/components/i-ui/styles/mixins/hairline.scss';
+@import '@/components/i-ui/styles/mixins/ellipsis.scss'; 
+@import '@/components/i-ui/styles/mixins/flex-box.scss';
+@import '@/components/i-ui/styles/mixins/hairline.scss';

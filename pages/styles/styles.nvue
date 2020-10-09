@@ -53,8 +53,8 @@ export default {
 <style lang="scss">
 
     /* #ifndef APP-NVUE */
-    @import '~@/components/i-ui/styles/hairline.scss';
-    @import '~@/components/i-ui/styles/ellipsis.scss';
+    @import '@/components/i-ui/styles/hairline.scss';
+    @import '@/components/i-ui/styles/ellipsis.scss';
     /* #endif */
 
     .ellipsis {
