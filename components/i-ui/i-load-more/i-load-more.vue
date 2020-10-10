@@ -6,12 +6,8 @@
 </template>
 
 <script>
-// #ifndef MP
+
 import IComponent from '../mixins/component'
-// #endif
-// #ifdef MP
-var MpComponent = require('../mixins/component') // fix: 解决在微信小程序上，data内数据在模板内渲染显示 undefined 问题
-// #endif
 import ILoading from '../i-loading/i-loading'
 import { LOAD_MORE } from '../common/config'
 
@@ -21,12 +17,7 @@ export default {
         ILoading
     },
     mixins: [
-        // #ifndef MP
-        IComponent,
-        // #endif
-        // #ifdef MP
-        MpComponent
-        // #endif
+        IComponent
     ],
     props: {
         status: {

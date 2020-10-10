@@ -14,12 +14,7 @@
 </template>
 
 <script>
-// #ifndef MP
 import IComponent from '../mixins/component'
-// #endif
-// #ifdef MP
-var MpComponent = require('../mixins/component') // fix: 解决在微信小程序上，data内数据在模板内渲染显示 undefined 问题
-// #endif
 import IButton from '../i-button/i-button'
 import { PAGE } from '../common/config'
 
@@ -29,12 +24,7 @@ export default {
         IButton
     },
     mixins: [
-        // #ifndef MP
-        IComponent,
-        // #endif
-        // #ifdef MP
-        MpComponent
-        // #endif
+        IComponent
     ],
     props: {
         status: {
