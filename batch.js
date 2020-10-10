@@ -14,7 +14,7 @@ const oExt = '.vue'
 const tExt = '.nvue'
 const action = 'put' // delete, put, copy
 batches(dir)
-const whiteList = ['draggable']
+// const whiteList = ['draggable']
 
 function batches(dir) {
     const dirs = fs.readdirSync(dir, { withFileTypes: true })
@@ -28,7 +28,8 @@ function batches(dir) {
             if (ext === oExt) {
                 if (action === 'delete') {
                     console.log(`delete ${fullPath}`)
-                    // whiteList.indexOf(fullPath) !== -1 && fs.unlinkSync(fullPath)
+                    fs.unlinkSync(fullPath)
+                    // ~whiteList.indexOf(fullPath) && fs.unlinkSync(fullPath)
                 }
 
                 if (action === 'put') {
@@ -41,7 +42,7 @@ function batches(dir) {
                     const fromPath = path.resolve(dir, dirent.name)
                     const toPath = path.resolve(dir, name + tExt)
                     console.log(`copy ${dirent.name} to ${name}${tExt}`)
-                    // whiteList.indexOf(fromPath) !== -1 && fs.writeFileSync(toPath, fs.readFileSync(fromPath))
+                    fs.writeFileSync(toPath, fs.readFileSync(fromPath))
                 }
             }
         }

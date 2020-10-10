@@ -3,6 +3,23 @@
 iui 遵循 [Semver](https://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ---  
+## v2.3.6
+
+`2020-10-10`
+
+**修复**
+
+- `i-nav-bar`: 在`app-plus` 平台下标题未居中
+- `i-load-more`，`i-page`，`i-nav-bar`: 在微信小程序平台下data内数据在模板内渲染显示 undefined 问题
+
+**优化**
+
+- 示例默认页面改为`.vue`后缀，需要体验`nvue`页面速度的同学，可以执行下根目录下的 `batch.js` 脚本
+```sh
+# 批量转换文件后缀名
+node batch.js
+```
+
 ## v2.3.5
 
 `2020-10-03`
