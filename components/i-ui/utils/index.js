@@ -3,7 +3,7 @@
  */
 
 /**
- * 验证 - 是否未定义
+ * 验证 - 是否有值
  * @param {*} value
  * @return {Boolean}
  */
