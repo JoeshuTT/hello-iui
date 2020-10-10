@@ -122,16 +122,16 @@ export default {
 
 		&__title {
 			flex: 1;
-			/* #ifndef APP-NVUE */
-			max-width: 55%;
-			/* #endif */
-			/* #ifdef MP */
-			max-width: 43%;
-			/* #endif */
+            @include flex-box('row');
+            justify-content: center;
+            paddinf-right: 110px;
+            /* #ifndef APP-NVUE */
+            max-width: 45%;
+            /* #endif */
+
 			&-text {
-				text-align: center;
-				font-weight: bold;
 				font-size: $nav-bar-title-font-size;
+				font-weight: bold;
 				color: $nav-bar-title-text-color;
 				@include ellipsis();
 			}
