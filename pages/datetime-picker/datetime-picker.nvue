@@ -83,7 +83,7 @@ var cities = {
     福建: ['福州', '厦门', '莆田', '三明', '泉州']
 }
 
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 
 export default {
     mixins: [pageMixin],

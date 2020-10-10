@@ -4,9 +4,7 @@
   "description": "一个基于 uni-app 的 UI 组件库（兼容NVUE）",
   "author": "Joeshu <1442702103@qq.com>",
   "dependencies": {
-    "@antv/f2": "^3.7.7",
-    "@antv/wx-f2": "^2.1.1",
-    "dayjs": "^1.9.1"
+    
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
