@@ -1,7 +1,7 @@
 {
   "name": "iui",
   "version": "1.0.0",
-  "description": "一个基于 uni-app 的 UI 组件库（兼容NVUE）",
+  "description": "一个基于 uni-app 的高质量UI组件库（兼容NVUE）",
   "author": "Joeshu <1442702103@qq.com>",
   "dependencies": {
     
