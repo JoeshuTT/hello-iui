@@ -13,17 +13,17 @@ const dom = weex.requireModule('dom')
 export default {
   name: 'Icol',
   mixins: [IComponent],
-  props: {
-    span: {
-      type: [Number, String],
-      default: 0,
-    },
-  },
   inject: {
     iRow: {
       default: null,
     },
     gutter: {
+      default: 0,
+    },
+  },
+  props: {
+    span: {
+      type: [Number, String],
       default: 0,
     },
   },
