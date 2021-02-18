@@ -1,19 +1,19 @@
 @mixin ellipsis($lines: 1) {
-    /* #ifndef APP-NVUE */
-    @if $lines <=1 {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    } @else {
-        display: -webkit-box;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-line-clamp: $lines;
-        -webkit-box-orient: vertical;
-    }
-    /* #endif */
-    /* #ifdef APP-NVUE */
-    lines: $lines;
+  /* #ifndef APP-NVUE */
+  @if $lines <=1 {
+    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
-    /* #endif */
+  } @else {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+  }
+  /* #endif */
+  /* #ifdef APP-NVUE */
+  lines: $lines;
+  text-overflow: ellipsis;
+  /* #endif */
 }

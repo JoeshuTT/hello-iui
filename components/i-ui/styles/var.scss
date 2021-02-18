@@ -1,5 +1,3 @@
-
-
 // Color Palette
 $black: #000 !default;
 $white: #fff !default;
@@ -43,11 +41,9 @@ $font-size-sm: 12px !default;
 $font-size-md: 14px !default;
 $font-size-lg: 16px !default;
 $font-weight-bold: 500 !default;
-$base-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
-  Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'Hiragino Sans GB',
-  'Microsoft Yahei', sans-serif !default;
-$price-integer-font-family: Avenir-Heavy, PingFang SC, Helvetica Neue, Arial,
-  sans-serif !default;
+$base-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto,
+  'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif !default;
+$price-integer-font-family: Avenir-Heavy, PingFang SC, Helvetica Neue, Arial, sans-serif !default;
 
 // Animation
 $animation-duration-base: 0.3s !default;
@@ -172,7 +168,7 @@ $switch-border-color: rgba(0, 0, 0, 0.1) !default;
 $switch-node-size: 60rpx !default;
 $switch-node-z-index: 1 !default;
 $switch-node-background-color: $white !default;
-$switch-node-box-shadow: 0 1px 3px rgba(0,0,0,.4) !default;
+$switch-node-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !default;
 $switch-background-color: $white !default;
 $switch-on-background-color: $blue !default;
 $switch-transition-duration: $animation-duration-base !default;

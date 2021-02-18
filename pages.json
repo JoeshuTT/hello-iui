@@ -1,197 +1,200 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/home/home",
-			"style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-		},
-		{
-			"path": "pages/discover/discover",
-			"style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-		},
-		{
-            "path" : "pages/button/button",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-		{
-            "path" : "pages/cell/cell",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-		{
-            "path" : "pages/icon/icon",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-		{
-            "path" : "pages/image/image",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-		{
-            "path" : "pages/col/col",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-		{
-            "path" : "pages/page/page",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none",
-					"titleNView": {
-						"buttons": [{
-							"text": "切换",
-							"fontSize": "16px",
-							"color": "#222"
-						}]
-					}
-                }
-            }
-        },
-		{
-            "path" : "pages/popup/popup",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-		{
-            "path" : "pages/styles/styles",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-		{
-            "path" : "pages/datetime-picker/datetime-picker",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-		{
-            "path" : "pages/picker/picker",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-		{
-            "path" : "pages/transition/transition",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-		{
-            "path" : "pages/overlay/overlay",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-        {
-            "path" : "pages/loading/loading",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-        {
-            "path" : "pages/load-more/load-more",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-        {
-            "path" : "pages/nav-bar/nav-bar",
-            "style": {
-                "navigationStyle": "custom",
-                "app-plus": {
-                    "titleNView": false,
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-        {
-            "path" : "pages/charts/charts",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
-        },
-        {
-            "path" : "pages/charts/column",
-            "style": {
-                "app-plus": {
-                    "bounce": "none",
-                    "scrollIndicator": "none"
-                }
-            }
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/home/home",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
         }
-    ],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "Hello Iui",
-		"navigationBarBackgroundColor": "#f8f8f8",
-		"backgroundColor": "#f8f8f8"
-	},
-	"easycom": {
-		"autoscan": true,
-		"custom": {
-			"demo-(.*)": "@/components/demo-$1/demo-$1.vue",
-			"i-(.*)": "@/components/i-ui/i-$1/i-$1.vue"
-		}
-	}
+      }
+    },
+    {
+      "path": "pages/discover/discover",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/button/button",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/cell/cell",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/icon/icon",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/image/image",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/col/col",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/page/page",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none",
+          "titleNView": {
+            "buttons": [
+              {
+                "text": "切换",
+                "fontSize": "16px",
+                "color": "#222"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/popup/popup",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/styles/styles",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/datetime-picker/datetime-picker",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/picker/picker",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/transition/transition",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/overlay/overlay",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/loading/loading",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/load-more/load-more",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/nav-bar/nav-bar",
+      "style": {
+        "navigationStyle": "custom",
+        "app-plus": {
+          "titleNView": false,
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/charts/charts",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/charts/column",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Hello Iui",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "backgroundColor": "#f8f8f8"
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "demo-(.*)": "@/components/demo-$1/demo-$1.vue",
+      "i-(.*)": "@/components/i-ui/i-$1/i-$1.vue"
+    }
+  }
 }

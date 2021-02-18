@@ -1,0 +1,30 @@
+## OS
+.DS_Store
+.idea
+.editorconfig
+package-lock.json
+.npmrc
+.vscode
+
+# Ignored suffix
+*.log
+*.md
+*.svg
+*.png
+*ignore
+
+## Local
+src/unpackage
+unpackage
+src/wxcomponents
+wxcomponents
+src/components/uni-ui
+components/uni-ui
+src/common/plugins
+common/plugins
+src/manifest.json
+manifest.json
+
+## Built-files
+.cache
+dist

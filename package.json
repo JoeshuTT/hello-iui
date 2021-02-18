@@ -1,26 +1,21 @@
 {
-  "name": "iui",
+  "name": "hello-iui",
   "version": "1.0.0",
+  "license": "MIT",
   "description": "一个基于 uni-app 的高质量UI组件库（兼容NVUE）",
   "author": "Joeshu <1442702103@qq.com>",
-  "dependencies": {
-    
+  "scripts": {
+    "lint": "eslint --ext .vue",
+    "prettier": "prettier --write ."
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "docsify serve docs"
-  },
-  "keywords": [
-    "uni-app",
-    "vue",
-    "nuve",
-    "ui",
-    "iui"
-  ],
-  "license": "MIT"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.16.0",
+    "eslint-plugin-vue": "^7.4.0",
+    "prettier": "^2.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^10.1.0"
+  }
 }

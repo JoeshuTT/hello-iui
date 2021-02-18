@@ -2,12 +2,11 @@
 
 /* #ifndef APP-NVUE */
 @mixin hairline-common() {
-    position: absolute;
-    box-sizing: border-box;
-    content: "";
-    pointer-events: none;
+  position: absolute;
+  box-sizing: border-box;
+  content: '';
+  pointer-events: none;
 }
-
 
 @mixin hairline($color: $border-color) {
   @include hairline-common();

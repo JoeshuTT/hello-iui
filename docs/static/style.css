@@ -1,13 +1,12 @@
 @charset "utf-8";
 
-
 /* :root {
     --theme-color: #42b983;
 } */
 
-.app-name-link > img{
-    width: 20%;
-    border-radius: 4px;
+.app-name-link > img {
+  width: 20%;
+  border-radius: 4px;
 }
 /* 文档 */
 /* .markdown-section table em{
@@ -20,47 +19,46 @@
 
 /* 模拟器 */
 .simulator {
-    position: fixed;
-    top: 90px;
-    right: 90px;
-    z-index: 1;
-    box-sizing: border-box;
-    width: 360px;
-    min-width: 360px;
-    overflow: hidden;
-    background: #fafafa;
-    border-radius: 12px;
-    box-shadow: #ebedf0 0 4px 12px;
+  position: fixed;
+  top: 90px;
+  right: 90px;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 360px;
+  min-width: 360px;
+  overflow: hidden;
+  background: #fafafa;
+  border-radius: 12px;
+  box-shadow: #ebedf0 0 4px 12px;
 }
 
 .simulator iframe {
-    display: block;
-    width: 100%;
-    border: none;
+  display: block;
+  width: 100%;
+  border: none;
 }
-  
+
 @media (max-width: 1100px) {
-    .simulator {
-        display: none;
-    }
+  .simulator {
+    display: none;
+  }
 }
 
 @media (min-width: 1680px) {
+  .content {
+    right: 410px;
+  }
 
-    .content {
-        right: 410px;
-    }
+  .app-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
 
-    .app-nav {
-        position: fixed;
-        top: 0;
-        right: 0;
-    }
-
-    .markdown-section {
-        max-width: 1070px;
-    }
-    /* .simulator {
+  .markdown-section {
+    max-width: 1070px;
+  }
+  /* .simulator {
         right: 50%;
         margin-right: -800px;
     } */

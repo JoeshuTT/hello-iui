@@ -11,12 +11,11 @@
  * @param {String} $var CSS 变量名
  */
 @mixin theme($property, $value, $var: 'ui-color') {
-    #{$property}: $value;
-    /* #ifndef APP-NVUE */
-    #{$property}: var(--#{$var}, $value);
-    /* #endif */
+  #{$property}: $value;
+  /* #ifndef APP-NVUE */
+  #{$property}: var(--#{$var}, $value);
+  /* #endif */
 }
-
 
 // 项目主题色
 $ui-color: #42b983;

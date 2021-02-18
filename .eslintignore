@@ -1,2 +1,9 @@
-node_modules/
-unpackage/
+public
+dist
+src/unpackage
+unpackage
+src/**/*.test.js
+src/components/uni-ui
+components/uni-ui
+src/common/plugins
+common/plugins
