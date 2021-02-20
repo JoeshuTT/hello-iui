@@ -1,0 +1,65 @@
+{
+  // editor
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  // eslint
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue",
+    "typescript",
+    "typescriptreact"
+  ],
+  // vetur
+  "vetur.format.enable": false,
+  "vetur.validation.template": false,
+  "vetur.validation.style": false,
+  "vetur.validation.script": false,
+  // cSpell
+  "cSpell.ignoreWords": [
+    "aboutus",
+    "alipay",
+    "app",
+    "appkey",
+    "autoscan",
+    "bgcolor",
+    "easemob",
+    "easycom",
+    "editorconfig",
+    "eqeqeq",
+    "eslintignore",
+    "famiao",
+    "flyio",
+    "hbuilderx",
+    "ifdef",
+    "ifndef",
+    "im",
+    "loadsh",
+    "mask",
+    "miniprogram",
+    "mixins",
+    "mp",
+    "nvue",
+    "prettierignore",
+    "prettierrc",
+    "quickapp",
+    "sinaweibo",
+    "stylelint",
+    "toutiao",
+    "truetype",
+    "ui",
+    "uniapp",
+    "univerify",
+    "unpackage",
+    "vconsole",
+    "vetur",
+    "vuex",
+    "weex",
+    "weixin",
+    "xiaomi"
+  ],
+}
