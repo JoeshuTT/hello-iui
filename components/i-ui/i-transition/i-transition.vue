@@ -1,23 +1,21 @@
 <template>
-  <view
-    v-if="inited"
-    ref="ani"
-    class="i-transition"
-    :class="[customClass, classes]"
-    :style="[mergeStyle]"
-    @click="onClick"
-  >
+  <view v-if="inited" ref="ani" class="i-transition" :style="[mergeStyle]" @click="onClick">
     <slot />
   </view>
 </template>
 
 <script>
-import IComponent from '../mixins/component'
-import transition from '../mixins/transition'
+import { isObj } from '../utils'
+import { TRANSITION } from '../common/config'
+// #ifdef APP-NVUE
+const animation = uni.requireNativePlugin('animation')
+// #endif
+const nextTick = () => new Promise(resolve => setTimeout(resolve, 1000 / 30))
+const animationMap = TRANSITION.animationMap
+const getStyle = name => animationMap[name]
 
 export default {
   name: 'ITransition',
-  mixins: [IComponent, transition],
   props: {
     show: {
       type: Boolean,
@@ -31,13 +29,150 @@ export default {
       type: null,
       default: 300,
     },
+    animConfig: {
+      type: Object,
+      default: () => ({}),
+    },
     customStyle: {
       type: Object,
       default: () => ({}),
     },
-    animConfig: {
-      type: null,
-      default: null,
+  },
+  data() {
+    const currentDuration = isObj(this.duration) ? this.duration.enter : this.duration
+
+    return {
+      inited: false,
+      aniStyle: {},
+      status: '',
+      classes: '',
+      viewStyle: {},
+      transitionEnded: false,
+      currentDuration,
+    }
+  },
+  computed: {
+    mergeStyle() {
+      const { customStyle, aniStyle } = this
+
+      return Object.assign({}, customStyle, aniStyle)
+    },
+    currentDisplay() {
+      let display = 'block'
+      // #ifdef APP-NVUE
+      display = 'flex'
+      // #endif
+      return this.customStyle.display || display
+    },
+  },
+  watch: {
+    show: {
+      handler(value) {
+        if (value) {
+          this.enter()
+        } else {
+          this.leave()
+        }
+      },
+      immediate: true,
+    },
+  },
+  methods: {
+    onClick() {
+      this.$emit('click')
+    },
+    enter() {
+      this.$emit('beforeEnter')
+      const { name, duration } = this
+      const currentDuration = isObj(duration) ? duration.enter : duration
+      const currentStyle = getStyle(name) || this.animConfig
+
+      this.inited = true
+
+      // #ifndef APP-NVUE
+      this.aniStyle = {
+        ...currentStyle['enter'],
+        transitionTimingFunction: 'ease',
+        transitionDuration: `${currentDuration}ms`,
+        display: this.currentDisplay,
+      }
+      this.$emit('enter')
+
+      this.$nextTick()
+        .then(nextTick)
+        .then(() => {
+          this.aniStyle = Object.assign({}, this.aniStyle, currentStyle['enter-to'])
+          this.$emit('afterEnter')
+        })
+        .catch(() => {})
+      // #endif
+
+      // #ifdef APP-NVUE
+      this.aniStyle = {
+        ...currentStyle['enter'],
+      }
+      this.$emit('enter')
+      this.$nextTick()
+        .then(nextTick)
+        .then(() => {
+          animation.transition(
+            this.$refs.ani,
+            {
+              styles: currentStyle['enter-to'],
+              duration: currentDuration,
+              timingFunction: 'ease',
+              needLayout: false,
+              delay: 0,
+            },
+            () => {
+              this.$emit('afterEnter')
+            },
+          )
+        })
+        .catch(() => {})
+      // #endif
+    },
+    leave() {
+      this.$emit('beforeLeave')
+      if (!this.inited) {
+        return
+      }
+
+      const { name, duration } = this
+      const currentDuration = isObj(duration) ? duration.leave : duration
+      const currentStyle = getStyle(name) || this.animConfig
+
+      // #ifndef APP-NVUE
+      this.aniStyle = Object.assign({}, this.aniStyle, currentStyle['leave-to'], {
+        transitionDuration: `${currentDuration}ms`,
+      })
+      this.$emit('leave')
+
+      setTimeout(() => {
+        this.aniStyle = {
+          display: 'none',
+        }
+        this.$emit('afterLeave')
+      }, currentDuration)
+      // #endif
+
+      // #ifdef APP-NVUE
+      this.$emit('leave')
+      animation.transition(
+        this.$refs.ani,
+        {
+          styles: currentStyle['leave-to'],
+          duration: currentDuration,
+          timingFunction: 'ease',
+          needLayout: false,
+          delay: 0,
+        },
+        () => {
+          this.$emit('afterLeave')
+          this.inited = false
+        },
+      )
+      // #endif
     },
   },
 }
@@ -47,103 +182,6 @@ export default {
 @import '../styles/index.scss';
 
 .i-transition {
-  transition-timing-function: ease;
+  // transition-timing-function: ease;
 }
-
-/* #ifndef APP-NVUE */
-
-.i-fade-enter-active,
-.i-fade-leave-active {
-  transition-property: opacity;
-}
-
-.i-fade-enter,
-.i-fade-leave-to {
-  opacity: 0;
-}
-
-.i-fade-down-enter-active,
-.i-fade-down-leave-active,
-.i-fade-left-enter-active,
-.i-fade-left-leave-active,
-.i-fade-right-enter-active,
-.i-fade-right-leave-active,
-.i-fade-up-enter-active,
-.i-fade-up-leave-active {
-  transition-property: opacity, transform;
-}
-
-.i-fade-up-enter,
-.i-fade-up-leave-to {
-  transform: translate3d(0, 100%, 0);
-  opacity: 0;
-}
-
-.i-fade-down-enter,
-.i-fade-down-leave-to {
-  transform: translate3d(0, -100%, 0);
-  opacity: 0;
-}
-
-.i-fade-left-enter,
-.i-fade-left-leave-to {
-  transform: translate3d(-100%, 0, 0);
-  opacity: 0;
-}
-
-.i-fade-right-enter,
-.i-fade-right-leave-to {
-  transform: translate3d(100%, 0, 0);
-  opacity: 0;
-}
-
-.i-slide-down-enter-active,
-.i-slide-down-leave-active,
-.i-slide-left-enter-active,
-.i-slide-left-leave-active,
-.i-slide-right-enter-active,
-.i-slide-right-leave-active,
-.i-slide-up-enter-active,
-.i-slide-up-leave-active {
-  transition-property: transform;
-}
-
-.i-slide-up-enter,
-.i-slide-up-leave-to {
-  transform: translate3d(0, 100%, 0);
-}
-
-.i-slide-down-enter,
-.i-slide-down-leave-to {
-  transform: translate3d(0, -100%, 0);
-}
-
-.i-slide-left-enter,
-.i-slide-left-leave-to {
-  transform: translate3d(-100%, 0, 0);
-}
-
-.i-slide-right-enter,
-.i-slide-right-leave-to {
-  transform: translate3d(100%, 0, 0);
-}
-
-.i-zoom-in-enter-active,
-.i-zoom-in-leave-active,
-.i-zoom-out-enter-active,
-.i-zoom-out-leave-active {
-  transition-property: transform;
-}
-
-.i-zoom-in-enter,
-.i-zoom-in-leave-to {
-  transform: scale(0.8);
-}
-
-.i-zoom-out-enter,
-.i-zoom-out-leave-to {
-  transform: scale(1.2);
-}
-
-/* #endif */
 </style>

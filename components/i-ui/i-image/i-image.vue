@@ -1,6 +1,6 @@
 <template>
-  <!-- #ifndef APP-NVUE -->
-  <view class="i-image" :class="[customClass, round && 'i-image--round']" :style="[mergeStyle]">
+  <view class="i-image" :class="[round && 'i-image--round']">
+    <!-- #ifndef APP-NVUE -->
     <!--图片加载器 start -->
     <image style="width: 0; height: 0; display: none" :src="src" @load="onImgLoad" @error="onImgError" />
     <!--图片加载器 end -->
@@ -14,30 +14,28 @@
       :class="[fadeShow && 'fade-out', fadeShow && loaded ? 'fade-in' : '']"
     />
     <view v-if="showLoading && loading" class="i-image__loading">
-      <slot name="loading"><i-icon name="photo-o" size="24" /></slot>
+      <slot name="loading"><i-icon name="photo" size="24" color="#dcdee0" /></slot>
     </view>
     <view v-if="showError && error" class="i-image__error">
-      <slot name="loading"><i-icon name="warning-o" size="24" /></slot>
+      <slot name="error"><i-icon name="photo-fail" size="24" color="#dcdee0" /></slot>
     </view>
+    <!-- #endif -->
+    <!-- #ifdef APP-NVUE -->
+    <image
+      :style="[mergeStyle]"
+      :src="src"
+      :lazy-load="lazyLoad"
+      :mode="mode"
+      :fade-show="fadeShow"
+      class="i-image__img"
+      @load="onImgLoad"
+      @error="onImgError"
+    />
+    <!-- #endif -->
   </view>
-  <!-- #endif -->
-  <!-- #ifdef APP-NVUE -->
-  <!-- eslint-disable-next-line -->
-  <image
-    :style="[mergeStyle]"
-    :src="src"
-    :lazy-load="lazyLoad"
-    :mode="mode"
-    :fade-show="fadeShow"
-    class="i-image__img"
-    @load="onImgLoad"
-    @error="onImgError"
-  />
-  <!-- #endif -->
 </template>
 
 <script>
-import IComponent from '../mixins/component'
 import IIcon from '../i-icon/i-icon'
 import { addUnit, isNumber } from '../utils'
 var imagePlaceholder = ''
@@ -51,7 +49,6 @@ export default {
   components: {
     IIcon,
   },
-  mixins: [IComponent],
   props: {
     src: {
       type: String,
@@ -62,10 +59,12 @@ export default {
       default: 'scaleToFill',
     },
     width: {
+      required: true,
       type: [Number, String],
       default: '',
     },
     height: {
+      required: true,
       type: [Number, String],
       default: '',
     },
@@ -100,6 +99,10 @@ export default {
     round: {
       type: Boolean,
       default: false,
+    },
+    customStyle: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {
@@ -162,6 +165,7 @@ export default {
       this.loading = false
       this.error = true
       // #ifdef APP-NVUE
+      // eslint-disable-next-line vue/no-mutating-props
       this.src = imagePlaceholder
       // #endif
       this.$emit('error', event)
@@ -175,14 +179,16 @@ export default {
 
 .i-image {
   position: relative;
-  overflow: hidden;
   /* #ifndef APP-NVUE */
+  overflow: hidden;
+
   &--round {
     border-radius: 50%;
   }
   /* #endif */
 }
 
+/* #ifndef APP-NVUE */
 .i-image__img {
   position: relative;
   transition-property: opacity;
@@ -191,7 +197,6 @@ export default {
   background-color: $image-placeholder-background-color;
 }
 
-/* #ifndef APP-NVUE */
 .i-image__img,
 .i-image__loading,
 .i-image__error {

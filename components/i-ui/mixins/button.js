@@ -8,6 +8,10 @@ export default {
     sendMessageImg: String,
     showMessageCard: Boolean,
     appParameter: String,
+    formType: {
+      type: String,
+      default: '',
+    },
     hoverClass: {
       type: String,
       default: 'i-button--active',

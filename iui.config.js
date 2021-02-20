@@ -19,16 +19,8 @@ export default [
         path: '/pages/image/image',
       },
       {
-        name: 'layout 布局',
-        path: '/pages/col/col',
-      },
-      {
         name: 'popup 弹出层',
         path: '/pages/popup/popup',
-      },
-      {
-        name: 'page 页面容器',
-        path: '/pages/page/page',
       },
       {
         name: 'Styles 内置样式',
@@ -40,19 +32,6 @@ export default [
       },
     ],
   },
-  // {
-  //     name: '表单组件',
-  //     children: [
-  //         {
-  //             name: 'DatetimePicker 时间选择',
-  //             path: '/pages/datetime-picker/datetime-picker'
-  //         },
-  //         {
-  //             name: 'Picker 选择器',
-  //             path: '/pages/picker/picker'
-  //         }
-  //     ]
-  // },
   {
     name: '反馈组件',
     children: [

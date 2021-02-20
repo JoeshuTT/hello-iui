@@ -3,8 +3,7 @@
     v-if="inited"
     ref="iOverlay"
     class="i-overlay"
-    :class="[customClass]"
-    :style="[overlayStyle]"
+    :style="[mergeStyle]"
     @click="onClick"
     @touchmove.stop.prevent="noop"
   >
@@ -13,7 +12,6 @@
 </template>
 
 <script>
-import IComponent from '../mixins/component'
 const nextTick = () => new Promise(resolve => setTimeout(resolve, 1000 / 30))
 // #ifdef APP-NVUE
 const animation = uni.requireNativePlugin('animation')
@@ -21,44 +19,54 @@ const animation = uni.requireNativePlugin('animation')
 
 export default {
   name: 'IOverlay',
-  mixins: [IComponent],
   props: {
     show: {
       type: Boolean,
       default: false,
     },
     duration: {
-      type: Number,
+      type: null,
       default: 300,
+    },
+    customStyle: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {
     return {
       inited: false,
-      display: false,
-      aniStyle: {},
+      overlayStyle: {
+        opacity: 0,
+        // #ifndef APP-NVUE
+        transitionDuration: `${this.duration}ms`,
+        display: this.customStyle.display || 'block', // 惰性显示，.vue页面可用
+        // #endif
+      },
     }
   },
   computed: {
-    overlayStyle() {
-      const { aniStyle, customStyle } = this
-      const style = {
-        // #ifndef APP-NVUE
-        transitionDuration: `${this.duration}ms`,
-        display: `${this.display ? '' : 'none'}`,
-        // #endif
-      }
-      return Object.assign({}, style, aniStyle, customStyle)
+    mergeStyle() {
+      const { customStyle, overlayStyle } = this
+
+      return Object.assign({}, customStyle, overlayStyle)
+    },
+    currentDisplay() {
+      let display = 'block'
+      // #ifdef APP-NVUE
+      display = 'flex'
+      // #endif
+      return this.customStyle.display || display
     },
   },
   watch: {
     show: {
-      handler(value, old) {
-        if (value === old) {
-          return
+      handler(value) {
+        if (value) {
+          this.enter()
+        } else {
+          this.leave()
         }
-
-        this.appearOverlay(value)
       },
       immediate: true,
     },
@@ -67,58 +75,74 @@ export default {
     onClick() {
       this.$emit('click')
     },
-    appearOverlay(bool) {
-      const { duration } = this
-
-      if (!this.show && !this.inited) {
-        return
-      }
-
-      this.show && (this.inited = true)
-      this.aniStyle = { opacity: bool ? 0 : 1 }
+    enter() {
+      this.inited = true
+      this.overlayStyle.opacity = 0
 
       // #ifndef APP-NVUE
-      this.show && (this.display = true)
+      this.overlayStyle.display = this.customStyle.display || 'block'
+      this.overlayStyle.transitionDuration = `${this.duration}ms`
 
-      Promise.resolve()
+      this.$nextTick()
         .then(nextTick)
         .then(() => {
-          this.aniStyle = { opacity: bool ? 1 : 0 }
-          if (!this.show && this.display) {
-            setTimeout(() => {
-              this.display = false
-            }, duration)
-          }
+          this.overlayStyle.opacity = 1
         })
         .catch(() => {})
       // #endif
 
       // #ifdef APP-NVUE
-
-      Promise.resolve()
+      this.$nextTick()
         .then(nextTick)
         .then(() => {
-          animation.transition(
-            this.$refs.iOverlay,
-            {
-              styles: {
-                opacity: bool ? 1 : 0,
-              },
-              duration,
-              timingFunction: 'ease',
-              needLayout: false,
-              delay: 0,
+          animation.transition(this.$refs.iOverlay, {
+            styles: {
+              opacity: 1,
             },
-            () => {
-              // console.log('animation finished')
-
-              if (!this.show && this.inited) {
-                this.inited = false
-              }
-            },
-          )
+            duration: this.duration,
+            timingFunction: 'ease',
+            needLayout: false,
+            delay: 0,
+          })
         })
         .catch(() => {})
+      // #endif
+    },
+    leave() {
+      if (!this.inited) {
+        return
+      }
+
+      this.overlayStyle.transitionDuration = `${this.duration}ms`
+
+      // #ifndef APP-NVUE
+      this.overlayStyle.opacity = 0
+      setTimeout(() => {
+        this.overlayStyle.display = 'none'
+      }, this.duration)
+      // #endif
+
+      // #ifdef APP-NVUE
+      animation.transition(
+        this.$refs.iOverlay,
+        {
+          styles: {
+            opacity: 0,
+          },
+          duration: this.duration,
+          timingFunction: 'ease',
+          needLayout: false,
+          delay: 0,
+        },
+        () => {
+          this.inited = false
+        },
+      )
+      // #endif
+    },
+    noop(e) {
+      // #ifdef APP-NVUE
+      e.stopPropagation()
       // #endif
     },
   },
@@ -129,21 +153,15 @@ export default {
 @import '../styles/index.scss';
 
 .i-overlay {
-  @include flex-box();
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   /* #ifndef APP-NVUE */
-  width: 100%;
-  height: 100%;
   z-index: $z-index;
   transition-property: opacity;
   transition-timing-function: ease;
-  /* #endif */
-  /* #ifdef APP-NVUE */
-  width: 750rpx;
-  bottom: 0;
-  right: 0;
   /* #endif */
   background-color: $overlay-background-color;
 }

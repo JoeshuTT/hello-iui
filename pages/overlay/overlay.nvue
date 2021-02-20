@@ -8,11 +8,11 @@
       <i-button type="primary" text="嵌入内容" @click="show2 = true" />
       <i-overlay
         :show="show2"
-        :custom-style="{ alignItems: 'center', justifyContent: 'center' }"
+        :custom-style="{ display: 'flex', alignItems: 'center', justifyContent: 'center' }"
         @click="onMaskToggle2"
       >
         <view class="block">
-          <text class="blokc-txt">111</text>
+          <text class="block-txt">内容</text>
         </view>
       </i-overlay>
     </demo-block>
@@ -30,7 +30,9 @@ export default {
       show2: false,
     }
   },
-  onLoad() {},
+  onLoad() {
+    //
+  },
   methods: {
     onMaskToggle() {
       this.show = !this.show
@@ -43,15 +45,18 @@ export default {
 </script>
 
 <style lang="scss">
-.mb20 {
-  margin-bottom: 20rpx;
-}
-
 .block {
   width: 300rpx;
   height: 300rpx;
   background-color: #fff;
+  // #ifndef APP-NVUE
+  display: flex;
+  // #endif
+  align-items: center;
+  justify-content: center;
+
   &-txt {
+    text-align: center;
     color: #666;
     font-size: 16px;
   }

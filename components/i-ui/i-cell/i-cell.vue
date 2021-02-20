@@ -1,12 +1,7 @@
 <template>
   <view
     class="i-cell"
-    :class="[
-      customClass,
-      center && 'i-cell--center',
-      (isLink || clickable) && 'i-cell--clickable',
-      border && 'i-cell--border',
-    ]"
+    :class="[center && 'i-cell--center', (isLink || clickable) && 'i-cell--clickable', border && 'i-cell--border']"
     :style="[customStyle]"
     @click="onClick"
   >

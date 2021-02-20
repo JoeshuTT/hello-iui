@@ -11,15 +11,6 @@
       }
     },
     {
-      "path": "pages/discover/discover",
-      "style": {
-        "app-plus": {
-          "bounce": "none",
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
       "path": "pages/button/button",
       "style": {
         "app-plus": {
@@ -56,33 +47,6 @@
       }
     },
     {
-      "path": "pages/col/col",
-      "style": {
-        "app-plus": {
-          "bounce": "none",
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
-      "path": "pages/page/page",
-      "style": {
-        "app-plus": {
-          "bounce": "none",
-          "scrollIndicator": "none",
-          "titleNView": {
-            "buttons": [
-              {
-                "text": "切换",
-                "fontSize": "16px",
-                "color": "#222"
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
       "path": "pages/popup/popup",
       "style": {
         "app-plus": {
@@ -93,24 +57,6 @@
     },
     {
       "path": "pages/styles/styles",
-      "style": {
-        "app-plus": {
-          "bounce": "none",
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
-      "path": "pages/datetime-picker/datetime-picker",
-      "style": {
-        "app-plus": {
-          "bounce": "none",
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
-      "path": "pages/picker/picker",
       "style": {
         "app-plus": {
           "bounce": "none",
@@ -160,24 +106,6 @@
         "navigationStyle": "custom",
         "app-plus": {
           "titleNView": false,
-          "bounce": "none",
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
-      "path": "pages/charts/charts",
-      "style": {
-        "app-plus": {
-          "bounce": "none",
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
-      "path": "pages/charts/column",
-      "style": {
-        "app-plus": {
           "bounce": "none",
           "scrollIndicator": "none"
         }

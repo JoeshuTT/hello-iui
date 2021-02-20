@@ -1,5 +1,5 @@
 <template>
-  <view class="i-load-more" :class="[customClass]" :style="[customStyle]" @click="onClick">
+  <view class="i-load-more" :style="[customStyle]" @click="onClick">
     <i-loading
       v-if="status === 'loading'"
       :type="iconType"

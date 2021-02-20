@@ -1,43 +1,61 @@
 <template>
   <view class="container">
     <demo-block title="基础图标" padding>
-      <i-row custom-class="demo-row" class="demo-row">
-        <i-col v-for="(item, index) in list" :key="index" :span="8" custom-class="demo-col" class="demo-col">
-          <i-icon class="demo-col-icon" :name="item.value" />
+      <view class="i-row demo-row">
+        <view v-for="(item, index) in list" :key="index" class="i-col-6 demo-col">
+          <i-icon size="32" color="#323233" :name="item.value" />
           <text class="demo-col-txt">{{ item.label }}</text>
-        </i-col>
-      </i-row>
+        </view>
+      </view>
     </demo-block>
     <demo-block title="图标图片" padding>
-      <i-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="20" />
+      <view class="i-row demo-row">
+        <view class="i-col-6 demo-col">
+          <i-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="50" />
+        </view>
+      </view>
     </demo-block>
     <demo-block title="图标颜色" padding>
-      <i-icon name="success" color="#1989fa" />
-      <i-icon name="arrow" color="#07c160" />
+      <view class="i-row demo-row">
+        <view class="i-col-6 demo-col">
+          <i-icon name="fire-o" size="32rpx" color="#1989fa" />
+        </view>
+        <view class="i-col-6 demo-col">
+          <i-icon name="smile-o" size="32" color="#07c160" />
+        </view>
+      </view>
     </demo-block>
     <demo-block title="图标大小" padding>
-      <i-icon name="success" size="50rpx" />
-      <i-icon name="success" size="50px" />
-    </demo-block>
-    <demo-block title="Unicode方式单个适用" padding>
-      <i-icon font-family="myIcon" :name="myIconWechat" />
+      <view class="i-row demo-row">
+        <view class="i-col-6 demo-col">
+          <i-icon name="circle" size="32rpx" color="#1989fa" />
+        </view>
+        <view class="i-col-6 demo-col">
+          <i-icon name="circle" size="32" color="#07c160" />
+        </view>
+      </view>
     </demo-block>
     <demo-block title="使用 Unicode 方式，自定义图标" padding>
-      <i-row custom-class="demo-row" class="demo-row">
-        <i-col v-for="(item, index) in list2" :key="index" :span="8" custom-class="demo-col" class="demo-col">
-          <i-icon class="demo-col-icon" font-family="myIcon" :name="item.value" size="20" />
+      <view class="i-row demo-row">
+        <view v-for="(item, index) in list2" :key="index" class="i-col-6 demo-col">
+          <i-icon font-family="myIcon" :name="item.value" size="32" color="#323233" />
           <text class="demo-col-txt">{{ item.label }}</text>
-        </i-col>
-      </i-row>
+        </view>
+      </view>
     </demo-block>
     <!-- #ifndef APP-NVUE -->
     <demo-block title="使用 Font Class 方式，自定义图标" padding>
-      <i-row custom-class="demo-row" class="demo-row">
-        <i-col v-for="(item, index) in list2" :key="index" :span="8" custom-class="demo-col" class="demo-col">
-          <i-icon class="demo-col-icon" class-prefix="my-icon" :name="item.label" size="20" />
+      <view class="i-row demo-row">
+        <view v-for="(item, index) in list2" :key="index" class="i-col-6 demo-col">
+          <i-icon
+            font-family="myIcon"
+            class-prefix="my-icon"
+            :custom-style="{ fontSize: '32px', color: 'red' }"
+            :name="item.label"
+          />
           <text class="demo-col-txt">{{ item.label }}</text>
-        </i-col>
-      </i-row>
+        </view>
+      </view>
     </demo-block>
     <!-- #endif -->
   </view>
@@ -63,16 +81,17 @@ export default {
           value: 'success',
         },
         {
+          label: 'cross',
+          value: 'cross',
+        },
+
+        {
           label: 'plus',
           value: 'plus',
         },
         {
-          label: 'cross',
-          value: 'cross',
-        },
-        {
-          label: 'fail',
-          value: 'fail',
+          label: 'minus',
+          value: 'minus',
         },
         {
           label: 'arrow',
@@ -89,6 +108,14 @@ export default {
         {
           label: 'arrow-down',
           value: 'arrow-down',
+        },
+        {
+          label: 'fail',
+          value: 'fail',
+        },
+        {
+          label: 'circle',
+          value: 'circle',
         },
       ],
       list2: [
@@ -109,28 +136,38 @@ export default {
           value: '\ue62a',
         },
       ],
-      myIconWechat: '\ue632',
     }
   },
-  onLoad() {},
-  methods: {},
 }
 </script>
 
 <style lang="scss">
+.i-row {
+  @include i-row();
+}
+
+.i-col-8 {
+  @include i-col(8, 0, 690);
+}
+
+.i-col-6 {
+  @include i-col(6, 0, 690);
+}
+
 .demo-row {
   background-color: #fff;
   border-radius: 4px;
 }
 
 .demo-col {
-  padding: 20rpx 30rpx;
+  padding: 15rpx 20rpx;
   align-items: center;
   justify-content: center;
+
   &-txt {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 24px;
-    color: #666;
+    color: #646566;
   }
 }
 
@@ -145,6 +182,9 @@ export default {
   font-family: 'myIcon';
 }
 
+.fz32 {
+  font-size: 32px;
+}
 .my-icon-wechat:before {
   content: '\e632';
 }

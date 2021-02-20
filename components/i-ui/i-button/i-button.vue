@@ -1,8 +1,8 @@
 <template>
   <!-- #ifndef APP-NVUE -->
-  <view
+  <button
     class="i-button"
-    :class="[customClass, utils.bem('button', [type, { plain, round, square, disabled }])]"
+    :class="[utils.bem('button', [type, { plain, round, square, disabled }])]"
     :hover-class="hoverClass"
     :lang="lang"
     :form-type="formType"
@@ -24,79 +24,43 @@
     @opensetting="bindOpenSetting"
   >
     <template v-if="loading">
-      <slot name="loading"
-        ><i-loading
-          custom-class="i-button__loading"
-          class="i-button__loading"
-          :type="loadingType"
-          :size="loadingSize"
-          :color="leftColor"
-      /></slot>
+      <slot name="loading">
+        <i-loading :type="loadingType" :size="loadingSize" :color="leftColor" />
+      </slot>
     </template>
     <template v-if="icon">
-      <i-icon
-        custom-class="i-button__icon"
-        class="i-button__icon"
-        :name="icon"
-        :font-family="iconFont"
-        :class-prefix="classPrefix"
-        :color="leftColor"
-      />
+      <slot name="icon">
+        <i-icon :name="icon" :font-family="iconFont" :size="loadingSize" :color="leftColor" />
+      </slot>
     </template>
-    <!-- 兼容使用 text 的情况 -->
-    <template v-if="text">
-      <text class="i-button__text" :style="[mergeTextStyle]">{{ text }}</text>
-    </template>
-    <template v-else>
-      <text v-if="$slots.default" class="i-button__text" :style="[mergeTextStyle]"><slot /></text>
-    </template>
-  </view>
+    <text class="i-button__text" :style="[mergeTextStyle]">{{ text }}</text>
+  </button>
   <!-- #endif -->
   <!-- #ifdef APP-NVUE -->
   <!-- eslint-disable-next-line -->
   <view
     class="i-button"
     :class="[
-      customClass,
       'i-button--' + type,
       plain && 'i-button--plain',
-      disabled && 'i-button--disabled',
       round && 'i-button--round',
       square && 'i-button--square',
+      disabled && 'i-button--disabled',
     ]"
     :style="[mergeStyle]"
     @click="onClick"
   >
     <template v-if="loading">
-      <i-loading
-        custom-class="i-button__loading"
-        class="i-button__loading"
-        :type="loadingType"
-        :size="loadingSize"
-        :color="leftColor"
-      />
+      <slot name="loading">
+        <i-loading :type="loadingType" :size="loadingSize" :color="leftColor" />
+      </slot>
     </template>
     <template v-if="icon">
-      <i-icon
-        custom-class="i-button__icon"
-        class="i-button__icon"
-        :name="icon"
-        :font-family="iconFont"
-        :color="leftColor"
-      />
+      <slot name="icon">
+        <i-icon :name="icon" :font-family="iconFont" :size="loadingSize" :color="leftColor" />
+      </slot>
     </template>
-    <!-- 兼容使用 text 的情况 -->
-    <template v-if="text">
-      <text class="i-button__text" :style="[mergeTextStyle]">{{ text }}</text>
-    </template>
-    <template v-else>
-      <text
-        v-if="$slots.default && $slots.default[0] && $slots.default[0].tag === 'u-text'"
-        class="i-button__text"
-        :style="[mergeTextStyle]"
-        >{{ $slots.default[0].children[0].text }}</text
-      >
-    </template>
+    <text class="i-button__text" :style="[mergeTextStyle]">{{ text }}</text>
   </view>
   <!-- #endif -->
 </template>
@@ -105,7 +69,6 @@
 <script module="utils" lang="wxs" src="../wxs/utils.wxs"></script>
 <!-- #endif -->
 <script>
-import IComponent from '../mixins/component'
 import button from '../mixins/button'
 import openType from '../mixins/open-type'
 import ILoading from '../i-loading/i-loading'
@@ -118,23 +81,19 @@ export default {
     IIcon,
     ILoading,
   },
-  mixins: [IComponent, button, openType],
+  mixins: [button, openType],
   props: {
-    text: {
-      type: String,
-      default: '',
-    },
     type: {
       type: String,
       default: 'default',
     },
-    color: {
+    text: {
       type: String,
       default: '',
     },
-    disabled: {
-      type: Boolean,
-      default: false,
+    color: {
+      type: String,
+      default: '',
     },
     plain: {
       type: Boolean,
@@ -148,13 +107,13 @@ export default {
       type: Boolean,
       default: false,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
     icon: {
       type: String,
       default: '',
-    },
-    classPrefix: {
-      type: String,
-      default: 'i-icon',
     },
     iconFont: {
       type: String,
@@ -176,9 +135,9 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    formType: {
-      type: String,
-      default: '',
+    textStyle: {
+      type: Object,
+      default: () => ({}),
     },
   },
   computed: {

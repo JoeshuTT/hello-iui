@@ -7,7 +7,6 @@
     @include hairline();
   }
 }
-/* #endif */
 
 .i-hairline {
   &,
@@ -44,3 +43,5 @@
     border-width: $border-width-base;
   }
 }
+
+/* #endif */

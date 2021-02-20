@@ -1,36 +1,32 @@
 <template>
   <view
-    :class="['i-icon', customClass, classPrefix, classPrefix ? classPrefix + '-' + name : 'i-icon-block']"
+    :class="['i-icon', classPrefix, classPrefix ? classPrefix + '-' + name : 'i-icon-block']"
+    :style="[classPrefix && mergeStyle]"
     @click="onClick"
   >
     <template v-if="isImage">
       <image class="i-icon-block_img" :style="[mergeStyle]" :src="name" mode="aspectFit" />
     </template>
     <template v-else>
-      <text v-if="!classPrefix" class="i-icon" :style="[mergeStyle]">{{ icon }}</text>
+      <text v-if="!classPrefix" class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
     </template>
   </view>
 </template>
 
 <script>
-import IComponent from '../mixins/component'
 import { addUnit } from '../utils'
 import icon from './type'
-import { COLOR_PALETTE } from '../common/config'
+import { COLOR_PALETTE, iconFontFamily, iconFontSrc } from '../common/config'
 // #ifdef APP-NVUE
-const fontFamily = 'iuiIconFont'
-// const url = '/static/iuiIconFont.ttf'
-const url = 'https://at.alicdn.com/t/font_1949925_qisrzzyoqy8.ttf'
 const dom = weex.requireModule('dom')
 dom.addRule('fontFace', {
-  fontFamily: fontFamily,
-  src: "url('" + url + "')",
+  fontFamily: iconFontFamily,
+  src: "url('" + iconFontSrc + "')",
 })
 // #endif
 
 export default {
   name: 'IIcon',
-  mixins: [IComponent],
   props: {
     name: {
       required: true,
@@ -39,27 +35,39 @@ export default {
     },
     size: {
       type: [Number, String],
-      default: '16px',
+      default: iconFontFamily,
     },
     color: {
       type: String,
-      default: COLOR_PALETTE['gray-6'],
+      default: '',
     },
     fontFamily: {
       type: String,
-      default: 'iuiIconFont',
+      default: '',
     },
     classPrefix: {
       type: String,
       default: '',
     },
+    customStyle: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  data() {
+    return {
+      icon,
+    }
   },
   computed: {
+    isImage() {
+      return ~this.name.indexOf('/')
+    },
     mergeStyle() {
       const { fontFamily, color, size, customStyle } = this
       const style = {}
 
-      if (this.name.indexOf('/') !== -1) {
+      if (this.isImage) {
         if (size) {
           style.width = addUnit(size)
           style.height = addUnit(size)
@@ -67,19 +75,12 @@ export default {
           console.error('image size is required')
         }
       } else {
-        style.fontFamily = fontFamily
-        style.fontSize = addUnit(size)
-        style.color = color
+        style.fontFamily = fontFamily || iconFontFamily
+        style.fontSize = size ? addUnit(size) : '16px'
+        style.color = color || COLOR_PALETTE['gray-6']
       }
 
       return Object.assign({}, style, customStyle)
-    },
-    isImage() {
-      return this.name ? this.name.indexOf('/') !== -1 : false
-    },
-    icon() {
-      // 古古怪怪
-      return icon[this.name] || this.name
     },
   },
   methods: {
@@ -95,7 +96,7 @@ export default {
 
 /* #ifndef APP-NVUE */
 @font-face {
-  font-family: 'iuiIconFont';
+  font-family: $iconFontFamily;
   src: url($iconFontUrl) format('truetype');
 }
 

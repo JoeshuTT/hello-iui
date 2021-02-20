@@ -1,5 +1,5 @@
 <template>
-  <view :style="[customStyle]" :class="[customClass]">
+  <view :style="[customStyle]">
     <view v-if="title" class="i-cell-group__title">
       <slot name="title"
         ><text class="i-cell-group__title__text">{{ title }}</text></slot

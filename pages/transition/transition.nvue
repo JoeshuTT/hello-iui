@@ -1,0 +1,181 @@
+<template>
+  <view class="container">
+    <demo-block title="基础用法" padding>
+      <i-cell v-for="(item, index) in list" :key="index" :title="item.label" is-link @click="onCellClick(index)" />
+      <i-transition :show="show" :name="name" :custom-style="style" />
+    </demo-block>
+    <demo-block title="高级用法-自定义过渡效果" padding>
+      <i-cell v-for="(item, index) in list2" :key="index" :title="item.label" is-link @click="onCellClick2(index)" />
+      <i-transition :show="show2" :name="name" :anim-config="animConfig" :custom-style="style" />
+    </demo-block>
+    <demo-block title="高级用法-定制进入和移出的持续时间" padding>
+      <i-cell v-for="(item, index) in list3" :key="index" :title="item.label" is-link @click="onCellClick3(index)" />
+      <i-transition
+        :show="show3"
+        name="custom"
+        :duration="{ enter: 300, leave: 1000 }"
+        :anim-config="customAnimConfig"
+        :custom-style="style"
+      />
+    </demo-block>
+    <demo-block title="高级用法-Javascript钩子" padding>
+      <i-cell title="声明 JavaScript 钩子做点什么" is-link @click="onCellLifeClick" />
+      <i-transition
+        :show="show4"
+        name="fade"
+        :custom-style="style"
+        @beforeEnter="beforeEnter"
+        @enter="enter"
+        @afterEnter="afterEnter"
+        @beforeLeave="beforeLeave"
+        @leave="leave"
+        @afterLeave="afterLeave"
+      />
+    </demo-block>
+    <view class="mb20"></view>
+  </view>
+</template>
+
+<script>
+import pageMixin from '@/mixins/page'
+import { getSystemInfoSync, throttle } from '@/common/util'
+const animate = {
+  'zoom-in': {
+    enter: { opacity: 0, transform: `scale(0.8)` },
+    'enter-to': { opacity: 1, transform: `scale(1)` },
+    leave: { opacity: 1, transform: `scale(1)` },
+    'leave-to': { opacity: 0, transform: `scale(0.8)` },
+  },
+  'zoom-out': {
+    enter: { opacity: 0, transform: `scale(1.2)` },
+    'enter-to': { opacity: 1, transform: `scale(1)` },
+    leave: { opacity: 1, transform: `scale(1)` },
+    'leave-to': { opacity: 0, transform: `scale(1.2)` },
+  },
+}
+export default {
+  mixins: [pageMixin],
+  data() {
+    return {
+      title: '',
+      name: '',
+      list: [
+        { label: 'Fade', value: 'fade' },
+        { label: 'Fade Up', value: 'fade-up' },
+        { label: 'Fade Down', value: 'fade-down' },
+        { label: 'Fade Left', value: 'fade-left' },
+        { label: 'Fade Right', value: 'fade-right' },
+        { label: 'Slide Up', value: 'slide-up' },
+        { label: 'Slide Down', value: 'slide-down' },
+        { label: 'Slide Left', value: 'slide-left' },
+        { label: 'Slide Right', value: 'slide-right' },
+      ],
+      show: false,
+      list2: [
+        { label: 'Zoom In', value: 'zoom-in' },
+        { label: 'Zoom Out', value: 'zoom-out' },
+      ],
+      show2: false,
+      list3: [{ label: 'Custom', value: 'custom' }],
+      show3: false,
+      show4: false,
+      style: {
+        position: 'fixed',
+        top: `${getSystemInfoSync().windowHeight / 2 - 50}px`,
+        left: `${getSystemInfoSync().windowWidth / 2 - 50}px`,
+        width: '100px',
+        height: '100px',
+        backgroundColor: '#1989fa',
+      },
+      customAnimConfig: {
+        enter: { opacity: '0', transform: `rotate(-360deg)` },
+        'enter-to': { opacity: '1', transform: `rotate(0deg)` },
+        leave: { opacity: '1', transform: `rotate(0deg)` },
+        'leave-to': { opacity: '0', transform: `rotate(-360deg)` },
+      },
+      animConfig: {},
+    }
+  },
+  onLoad() {
+    //
+  },
+  methods: {
+    onCellClick: throttle(function (index) {
+      const { label, value } = this.list[index]
+
+      this.title = label
+      this.name = value
+      this.show = true
+      setTimeout(() => {
+        this.show = false
+      }, 500)
+    }, 1000),
+    onCellClick2: throttle(function (index) {
+      const { label, value } = this.list2[index]
+      this.animConfig = animate[value]
+
+      this.title = label
+      this.name = value
+      this.show2 = true
+      setTimeout(() => {
+        this.show2 = false
+      }, 500)
+    }, 1000),
+    onCellClick3: throttle(function (index) {
+      const { label, value } = this.list3[index]
+
+      this.title = label
+      this.name = value
+      this.show3 = true
+      setTimeout(() => {
+        this.show3 = false
+      }, 500)
+    }, 1000),
+    onCellLifeClick() {
+      this.show4 = !this.show4
+    },
+    // JavaScript 钩子
+    beforeEnter() {
+      console.log('beforeEnter')
+    },
+    enter() {
+      console.log('enter')
+    },
+    afterEnter() {
+      console.log('afterEnter')
+      uni.showModal({
+        content: '过渡动画-已进入',
+        showCancel: false,
+      })
+    },
+    beforeLeave() {
+      console.log('beforeLeave')
+    },
+    leave() {
+      console.log('leave')
+    },
+    afterLeave() {
+      console.log('afterLeave')
+      uni.showModal({
+        content: '过渡动画-已离开',
+        showCancel: false,
+      })
+    },
+  },
+}
+</script>
+
+<style lang="scss">
+/* #ifndef APP-NVUE */
+.i-custom-enter-active,
+.i-custom-leave-active {
+  transition-property: opacity, transform;
+}
+
+.i-custom-enter,
+.i-custom-leave-to {
+  opacity: 0;
+  transform: rotate(-360deg);
+}
+/* #endif */
+</style>

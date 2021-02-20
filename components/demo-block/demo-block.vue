@@ -26,9 +26,11 @@ export default {
 .demo-block {
   @include flex-box();
   // padding: 0 30rpx;
+
   &--padding {
     padding: 0 30rpx;
   }
+
   &__title {
     font-size: 14px;
     color: rgba(69, 90, 100, 0.6);

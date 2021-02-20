@@ -1,58 +1,32 @@
 <template>
-  <view class="i-popup-wrapper" @touchmove.stop.prevent="noop">
-    <!-- #ifdef APP-NVUE -->
-    <!-- <i-overlay :show="overlay && value" :custom-style="overlayStyle" @click="onOverlayClick" /> -->
-    <!-- nvue 平台降级处理，遮罩无动画 -->
-    <view v-if="overlay && value" class="i-overlay" :style="[overlayStyle]" @click="onOverlayClick" />
-    <!-- #endif -->
-    <!-- #ifndef APP-NVUE -->
-    <i-overlay :show="overlay && value" :custom-style="overlayStyle" @click="onOverlayClick" />
-    <!-- #endif -->
-    <template v-if="position === 'center'">
-      <view
-        v-if="inited"
-        ref="ani"
-        class="i-popup"
-        :class="[customClass, 'i-popup--' + position, classes]"
-        :style="[mergeStyle]"
-        @click="onOverlayClick"
-      >
-        <view class="i-popup__content" :style="[customStyle]" @click.stop="noop"><slot /></view>
-      </view>
-    </template>
-    <template v-else>
-      <view
-        v-if="inited"
-        ref="ani"
-        class="i-popup"
-        :class="[customClass, 'i-popup--' + position, classes]"
-        :style="[mergeStyle]"
-      >
-        <slot />
-      </view>
-    </template>
+  <view
+    v-if="value"
+    :class="['i-popup-wrapper', 'i-popup-wrapper--' + position]"
+    :style="[wrapperStyle]"
+    @touchmove.stop.prevent="noop"
+  >
+    <i-overlay :show="overlay" :custom-style="overlayStyle" @click="onOverlayClick" />
+    <i-transition :show="true" :duration="duration" :name="aniName" :custom-style="mergeStyle">
+      <slot />
+    </i-transition>
   </view>
 </template>
 
 <script>
-import IComponent from '../mixins/component'
 import IOverlay from '../i-overlay/i-overlay'
-import transition from '../mixins/transition'
+import iTransition from '../i-transition/i-transition'
+import { getSystemInfoSync } from '../utils'
 
 export default {
   name: 'IPopup',
   components: {
     IOverlay,
+    iTransition,
   },
-  mixins: [IComponent, transition],
-  // model: {
-  //     prop: 'show',
-  //     event: 'input'
-  // },
   props: {
     value: {
       type: Boolean,
-      default: false, // 小程序端使用 model 定制 prop 和 event无效，只好在 popup 中使用 value 代替 show
+      default: false,
     },
     overlay: {
       type: Boolean,
@@ -60,87 +34,127 @@ export default {
     },
     position: {
       type: String,
-      default: 'center', // top, bottom, left, right, center
+      default: 'center',
+      validator(value) {
+        return ~['top', 'right', 'bottom', 'left', 'center'].indexOf(value)
+      },
     },
     duration: {
       type: null,
       default: 300,
     },
-    overlayStyle: {
-      type: Object,
-      default: () => ({}),
-    },
     closeOnClickOverlay: {
       type: Boolean,
       default: true,
     },
+    overlayStyle: {
+      type: Object,
+      default: () => ({}),
+    },
+    customStyle: {
+      type: Object,
+      default: () => ({}),
+    },
+    rootStyle: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
-      name: 'center',
-      overlayShow: false,
+      positionMap: {
+        center: {
+          animate: 'fade',
+          style: {
+            position: 'relative',
+          },
+          wrapperStyle: {
+            width: `${getSystemInfoSync().windowWidth}px`,
+            height: `${getSystemInfoSync().windowHeight}px`,
+          },
+        },
+        top: {
+          animate: 'slide-down',
+          style: {
+            position: 'fixed',
+            // #ifndef H5
+            top: 0,
+            // #endif
+            left: 0,
+            right: 0,
+          },
+        },
+        bottom: {
+          animate: 'slide-up',
+          style: {
+            position: 'fixed',
+            left: 0,
+            right: 0,
+            bottom: 0,
+          },
+        },
+        left: {
+          animate: 'slide-left',
+          style: {
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            bottom: 0,
+          },
+        },
+        right: {
+          animate: 'slide-right',
+          style: {
+            position: 'fixed',
+            right: 0,
+            top: 0,
+            bottom: 0,
+          },
+        },
+      },
     }
   },
-  watch: {
-    value: {
-      handler(value, old) {
-        if (value === old) {
-          return
-        }
-
-        // #ifndef APP-NVUE
-        value ? this.enter() : this.leave()
-        // #endif
-        // #ifdef APP-NVUE
-        value ? this.enter2() : this.leave2()
-        // #endif
-      },
-      immediate: true,
+  computed: {
+    currentPosition() {
+      const { positionMap, position } = this
+      return positionMap[position] || 'center'
     },
-  },
-  created() {
-    this.setAniName()
+    wrapperStyle() {
+      const { rootStyle } = this
+
+      return Object.assign({}, rootStyle, this.currentPosition.wrapperStyle)
+    },
+    mergeStyle() {
+      const { customStyle } = this
+
+      const positionStyle = {
+        'transition-timing-function': 'ease',
+        'background-color': '#fff',
+        /* #ifndef APP-NVUE */
+        'z-index': 999,
+        /* #endif */
+        ...this.currentPosition.style,
+      }
+
+      return Object.assign({}, customStyle, positionStyle)
+    },
+    aniName() {
+      return this.currentPosition.animate || 'fade'
+    },
   },
   methods: {
     onOverlayClick() {
-      this.$emit('click-overlay')
+      this.$emit('clickOverlay')
       if (this.closeOnClickOverlay) {
-        this.$emit('close', false)
         this.$emit('input', false)
+        this.$emit('close')
       }
     },
-    setAniName() {
-      const { position } = this
+    noop(e) {
       // #ifdef APP-NVUE
-      const aniMap = {
-        center: 'fade',
-        top: 'slide-down',
-        bottom: 'slide-up',
-        left: 'slide-left',
-        right: 'slide-right',
-      }
-      this.name = aniMap[position]
-      // #endif
-      // #ifndef APP-NVUE
-      this.name = position
+      e.stopPropagation()
       // #endif
     },
-    // 完成过渡后触发
-    onTransitionEnd() {
-      if (this.transitionEnded) {
-        return
-      }
-      this.transitionEnded = true
-      this.$emit(`after-${this.status}`)
-      const { value, display } = this
-      if (!value && display) {
-        this.display = false
-        // #ifdef APP-NVUE
-        this.inited = false
-        // #endif
-      }
-    },
-    noop() {},
   },
 }
 </script>
@@ -148,126 +162,27 @@ export default {
 <style lang="scss">
 @import '../styles/index.scss';
 
-.i-popup {
-  @include flex-box();
+.i-popup-wrapper {
   position: fixed;
-  transition-timing-function: ease;
-  /* #ifndef APP-NVUE */
-  z-index: $z-index;
-  /* #endif */
-  &__content {
-    background-color: $popup-background-color;
-  }
 
   &--center {
     top: 0;
     left: 0;
-    bottom: 0;
-    width: 750rpx;
-    @include flex-box();
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
     align-items: center;
     justify-content: center;
   }
+}
 
-  &--top {
-    background-color: $popup-background-color;
-    top: 0;
-    left: 0;
-    width: 750rpx;
+.i-popup {
+  &--safe-bottom {
+    @include safe-area-inset-bottom();
   }
 
-  &--bottom {
-    background-color: $popup-background-color;
-    bottom: 0;
-    left: 0;
-    width: 750rpx;
+  &--safe-top {
+    @include safe-area-inset-top();
   }
-
-  &--left {
-    background-color: $popup-background-color;
-    top: 0;
-    left: 0;
-    /* #ifndef APP-NVUE */
-    height: 100%;
-    /* #endif */
-    /* #ifdef APP-NVUE */
-    bottom: 0;
-    /* #endif */
-  }
-
-  &--right {
-    background-color: $popup-background-color;
-    top: 0;
-    right: 0;
-    /* #ifndef APP-NVUE */
-    height: 100%;
-    /* #endif */
-    /* #ifdef APP-NVUE */
-    bottom: 0;
-    /* #endif */
-  }
-}
-
-/* #ifndef APP-NVUE */
-
-.i-center-enter-active,
-.i-center-leave-active {
-  transition-property: opacity;
-}
-
-.i-center-enter,
-.i-center-leave-to {
-  opacity: 0;
-}
-
-.i-bottom-enter-active,
-.i-bottom-leave-active,
-.i-left-enter-active,
-.i-left-leave-active,
-.i-right-enter-active,
-.i-right-leave-active,
-.i-top-enter-active,
-.i-top-leave-active {
-  transition-property: transform;
-}
-
-.i-top-enter,
-.i-top-leave-to {
-  transform: translate3d(0, -100%, 0);
-}
-
-.i-bottom-enter,
-.i-bottom-leave-to {
-  transform: translate3d(0, 100%, 0);
-}
-
-.i-left-enter,
-.i-left-leave-to {
-  transform: translate3d(-100%, 0, 0);
-}
-
-.i-right-enter,
-.i-right-leave-to {
-  transform: translate3d(100%, 0, 0);
-}
-
-/* #endif */
-
-.i-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  /* #ifndef APP-NVUE */
-  width: 100%;
-  height: 100%;
-  z-index: $z-index;
-  /* #endif */
-  /* #ifdef APP-NVUE */
-  width: 750rpx;
-  bottom: 0;
-  right: 0;
-  // height: 724px;
-  /* #endif */
-  background-color: $overlay-background-color;
 }
 </style>

@@ -28,5 +28,9 @@ page {
 ::-webkit-scrollbar {
   display: none;
 }
+
+.mb20 {
+  margin-bottom: 20px;
+}
 /* #endif */
 </style>
