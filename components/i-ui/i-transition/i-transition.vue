@@ -62,9 +62,9 @@ export default {
     mergeStyle() {
       const { customStyle, aniStyle } = this
       // #ifndef APP-NVUE
-      customStyle.display = aniStyle.display
+      delete customStyle.display
       // #endif
-      return Object.assign({}, customStyle, aniStyle)
+      return Object.assign({}, aniStyle, customStyle)
     },
   },
   watch: {

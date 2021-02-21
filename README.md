@@ -77,40 +77,9 @@ iui 有依赖scss，请务必安装相关依赖项
 }
 ```
 
-## 项目目录结构
-
-```
-├── common/             # 公共文件目录
-├── public/             # 静态资源文件目录
-│ ├── components/       # 组件目录
-│ │ ├── iui/            # iui组件库
-│ │ ├── ...             # 其他业务组件
-├── config/             # 项目配置目录
-├── docs/               # 组件库文档目录
-├── mixins/             # 项目mixins目录
-├── pages/              # 页面组件目录
-├── static/             # 静态资源文件目录
-├── styles/             # 项目样式目录
-├── unpackage/          # 项目打包后输出目录
-├── .editorconfig       # 编辑器配置
-├── .eslintignore       # ESlint忽略文件配置
-├── .eslintrc.js        # ESlint配置
-├── .gitignore          # Git忽略文件配置
-├── batch.js            # 批量互转文件后缀名脚本
-├── App.vue             # 项目主组件
-├── main.js             # 项目入口文件
-├── manifest.json       # 项目应用配置
-├── package.json        # 项目包管理
-├── pages.json          # 项目页面配置
-├── uni.scss            # uni-app内置的`scss`
-├── vue.config.js       # vuecli配置
-
-```
 ## 致谢
 
 iui 的组件设计有参考了 uni-ui，vant-ui，weex-ui，感谢开源！
-
-
 
 ## 开源协议
 

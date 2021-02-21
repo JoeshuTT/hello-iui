@@ -40,7 +40,7 @@ export default {
         opacity: 0,
         // #ifndef APP-NVUE
         transitionDuration: `${this.duration}ms`,
-        display: this.customStyle.display || 'block', // 惰性显示，.vue页面可用
+        display: this.customStyle.display || 'block', // 起到v-show的效果，.vue页面可用
         // #endif
       },
     }
@@ -56,7 +56,7 @@ export default {
     mergeStyle() {
       const { customStyle, overlayStyle } = this
       // #ifndef APP-NVUE
-      customStyle.display = overlayStyle.display
+      delete customStyle.display
       // #endif
       return Object.assign({}, overlayStyle, customStyle)
     },
