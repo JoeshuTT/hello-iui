@@ -46,17 +46,19 @@ export default {
     }
   },
   computed: {
-    mergeStyle() {
-      const { customStyle, overlayStyle } = this
-
-      return Object.assign({}, customStyle, overlayStyle)
-    },
     currentDisplay() {
       let display = 'block'
       // #ifdef APP-NVUE
       display = 'flex'
       // #endif
       return this.customStyle.display || display
+    },
+    mergeStyle() {
+      const { customStyle, overlayStyle } = this
+      // #ifndef APP-NVUE
+      customStyle.display = overlayStyle.display
+      // #endif
+      return Object.assign({}, overlayStyle, customStyle)
     },
   },
   watch: {
@@ -80,7 +82,7 @@ export default {
       this.overlayStyle.opacity = 0
 
       // #ifndef APP-NVUE
-      this.overlayStyle.display = this.customStyle.display || 'block'
+      this.overlayStyle.display = this.currentDisplay
       this.overlayStyle.transitionDuration = `${this.duration}ms`
 
       this.$nextTick()

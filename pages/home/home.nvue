@@ -1,16 +1,16 @@
 <template>
   <view class="demo-home">
     <view class="demo-header">
-      <image class="demo-header__logo" src="/static/logo.png" />
-      <text class="demo-header__txt"> {{ title }} </text>
-      <text class="demo-header__txt"> {{ subTitle }} </text>
+      <image class="demo-header-logo" src="/static/logo.png" />
+      <text class="demo-header-title"> {{ title }} </text>
+      <text class="demo-header-txt"> {{ subTitle }} </text>
     </view>
     <view v-for="(item, index) in list" :key="index" class="demo-nav">
-      <text class="demo-nav__title">{{ item.name }}</text>
-      <view class="demo-nav__group">
-        <view v-for="(v, i) in item.children" :key="i" class="demo-nav__block" @click="onNavigator(v.path, v.name)">
-          <text class="demo-nav__block-text">{{ v.name }}</text>
-          <i-icon name="arrow" class="demo-nav__icon" />
+      <text class="demo-nav-title">{{ item.name }}</text>
+      <view class="demo-nav-group">
+        <view v-for="(v, i) in item.children" :key="i" class="demo-nav-block" @click="onNavigator(v.path, v.name)">
+          <text class="demo-nav-block-text">{{ v.name }}</text>
+          <i-icon name="arrow" class="demo-nav-icon" />
         </view>
       </view>
     </view>
@@ -23,8 +23,8 @@ import list from '@/iui.config.js'
 export default {
   data() {
     return {
-      title: '一个基于 uni-app 的UI组件库(兼容NVUE)',
-      subTitle: '',
+      title: 'Iui',
+      subTitle: '极简、轻便、灵活的 uni-app 组件库',
       list,
     }
   },
@@ -43,13 +43,28 @@ export default {
 .demo-header {
   @include flex-box();
   align-items: center;
-  &__logo {
+
+  &-hd {
+    @include flex-box('row');
+  }
+
+  &-logo {
     width: 100px;
     height: 100px;
     margin-bottom: 20px;
     border-radius: 10px;
   }
-  &__txt {
+
+  &-title {
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: bold;
+    color: #323232;
+  }
+
+  &-txt {
+    color: rgba(69, 90, 100, 0.6);
+    font-size: 14px;
   }
 }
 
@@ -64,17 +79,17 @@ export default {
 }
 
 .demo-nav {
-  &__title {
+  &-title {
     @include flex-box('row');
-    margin: 24px 0 8px 16px;
+    padding: 14px 0 8px 16px;
     color: rgba(69, 90, 100, 0.6);
     font-size: 14px;
   }
 
-  &__group {
+  &-group {
   }
 
-  &__block {
+  &-block {
     position: relative;
     @include flex-box('row');
     justify-content: space-between;
@@ -87,18 +102,18 @@ export default {
     transition: background-color 0.3s;
   }
 
-  &__block-text {
+  &-block-text {
     flex: 1;
     font-weight: 500;
     font-size: 14px;
     line-height: 40px;
   }
 
-  &__block:active {
+  &-block:active {
     background-color: #e4e8ee;
   }
 
-  &__icon {
+  &-icon {
     //
   }
 }

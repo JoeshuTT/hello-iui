@@ -122,7 +122,7 @@ export default {
     wrapperStyle() {
       const { rootStyle } = this
 
-      return Object.assign({}, rootStyle, this.currentPosition.wrapperStyle)
+      return Object.assign({}, this.currentPosition.wrapperStyle, rootStyle)
     },
     mergeStyle() {
       const { customStyle } = this
@@ -136,7 +136,7 @@ export default {
         ...this.currentPosition.style,
       }
 
-      return Object.assign({}, customStyle, positionStyle)
+      return Object.assign({}, positionStyle, customStyle)
     },
     aniName() {
       return this.currentPosition.animate || 'fade'

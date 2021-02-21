@@ -19,7 +19,7 @@
       />
     </demo-block>
     <demo-block title="高级用法-Javascript钩子" padding>
-      <i-cell title="声明 JavaScript 钩子做点什么" is-link @click="onCellLifeClick" />
+      <i-cell title="使用 JavaScript 钩子做点什么" is-link @click="onCellLifeClick" />
       <i-transition
         :show="show4"
         name="fade"

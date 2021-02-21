@@ -1,7 +1,6 @@
 <template>
   <!-- #ifndef APP-NVUE -->
   <button
-    class="i-button"
     :class="[utils.bem('button', [type, { plain, round, square, disabled }])]"
     :hover-class="hoverClass"
     :lang="lang"
@@ -135,7 +134,7 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    textStyle: {
+    customStyle: {
       type: Object,
       default: () => ({}),
     },

@@ -11,13 +11,7 @@
     </demo-block>
     <demo-block title="自定义样式" padding>
       <i-cell title="圆角弹窗" is-link @click="onCellClick('round')" />
-      <i-popup
-        v-model="show_round"
-        position="bottom"
-        :custom-style="{ 'border-top-left-radius': '16px', 'border-top-right-radius': '16px', height: '200px' }"
-      >
-        <view class="popup">圆角弹窗</view>
-      </i-popup>
+      <i-cell title="预留顶部安全距离" is-link @click="onCellClick('area')" />
     </demo-block>
     <i-popup v-model="show_center">
       <view class="popup">内容</view>
@@ -33,6 +27,16 @@
     </i-popup>
     <i-popup v-model="show_right" position="right">
       <view class="popup">内容</view>
+    </i-popup>
+    <i-popup
+      v-model="show_round"
+      position="bottom"
+      :custom-style="{ 'border-top-left-radius': '16px', 'border-top-right-radius': '16px', height: '200px' }"
+    >
+      <view class="popup">圆角弹窗</view>
+    </i-popup>
+    <i-popup v-model="show_area" position="right" :custom-style="areaStyle">
+      <view class="popup">预留顶部安全距离</view>
     </i-popup>
   </view>
 </template>
@@ -50,6 +54,13 @@ export default {
       show_left: false,
       show_right: false,
       show_round: false,
+      show_area: false,
+      areaStyle: {
+        'background-color': 'red',
+        // #ifdef H5
+        'padding-top': '44px',
+        // #endif
+      },
     }
   },
   onLoad() {},

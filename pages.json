@@ -121,8 +121,8 @@
   "easycom": {
     "autoscan": true,
     "custom": {
-      "demo-(.*)": "@/components/demo-$1/demo-$1.vue",
-      "i-(.*)": "@/components/i-ui/i-$1/i-$1.vue"
+      "^demo-(.*)": "@/components/demo-$1/demo-$1.vue",
+      "^i-(.*)": "@/components/i-ui/i-$1/i-$1.vue"
     }
   }
 }

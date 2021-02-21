@@ -1,0 +1,17 @@
+export default {
+  'fire-o': '\ue665',
+  'smile-o': '\ue666',
+  'photo-fail': '\ue664',
+  photo: '\ue662',
+  'photo-o': '\ue663',
+  arrow: '\ue640',
+  'arrow-down': '\ue641',
+  'arrow-up': '\ue642',
+  circle: '\ue643',
+  minus: '\ue644',
+  'arrow-left': '\ue645',
+  plus: '\ue646',
+  success: '\ue647',
+  cross: '\ue648',
+  fail: '\ue649',
+}

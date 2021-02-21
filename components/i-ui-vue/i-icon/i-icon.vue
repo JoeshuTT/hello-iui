@@ -1,0 +1,109 @@
+<template>
+  <view
+    :class="['i-icon', classPrefix, classPrefix ? classPrefix + '-' + name : 'i-icon-block']"
+    :style="[classPrefix && mergeStyle]"
+    @click="onClick"
+  >
+    <template v-if="isImage">
+      <image class="i-icon-block_img" :style="[mergeStyle]" :src="name" mode="aspectFit" />
+    </template>
+    <template v-else>
+      <text v-if="!classPrefix" class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
+    </template>
+  </view>
+</template>
+
+<script>
+import { addUnit } from '../utils'
+import icon from './type'
+import { COLOR_PALETTE, iconFontFamily, iconFontSrc } from '../common/config'
+// #ifdef APP-NVUE
+const dom = weex.requireModule('dom')
+dom.addRule('fontFace', {
+  fontFamily: iconFontFamily,
+  src: "url('" + iconFontSrc + "')",
+})
+// #endif
+
+export default {
+  name: 'IIcon',
+  props: {
+    name: {
+      required: true,
+      type: String,
+      default: '',
+    },
+    size: {
+      type: [Number, String],
+      default: iconFontFamily,
+    },
+    color: {
+      type: String,
+      default: '',
+    },
+    fontFamily: {
+      type: String,
+      default: '',
+    },
+    classPrefix: {
+      type: String,
+      default: '',
+    },
+    customStyle: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  data() {
+    return {
+      icon,
+    }
+  },
+  computed: {
+    isImage() {
+      return ~this.name.indexOf('/')
+    },
+    mergeStyle() {
+      const { fontFamily, color, size, customStyle } = this
+      const style = {}
+
+      if (this.isImage) {
+        if (size) {
+          style.width = addUnit(size)
+          style.height = addUnit(size)
+        } else {
+          console.error('image size is required')
+        }
+      } else {
+        style.fontFamily = fontFamily || iconFontFamily
+        style.fontSize = size ? addUnit(size) : '16px'
+        style.color = color || COLOR_PALETTE['gray-6']
+      }
+
+      return Object.assign({}, style, customStyle)
+    },
+  },
+  methods: {
+    onClick() {
+      this.$emit('click')
+    },
+  },
+}
+</script>
+
+<style lang="scss">
+@import '../styles/index.scss';
+
+/* #ifndef APP-NVUE */
+@font-face {
+  font-family: $iconFontFamily;
+  src: url($iconFontUrl) format('truetype');
+}
+
+.i-icon {
+  line-height: inherit;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+/* #endif */
+</style>

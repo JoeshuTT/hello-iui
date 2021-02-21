@@ -32,7 +32,7 @@ export default {
     log('info', 'Lifecycle', `${this.$mp.page.$page.fullPath} onReady`)
     // #endif
     // #ifndef MP
-    log('info', 'Lifecycle', `${this.$page.fullPath} onReady`)
+    log('info', 'Lifecycle', `${this.$page.route} onReady`)
     // #endif
     if (this.pageTitle) {
       console.log(this.pageTitle)

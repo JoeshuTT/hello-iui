@@ -7,11 +7,19 @@ export default [
         path: '/pages/button/button',
       },
       {
+        name: 'Button 按钮 - vue',
+        path: '/pages/button/button-vue',
+      },
+      {
         name: 'Cell 单元格',
         path: '/pages/cell/cell',
       },
       {
         name: 'Icon 图标',
+        path: '/pages/icon/icon-vue',
+      },
+      {
+        name: 'Icon 图标 - vue',
         path: '/pages/icon/icon',
       },
       {
@@ -29,6 +37,10 @@ export default [
       {
         name: 'Transition 过渡动画',
         path: '/pages/transition/transition',
+      },
+      {
+        name: 'Transition 过渡动画 - vue',
+        path: '/pages/transition/transition-vue',
       },
     ],
   },

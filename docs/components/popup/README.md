@@ -42,7 +42,8 @@ export default {
 
 ### 弹出位置
 
-通过`position`属性设置弹出位置，默认居中弹出，可以设置为`top`、`bottom`、`left`、`right`
+通过`position`属性设置弹出位置，默认居中弹出，可以设置为`top`、`bottom`、`left`、`right`  
+建议直接放在页面组件根节点下，不要嵌套在其他标签下，避免出现其他问题
 
 ```html
 <i-popup v-model="show" position="top" :custom-style="{height: '200rpx'}">内容</i-popup>     
@@ -69,10 +70,4 @@ export default {
 | ------------------ | ---------------- | ---- |
 | @close         | 关闭弹出层时触发 | -    |
 | @click-overlay | 点击遮罩层时触发 | -    |
-| @before-enter  | 进入前触发       | -    |
-| @enter         | 进入中触发       | -    |
-| @after-enter   | 进入后触发       | -    |
-| @before-leave  | 离开前触发       | -    |
-| @leave         | 离开中触发       | -    |
-| @after-leave   | 离开后触发       | -    |
 
