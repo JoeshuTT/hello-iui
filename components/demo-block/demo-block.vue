@@ -1,7 +1,7 @@
 <template>
   <view class="demo-block" :class="[padding && 'demo-block--padding']">
-    <text v-if="title" class="demo-block__title" :style="{ paddingLeft: padding ? '0' : '30rpx' }">{{ title }}</text>
-    <view class="demo-block-body">
+    <text v-if="title" class="demo-block-title" :style="{ paddingLeft: padding ? '0' : '30rpx' }">{{ title }}</text>
+    <view class="demo-block-body" :class="[row && 'demo-block-body--row']">
       <slot />
     </view>
   </view>
@@ -18,6 +18,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    row: {
+      type: Boolean,
+      default: false,
+    },
   },
 }
 </script>
@@ -25,16 +29,20 @@ export default {
 <style lang="scss">
 .demo-block {
   @include flex-box();
-  // padding: 0 30rpx;
-
   &--padding {
-    padding: 0 30rpx;
+    padding: 0 30rpx 20rpx;
   }
 
-  &__title {
+  &-title {
     font-size: 14px;
     color: rgba(69, 90, 100, 0.6);
-    padding: 20px 30rpx 15px;
+    padding: 30rpx 15rpx;
+  }
+
+  &-body {
+    &--row {
+      @include flex-box('row');
+    }
   }
 }
 </style>

@@ -16,11 +16,11 @@ export default [
       },
       {
         name: 'Icon 图标',
-        path: '/pages/icon/icon-vue',
+        path: '/pages/icon/icon',
       },
       {
         name: 'Icon 图标 - vue',
-        path: '/pages/icon/icon',
+        path: '/pages/icon/icon-vue',
       },
       {
         name: 'Image 图片',

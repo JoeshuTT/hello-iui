@@ -9,21 +9,23 @@
       <slot name="icon" />
     </view>
     <view class="i-cell__title">
-      <slot name="title"
-        ><text v-if="title" class="i-cell__title-text">{{ title }}</text></slot
-      >
-      <slot name="label"
-        ><text v-if="label" class="i-cell__label">{{ label }}</text></slot
-      >
+      <slot name="title">
+        <text v-if="title" class="i-cell__title-text">{{ title }}</text>
+      </slot>
+      <slot name="label">
+        <text v-if="label" class="i-cell__label">{{ label }}</text>
+      </slot>
     </view>
-    <slot>
-      <view v-if="value" class="i-cell__value">
+    <view v-if="value" class="i-cell__value">
+      <slot>
         <text class="i-cell__value-text">{{ value }}</text>
-      </view>
-    </slot>
-    <view v-if="$slots.rightIcon || isLink" class="i-cell__right-icon-wrap">
-      <i-icon v-if="isLink" :name="arrowDirection ? 'arrow' + '-' + arrowDirection : 'arrow'" />
-      <slot v-else name="right-icon" />
+      </slot>
+    </view>
+    <view v-if="isLink" class="i-cell__right-icon-wrap">
+      <i-icon :name="arrowDirection ? 'arrow' + '-' + arrowDirection : 'arrow'" />
+    </view>
+    <view v-if="$slots['right-icon']" class="i-cell__right-icon-wrap">
+      <slot name="right-icon" />
     </view>
   </view>
 </template>
@@ -71,6 +73,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    customStyle: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   methods: {
     onClick() {
@@ -88,10 +94,6 @@ export default {
   position: relative;
   padding: $cell-vertical-padding $cell-horizontal-padding;
   background-color: $cell-background-color;
-  /* #ifndef APP-NVUE */
-  font-size: $cell-font-size;
-  line-height: $cell-line-height;
-  /* #endif */
 
   &--center {
     align-items: center;
@@ -121,6 +123,7 @@ export default {
 
   &__title {
     @include flex-box();
+
     &-text {
       font-size: $cell-title-font-size;
       line-height: $cell-title-line-height;
@@ -129,9 +132,17 @@ export default {
     }
   }
 
+  &__label {
+    margin-top: 4px;
+    font-size: $cell-label-font-size;
+    line-height: $cell-label-line-height;
+    color: $cell-label-color;
+  }
+
   &__value {
     @include flex-box('row');
     justify-content: flex-end;
+
     &-text {
       font-size: $cell-font-size;
       line-height: $cell-line-height;
@@ -139,18 +150,15 @@ export default {
     }
   }
 
-  &__label {
-    margin-top: 4px;
-    font-size: $cell-label-font-size;
-    color: $cell-label-color;
-    line-height: $cell-label-line-height;
-  }
-
   &__left-icon-wrap {
+    @include flex-box('row');
+    align-items: center;
     margin-right: 4px;
   }
 
   &__right-icon-wrap {
+    @include flex-box('row');
+    align-items: center;
     margin-left: 4px;
   }
 }

@@ -1,21 +1,21 @@
 <template>
   <view class="container">
-    <demo-block title="加载类型" padding>
+    <demo-block title="加载类型" padding row>
       <i-loading class="demo-loading" />
       <i-loading class="demo-loading" type="spinner" />
     </demo-block>
-    <demo-block title="自定义颜色" padding>
+    <demo-block title="自定义颜色" padding row>
       <i-loading class="demo-loading" color="#1989fa" />
       <i-loading class="demo-loading" color="#1989fa" type="spinner" />
     </demo-block>
-    <demo-block title="自定义大小" padding>
+    <demo-block title="自定义大小" padding row>
       <i-loading class="demo-loading" size="48" />
-      <i-loading class="demo-loading" size="48rpx" type="spinner" />
+      <i-loading class="demo-loading" size="48px" />
     </demo-block>
-    <demo-block title="加载文案" padding>
+    <demo-block title="加载文案" padding row>
       <i-loading size="24px" tip="加载中..." />
     </demo-block>
-    <demo-block title="垂直排列" padding>
+    <demo-block title="垂直排列" padding row>
       <i-loading size="24px" tip="加载中..." vertical />
     </demo-block>
   </view>
@@ -41,6 +41,10 @@ export default {
 </script>
 
 <style lang="scss">
+.demo-row {
+  @include i-row();
+}
+
 .demo-loading {
   margin-right: 40rpx;
 }

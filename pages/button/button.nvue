@@ -2,53 +2,48 @@
   <view class="container">
     <demo-block title="按钮类型" padding>
       <view class="demo-row">
-        <i-button type="default" text="默认按钮" />
-        <i-button type="primary" text="主要按钮" />
-        <i-button type="info" text="信息按钮" />
-        <i-button type="warning" text="警告按钮" />
-        <i-button type="danger" text="危险按钮" />
+        <i-button type="default" class="demo-margin-right" text="默认按钮" />
+        <i-button type="primary" class="demo-margin-right" text="主要按钮" />
+        <i-button type="info" class="demo-margin-right" text="信息按钮" />
+      </view>
+      <view class="demo-row">
+        <i-button type="warning" class="demo-margin-right" text="警告按钮" />
+        <i-button type="danger" class="demo-margin-right" text="危险按钮" />
       </view>
     </demo-block>
-    <demo-block title="朴素按钮" padding>
-      <i-button type="default" plain text="朴素按钮" />
-      <i-button type="primary" plain text="朴素按钮" />
+    <demo-block title="朴素按钮" padding row>
+      <i-button class="demo-margin-right" type="default" plain text="朴素按钮" />
+      <i-button class="demo-margin-right" type="primary" plain text="朴素按钮" />
     </demo-block>
-    <demo-block title="禁用状态" padding>
-      <i-button type="default" disabled text="禁用状态" />
-      <i-button type="primary" disabled text="禁用状态" />
+    <demo-block title="禁用状态" padding row>
+      <i-button class="demo-margin-right" type="default" disabled text="禁用状态" />
+      <i-button class="demo-margin-right" type="primary" disabled text="禁用状态" />
     </demo-block>
-    <demo-block title="加载状态" padding>
-      <i-button loading />
-      <i-button loading type="primary" loading-type="spinner" />
-      <i-button loading loading-type="spinner" type="primary" text="加载中..." />
+    <demo-block title="加载状态" padding row>
+      <i-button class="demo-margin-right" loading />
+      <i-button class="demo-margin-right" loading type="primary" loading-type="spinner" />
+      <i-button class="demo-margin-right" loading loading-type="spinner" type="primary" text="加载中..." />
     </demo-block>
-    <demo-block title="按钮形状" padding>
-      <i-button type="primary" square text="方形按钮" />
-      <i-button type="info" round text="圆形按钮" />
+    <demo-block title="按钮形状" padding row>
+      <i-button class="demo-margin-right" type="primary" square text="方形按钮" />
+      <i-button class="demo-margin-right" type="info" round text="圆形按钮" />
     </demo-block>
-    <demo-block title="图标按钮" padding>
-      <i-button icon="success" />
-      <i-button icon="success" type="primary" text="按钮" />
-      <i-button icon="/static/logo.png" type="info" />
+    <demo-block title="图标按钮" padding row>
+      <i-button class="demo-margin-right" icon="smile-o" />
+      <i-button class="demo-margin-right" icon="smile-o" type="primary" text="按钮" />
+      <i-button class="demo-margin-right" icon="/static/logo.png" plain type="info" />
     </demo-block>
-    <demo-block title="自定义颜色" padding>
-      <i-button color="#7232dd" text="单色按钮" />
-      <i-button color="#7232dd" plain text="单色按钮" />
-      <i-button color="linear-gradient(to right, #4bb0ff, #6149f6)" text="渐变色按钮" />
+    <demo-block title="自定义颜色" padding row>
+      <i-button class="demo-margin-right" color="#7232dd" text="单色按钮" />
+      <i-button class="demo-margin-right" color="#7232dd" plain text="单色按钮" />
+      <i-button class="demo-margin-right" color="linear-gradient(to right, #4bb0ff, #6149f6)" text="渐变色按钮" />
     </demo-block>
-    <demo-block title="自定义样式" padding>
+    <demo-block title="自定义样式" padding row>
       <i-button :custom-style="{ width: '100px', height: '100px', borderRadius: '20rpx' }" text="自定义" />
     </demo-block>
     <!-- #ifdef MP -->
-    <demo-block title="开放能力" padding>
-      <i-button
-        open-type="getUserInfo"
-        type="primary"
-        class="mb20"
-        custom-class="mb20"
-        text="获取用户信息"
-        @getuserinfo="getUserInfo"
-      />
+    <demo-block title="开放能力" padding row>
+      <i-button open-type="getUserInfo" type="primary" text="获取用户信息" @getuserinfo="getUserInfo" />
     </demo-block>
     <!-- #endif -->
   </view>
@@ -61,10 +56,12 @@ export default {
   mixins: [pageMixin],
   data() {
     return {
-      a: { backgroundColor: '#7232dd' },
+      //
     }
   },
-  onLoad() {},
+  onLoad() {
+    //
+  },
   methods: {
     getUserInfo(detail) {
       console.log(detail)
@@ -74,11 +71,18 @@ export default {
 </script>
 
 <style lang="scss">
-.mb20 {
-  margin-bottom: 20rpx;
-}
-
 .a {
   background-color: red;
+}
+
+.demo {
+  &-row {
+    @include i-row();
+    margin-bottom: 30rpx;
+  }
+
+  &-margin-right {
+    margin-right: 20rpx;
+  }
 }
 </style>

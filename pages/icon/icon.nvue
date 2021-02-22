@@ -43,21 +43,6 @@
         </view>
       </view>
     </demo-block>
-    <!-- #ifndef APP-NVUE -->
-    <demo-block title="使用 Font Class 方式，自定义图标" padding>
-      <view class="i-row demo-row">
-        <view v-for="(item, index) in list2" :key="index" class="i-col-6 demo-col">
-          <i-icon
-            font-family="myIcon"
-            class-prefix="my-icon"
-            :custom-style="{ fontSize: '32px', color: 'red' }"
-            :name="item.label"
-          />
-          <text class="demo-col-txt">{{ item.label }}</text>
-        </view>
-      </view>
-    </demo-block>
-    <!-- #endif -->
   </view>
 </template>
 
@@ -180,25 +165,6 @@ export default {
 
 .my-icon {
   font-family: 'myIcon';
-}
-
-.fz32 {
-  font-size: 32px;
-}
-.my-icon-wechat:before {
-  content: '\e632';
-}
-
-.my-icon-qq:before {
-  content: '\e624';
-}
-
-.my-icon-weibo:before {
-  content: '\e630';
-}
-
-.my-icon-share:before {
-  content: '\e62a';
 }
 
 /* #endif */

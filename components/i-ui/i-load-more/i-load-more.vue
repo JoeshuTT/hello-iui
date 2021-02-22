@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import IComponent from '../mixins/component'
 import ILoading from '../i-loading/i-loading'
 import { LOAD_MORE } from '../common/config'
 
@@ -21,7 +20,6 @@ export default {
   components: {
     ILoading,
   },
-  mixins: [IComponent],
   props: {
     status: {
       type: String,
@@ -42,6 +40,10 @@ export default {
     color: {
       type: String,
       default: '',
+    },
+    customStyle: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {
@@ -65,8 +67,9 @@ export default {
   align-items: center;
   justify-content: center;
   height: $load-more-height;
+
   &__text {
-    margin-left: 5px;
+    margin-left: 4px;
     font-size: $load-more-text-font-size;
     color: $load-more-text-color;
   }

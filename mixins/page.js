@@ -1,4 +1,4 @@
-import { log } from '@/common/util'
+import { log, getCurrentRoute } from '@/common/util'
 
 export default {
   data() {
@@ -8,32 +8,17 @@ export default {
     }
   },
   onLoad(options) {
-    // #ifdef MP
-    log('info', 'Lifecycle', `${this.$mp.page.$page.fullPath} onLoad`, options)
-    // #endif
-    // #ifndef MP
-    log('info', 'Lifecycle', `${this.$page.fullPath} onLoad`, options)
-    // #endif
-    console.log('options', options)
+    log('info', 'Lifecycle', `${getCurrentRoute()} onLoad`, options)
     if (options.pageTitle) {
       this.pageTitle = decodeURIComponent(options.pageTitle)
     }
   },
   onShow() {
-    // #ifdef MP
-    log('info', 'Lifecycle', `${this.$mp.page.$page.fullPath} onShow`)
-    // #endif
-    // #ifndef MP
-    log('info', 'Lifecycle', `${this.$page.fullPath} onShow`)
-    // #endif
+    log('info', 'Lifecycle', `${getCurrentRoute()} onShow`)
   },
   onReady() {
-    // #ifdef MP
-    log('info', 'Lifecycle', `${this.$mp.page.$page.fullPath} onReady`)
-    // #endif
-    // #ifndef MP
-    log('info', 'Lifecycle', `${this.$page.route} onReady`)
-    // #endif
+    log('info', 'Lifecycle', `${getCurrentRoute()} onReady`)
+
     if (this.pageTitle) {
       console.log(this.pageTitle)
       uni.setNavigationBarTitle({

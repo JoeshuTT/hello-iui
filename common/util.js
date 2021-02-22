@@ -111,6 +111,20 @@ export const getRect = function (context, selector, all = false) {
 }
 
 /**
+ * 获取当前页面路径
+ * @description 可用于修改上一页数据
+ * @returns {String}
+ */
+export const getCurrentRoute = function () {
+  const pages = getCurrentPages()
+  if (pages.length > 0) {
+    const currentPage = pages[pages.length - 1]
+    return currentPage.route
+  }
+  return '/'
+}
+
+/**
  * 生成一个 UUID
  */
 export const guid = function () {

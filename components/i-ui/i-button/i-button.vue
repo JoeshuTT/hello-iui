@@ -22,16 +22,12 @@
     @launchapp="bindLaunchApp"
     @opensetting="bindOpenSetting"
   >
-    <template v-if="loading">
-      <slot name="loading">
-        <i-loading :type="loadingType" :size="loadingSize" :color="leftColor" />
-      </slot>
-    </template>
-    <template v-if="icon">
-      <slot name="icon">
-        <i-icon :name="icon" :font-family="iconFont" :size="loadingSize" :color="leftColor" />
-      </slot>
-    </template>
+    <slot v-if="loading" name="loading">
+      <i-loading class="i-button__loading" :type="loadingType" :size="loadingSize" :color="leftColor" />
+    </slot>
+    <slot v-if="icon" name="icon">
+      <i-icon class="i-button__icon" :name="icon" :font-family="iconFont" :size="loadingSize" :color="leftColor" />
+    </slot>
     <text class="i-button__text" :style="[mergeTextStyle]">{{ text }}</text>
   </button>
   <!-- #endif -->
@@ -49,16 +45,12 @@
     :style="[mergeStyle]"
     @click="onClick"
   >
-    <template v-if="loading">
-      <slot name="loading">
-        <i-loading :type="loadingType" :size="loadingSize" :color="leftColor" />
-      </slot>
-    </template>
-    <template v-if="icon">
-      <slot name="icon">
-        <i-icon :name="icon" :font-family="iconFont" :size="loadingSize" :color="leftColor" />
-      </slot>
-    </template>
+    <slot v-if="loading" name="loading">
+      <i-loading class="i-button__loading" :type="loadingType" :size="loadingSize" :color="leftColor" />
+    </slot>
+    <slot v-if="icon" name="icon">
+      <i-icon class="i-button__icon" :name="icon" :font-family="iconFont" :size="loadingSize" :color="leftColor" />
+    </slot>
     <text class="i-button__text" :style="[mergeTextStyle]">{{ text }}</text>
   </view>
   <!-- #endif -->
@@ -72,7 +64,7 @@ import button from '../mixins/button'
 import openType from '../mixins/open-type'
 import ILoading from '../i-loading/i-loading'
 import IIcon from '../i-icon/i-icon'
-import { BUTTON } from '../common/config'
+import { BUTTON, COLOR_PALETTE } from '../common/config'
 
 export default {
   name: 'IButton',
@@ -142,17 +134,20 @@ export default {
   computed: {
     leftColor() {
       if (this.plain) {
-        return BUTTON.type[this.type] || BUTTON.text.color
-      } else {
-        return BUTTON.type[this.type] ? 'white' : BUTTON.text.color
+        return this.color ? this.color : COLOR_PALETTE['gray-5']
       }
+
+      if (this.type === 'default') {
+        return COLOR_PALETTE['gray-5']
+      }
+
+      return '#fff'
     },
     mergeStyle() {
       const viewStyle = {}
       const { color, plain, customStyle } = this
 
       // #ifdef APP-NVUE
-      viewStyle.height = BUTTON.height.default
       viewStyle.backgroundColor = BUTTON.type[this.type] || 'white'
       viewStyle.borderWidth = '1px'
       viewStyle.borderStyle = 'solid'
@@ -187,7 +182,7 @@ export default {
     },
     mergeTextStyle() {
       const viewStyle = {}
-      const { color, type, icon, plain, loading, textStyle } = this
+      const { text, color, type, icon, plain, loading, textStyle } = this
 
       // #ifdef APP-NVUE
 
@@ -206,6 +201,9 @@ export default {
         }
       }
 
+      if ((icon && text) || (loading && text)) {
+        viewStyle.marginLeft = '4px'
+      }
       // #endif
 
       return Object.assign({}, viewStyle, textStyle)
@@ -229,10 +227,10 @@ export default {
   @include flex-box('row');
   align-items: center;
   justify-content: center;
-  /* #ifndef APP-NVUE */
+  padding: 0 $padding-md;
   height: $button-default-height;
   line-height: $button-default-line-height;
-  padding: 0;
+  /* #ifndef APP-NVUE */
   margin-left: 0;
   margin-right: 0;
   text-align: center;

@@ -28,7 +28,7 @@ $background-color-light: #fafafa !default;
 $text-link-color: #576b95 !default;
 
 // Padding
-$padding-base: 4px !default;
+$padding-base: 8rpx !default;
 $padding-xs: $padding-base * 2 !default;
 $padding-sm: $padding-base * 3 !default;
 $padding-md: $padding-base * 4 !default;
@@ -65,7 +65,7 @@ $z-index: 999 !default;
 // Button
 $button-default-height: 88rpx !default;
 $button-default-line-height: 20px !default;
-$button-default-font-size: $font-size-lg !default;
+$button-default-font-size: $font-size-md !default;
 $button-default-color: $text-color !default;
 $button-default-background-color: $white !default;
 $button-default-border-color: $border-color !default;
@@ -96,8 +96,8 @@ $page-loading-title-size: $font-size-lg !default;
 // Cell
 $cell-font-size: $font-size-md !default;
 $cell-line-height: 24px !default;
-$cell-vertical-padding: 26rpx !default;
-$cell-horizontal-padding: 30rpx !default;
+$cell-vertical-padding: $padding-sm !default;
+$cell-horizontal-padding: $padding-md !default;
 $cell-text-color: $text-color !default;
 $cell-background-color: $white !default;
 $cell-border-color: $border-color !default;
@@ -142,6 +142,7 @@ $picker-option-selected-text-color: $text-color;
 // Loading
 $loading-text-color: $gray-6 !default;
 $loading-text-font-size: $font-size-md !default;
+$loading-text-line-height: 40rpx !default;
 $loading-spinner-color: $gray-5 !default;
 $loading-spinner-size: 60rpx !default;
 $loading-spinner-animation-duration: 0.8s !default;

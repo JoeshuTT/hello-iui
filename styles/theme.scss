@@ -3,13 +3,13 @@
  * 还可以新增样式变量，来覆盖组件的默认样式变量，使得组件和项目的样式，保持一致。
  */
 
-/**
- * theme
- * @desc 可以通过给页面元素的 style，设置css变量，以实现主题的动态切换
- * @param {String} $property CSS 属性名
- * @param {String} $value CSS 属性值
- * @param {String} $var CSS 变量名
- */
+// /**
+//  * theme
+//  * @desc 可以通过给页面元素的 style，设置css变量，以实现主题的动态切换
+//  * @param {String} $property CSS 属性名
+//  * @param {String} $value CSS 属性值
+//  * @param {String} $var CSS 变量名
+//  */
 @mixin theme($property, $value, $var: 'ui-color') {
   #{$property}: $value;
   /* #ifndef APP-NVUE */

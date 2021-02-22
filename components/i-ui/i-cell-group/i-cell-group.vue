@@ -12,11 +12,8 @@
 </template>
 
 <script>
-import IComponent from '../mixins/component'
-
 export default {
   name: 'ICellGroup',
-  mixins: [IComponent],
   props: {
     title: {
       type: String,
@@ -25,6 +22,10 @@ export default {
     border: {
       type: Boolean,
       default: true,
+    },
+    customStyle: {
+      type: Object,
+      default: () => ({}),
     },
   },
   methods: {

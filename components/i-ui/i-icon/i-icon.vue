@@ -1,14 +1,10 @@
 <template>
-  <view
-    :class="['i-icon', classPrefix, classPrefix ? classPrefix + '-' + name : 'i-icon-block']"
-    :style="[classPrefix && mergeStyle]"
-    @click="onClick"
-  >
+  <view class="i-icon" @click="onClick">
     <template v-if="isImage">
       <image class="i-icon-block_img" :style="[mergeStyle]" :src="name" mode="aspectFit" />
     </template>
     <template v-else>
-      <text v-if="!classPrefix" class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
+      <text class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
     </template>
   </view>
 </template>
@@ -42,10 +38,6 @@ export default {
       default: '',
     },
     fontFamily: {
-      type: String,
-      default: '',
-    },
-    classPrefix: {
       type: String,
       default: '',
     },
