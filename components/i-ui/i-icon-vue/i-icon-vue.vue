@@ -1,38 +1,24 @@
 <template>
-  <view
-    :class="['i-icon', classPrefix, classPrefix ? classPrefix + '-' + name : 'i-icon-block']"
-    :style="[classPrefix && mergeStyle]"
-    @click="onClick"
-  >
+  <view class="i-icon" @click="onClick">
     <template v-if="isImage">
       <image class="i-icon-block_img" :style="[mergeStyle]" :src="name" mode="aspectFit" />
     </template>
     <template v-else>
-      <text v-if="!classPrefix" class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
+      <text class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
     </template>
   </view>
 </template>
-
+<!-- eslint-disable-next-line -->
+<script module="computed" lang="wxs" src="./index.wxs"></script>
+<!-- #endif -->
 <script>
 import { addUnit } from '../utils'
 import icon from './type'
 import { COLOR_PALETTE, iconFontFamily, iconFontSrc } from '../common/config'
-// #ifdef APP-NVUE
-const dom = weex.requireModule('dom')
-dom.addRule('fontFace', {
-  fontFamily: iconFontFamily,
-  src: "url('" + iconFontSrc + "')",
-})
-// #endif
 
 export default {
   name: 'IIcon',
   props: {
-    name: {
-      required: true,
-      type: String,
-      default: '',
-    },
     size: {
       type: [Number, String],
       default: iconFontFamily,
@@ -41,13 +27,9 @@ export default {
       type: String,
       default: '',
     },
-    fontFamily: {
-      type: String,
-      default: '',
-    },
     classPrefix: {
       type: String,
-      default: '',
+      default: 'i-icon',
     },
     customStyle: {
       type: Object,
@@ -94,7 +76,6 @@ export default {
 <style lang="scss">
 @import '../styles/index.scss';
 
-/* #ifndef APP-NVUE */
 @font-face {
   font-family: $iconFontFamily;
   src: url($iconFontUrl) format('truetype');
@@ -105,5 +86,72 @@ export default {
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
 }
-/* #endif */
+.i-icon,
+.i-icon:before {
+  display: inline-block;
+}
+
+.i-icon-replay:before {
+  content: '\e667';
+}
+
+.i-icon-fire-o:before {
+  content: '\e665';
+}
+
+.i-icon-smile-o:before {
+  content: '\e666';
+}
+
+.i-icon-photo-fail:before {
+  content: '\e664';
+}
+
+.i-icon-photo:before {
+  content: '\e662';
+}
+
+.i-icon-photo-o:before {
+  content: '\e663';
+}
+
+.i-icon-arrow:before {
+  content: '\e640';
+}
+
+.i-icon-arrow-down:before {
+  content: '\e641';
+}
+
+.i-icon-arrow-up:before {
+  content: '\e642';
+}
+
+.i-icon-circle:before {
+  content: '\e643';
+}
+
+.i-icon-minus:before {
+  content: '\e644';
+}
+
+.i-icon-arrow-left:before {
+  content: '\e645';
+}
+
+.i-icon-plus:before {
+  content: '\e646';
+}
+
+.i-icon-success:before {
+  content: '\e647';
+}
+
+.i-icon-cross:before {
+  content: '\e648';
+}
+
+.i-icon-fail:before {
+  content: '\e649';
+}
 </style>

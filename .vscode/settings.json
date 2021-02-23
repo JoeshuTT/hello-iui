@@ -19,6 +19,11 @@
   "vetur.validation.template": false,
   "vetur.validation.style": false,
   "vetur.validation.script": false,
+  // file associations
+  "files.associations": {
+    "*.wxs": "javascript",
+    "*.nvue": "vue"
+  },
   // cSpell
   "cSpell.ignoreWords": [
     "aboutus",

@@ -1,7 +1,7 @@
 // var bem = require('./bem.wxs').bem;
 // var memoize = require('./memoize.wxs').memoize;
 // var addUnit = require('./add-unit.wxs').addUnit;
-// /* eslint-disable */
+/* eslint-disable */
 var REGEXP = getRegExp('{|}|"', 'g')
 var PREFIX = 'i-'
 
