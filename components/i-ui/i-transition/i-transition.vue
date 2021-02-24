@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { isObj } from '../utils'
+import { isObj } from '../common/validator'
 import { TRANSITION } from '../common/config'
 // #ifdef APP-NVUE
 const animation = uni.requireNativePlugin('animation')
@@ -84,11 +84,11 @@ export default {
       this.$emit('click')
     },
     enter() {
-      this.$emit('beforeEnter')
       const { name, duration } = this
       const currentDuration = isObj(duration) ? duration.enter : duration
       const currentStyle = getStyle(name) || this.animConfig
 
+      this.$emit('beforeEnter')
       this.inited = true
 
       // #ifndef APP-NVUE
@@ -135,10 +135,11 @@ export default {
       // #endif
     },
     leave() {
-      this.$emit('beforeLeave')
       if (!this.inited) {
         return
       }
+
+      this.$emit('beforeLeave')
 
       const { name, duration } = this
       const currentDuration = isObj(duration) ? duration.leave : duration
