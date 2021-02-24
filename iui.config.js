@@ -40,7 +40,7 @@ export default [
       },
       {
         name: 'Transition 过渡动画 - vue',
-        path: '/pages/transition/transition-vue',
+        path: '/pages/transition-vue/transition-vue',
       },
     ],
   },

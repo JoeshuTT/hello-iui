@@ -2,43 +2,45 @@
   <view class="container">
     <demo-block title="基础用法" padding>
       <i-cell v-for="(item, index) in list" :key="index" :title="item.label" is-link @click="onCellClick(index)" />
-      <i-transition :show="show" :name="name" :custom-style="style" />
     </demo-block>
     <demo-block title="高级用法-自定义过渡效果" padding>
       <i-cell v-for="(item, index) in list2" :key="index" :title="item.label" is-link @click="onCellClick2(index)" />
-      <i-transition :show="show2" :name="name" :anim-config="animConfig" :custom-style="style" />
     </demo-block>
     <demo-block title="高级用法-定制进入和移出的持续时间" padding>
       <i-cell v-for="(item, index) in list3" :key="index" :title="item.label" is-link @click="onCellClick3(index)" />
-      <i-transition
-        :show="show3"
-        name="custom"
-        :duration="{ enter: 300, leave: 1000 }"
-        :anim-config="customAnimConfig"
-        :custom-style="style"
-      />
     </demo-block>
     <demo-block title="高级用法-Javascript钩子" padding>
       <i-cell title="使用 JavaScript 钩子做点什么" is-link @click="onCellLifeClick" />
-      <i-transition
-        :show="show4"
-        name="fade"
-        :custom-style="style"
-        @beforeEnter="beforeEnter"
-        @enter="enter"
-        @afterEnter="afterEnter"
-        @beforeLeave="beforeLeave"
-        @leave="leave"
-        @afterLeave="afterLeave"
-      />
     </demo-block>
+    <i-transition :show="show" :name="name" :custom-style="style" />
+    <i-transition :show="show2" :name="name" :anim-config="animConfig" :custom-style="style" />
+    <i-transition
+      :show="show3"
+      name="custom"
+      :duration="{ enter: 300, leave: 1000 }"
+      :anim-config="customAnimConfig"
+      :custom-style="style"
+    />
+    <i-transition
+      :show="show4"
+      name="fade"
+      :custom-style="style"
+      @beforeEnter="beforeEnter"
+      @enter="enter"
+      @afterEnter="afterEnter"
+      @beforeLeave="beforeLeave"
+      @leave="leave"
+      @afterLeave="afterLeave"
+    />
     <view class="mb20"></view>
   </view>
 </template>
 
 <script>
 import pageMixin from '@/mixins/page'
-import { getSystemInfoSync, throttle } from '@/common/util'
+import { getSystemInfoSync } from '@/common/util'
+import { throttle } from '@/common/lodash'
+
 const animate = {
   'zoom-in': {
     enter: { opacity: 0, transform: `scale(0.8)` },

@@ -74,6 +74,15 @@
       }
     },
     {
+      "path": "pages/transition-vue/transition-vue",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
       "path": "pages/overlay/overlay",
       "style": {
         "app-plus": {

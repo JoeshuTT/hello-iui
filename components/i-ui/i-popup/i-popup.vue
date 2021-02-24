@@ -6,7 +6,13 @@
     @touchmove.stop.prevent="noop"
   >
     <i-overlay :show="overlay" :custom-style="overlayStyle" @click="onOverlayClick" />
-    <i-transition :show="true" :duration="duration" :name="aniName" :custom-style="mergeStyle">
+    <i-transition
+      :class="['i-popup--' + position]"
+      :show="true"
+      :duration="duration"
+      :name="aniName"
+      :custom-style="mergeStyle"
+    >
       <slot />
     </i-transition>
   </view>
@@ -77,11 +83,11 @@ export default {
           animate: 'slide-down',
           style: {
             position: 'fixed',
+            left: 0,
+            right: 0,
             // #ifndef H5
             top: 0,
             // #endif
-            left: 0,
-            right: 0,
           },
         },
         bottom: {
@@ -90,7 +96,9 @@ export default {
             position: 'fixed',
             left: 0,
             right: 0,
+            // #ifndef H5
             bottom: 0,
+            // #endif
           },
         },
         left: {
@@ -176,7 +184,16 @@ export default {
   }
 }
 
+/* #ifdef H5 */
 .i-popup {
+  &--top {
+    top: var(--window-top);
+  }
+
+  &--bottom {
+    bottom: var(--window-bottom);
+  }
+
   &--safe-bottom {
     @include safe-area-inset-bottom();
   }
@@ -185,4 +202,5 @@ export default {
     @include safe-area-inset-top();
   }
 }
+/* #endif */
 </style>
