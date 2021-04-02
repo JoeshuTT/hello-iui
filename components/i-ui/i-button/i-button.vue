@@ -64,7 +64,7 @@ import button from '../mixins/button'
 import openType from '../mixins/open-type'
 import ILoading from '../i-loading/i-loading'
 import IIcon from '../i-icon/i-icon'
-import { BUTTON, COLOR_PALETTE } from '../common/config'
+import { BUTTON, COLOR_PALETTE } from '../index'
 
 export default {
   name: 'IButton',

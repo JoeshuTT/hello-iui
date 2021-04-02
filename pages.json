@@ -47,6 +47,15 @@
       }
     },
     {
+      "path": "pages/layout-vue/layout-vue",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
       "path": "pages/popup/popup",
       "style": {
         "app-plus": {

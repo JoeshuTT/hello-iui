@@ -140,3 +140,21 @@ export const PAGE = {
   loadingTitle: '页面加载中，请稍后 ...',
   tabbarPaths: ['pages/home/home', 'pages/discover/discover'],
 }
+
+export const myIui = {
+  install(Vue, options = {}) {
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`i-ui 来啦来啦，您现在使用的是${basic.version}版本！`)
+      console.log('%c记得帮我点个 start，鼓励鼓励我这个切图仔：https://github.com/JoeshuTT/hello-iui', 'color:red')
+
+      Vue.mixin({
+        data() {
+          return {
+            ...basic,
+            ...options,
+          }
+        },
+      })
+    }
+  },
+}

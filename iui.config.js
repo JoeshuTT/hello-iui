@@ -7,10 +7,6 @@ export default [
         path: '/pages/button/button',
       },
       {
-        name: 'Button 按钮 - vue',
-        path: '/pages/button/button-vue',
-      },
-      {
         name: 'Cell 单元格',
         path: '/pages/cell/cell',
       },
@@ -25,6 +21,10 @@ export default [
       {
         name: 'Image 图片',
         path: '/pages/image/image',
+      },
+      {
+        name: 'Layout 布局 - vue',
+        path: '/pages/layout-vue/layout-vue',
       },
       {
         name: 'popup 弹出层',

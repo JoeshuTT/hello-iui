@@ -34,7 +34,7 @@
 import IComponent from '../mixins/component'
 import IIcon from '../i-icon/i-icon'
 import { getSystemInfoSync } from '../utils'
-import { COLOR_PALETTE } from '../common/config'
+import { COLOR_PALETTE } from '../index'
 
 export default {
   name: 'INavBar',

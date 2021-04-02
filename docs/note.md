@@ -1,41 +1,17 @@
 # 注意事项
 
+## 带有`-vue`组件是什么？
+
+在组件设计过程中，发现 nvue 不是很能支持 vue 页面上的一些特性，但是丢掉有很可惜，所以专门实现个`vue`版，仅仅用在 vue 页面上也不错，
+像`i-col-vue`，`i-icon-vue`，`i-transition-vue` 之类的组件就是。
+
 ## 修改组件样式
 
-为了抹平各平台上使用的差异，`iui` 每个组件都提供了 `custom-style`，`custom-class` 2 个属性，方便自定义样式（一般是指组件根元素上的样式）。  
-举个栗子，如果只在 app(包括 nvue)和 H5 上运行，则
+`iui` 为每个组件都提供了 `custom-style` 属性，便于自定义样式（一般是指组件根元素上的样式）。  
+废弃了旧版本的 `custom-class`
 
 ```vue
-<i-button class="mb20" :custom-style="{ width: '100px', height: '100px', borderRadius: '20rpx' }"> 单色按钮
-</i-button>
-
-/* style */ .mb20 { margin-bottom: 20rpx; }
-```
-
-就可以了，  
-如果还要在微信小程序运行，则必须再加上 `custom-class="mb20" `
-
-```vue
-<i-button
-  class="mb20"
-  custom-class="mb20"
-  :custom-style="{ width: '100px', height: '100px', borderRadius: '20rpx' }"
-> 单色按钮
-</i-button>
-
-/* style */ .mb20 { margin-bottom: 20rpx; }
-```
-
-这个蹩脚设计是因为在微信小程序中，自定义组件需要通过定义 `externalClasses`，来接受外部样式类。而`uni-app`官方目前还没有提供可以在 Vue 组件中使用 externalClasses 属性的方法。关于这个问题已经在论坛发帖，但是不知道官方会不会处理 o(´^｀)o。
-
-[Vue 组件支持添加 externalClasses 属性，编译到微信小程序](https://ask.dcloud.net.cn/question/108141)
-
-> 还有一个常见办法，是直接在页面中定义跟组件同名的样式名，覆盖样式，此方案只适用于非 nvue 平台，酌情使用
-
-```style
-.i-button {
-    margin-bottom: 20rpx;
-}
+<i-button :custom-style="{ width: '100px', height: '100px', borderRadius: '20rpx' }" text="自定义" />
 ```
 
 ## 避免使用`i-`的 class
@@ -46,7 +22,7 @@
 
 iui 有依赖 scss，请务必有安装相关依赖项
 
-## 改变组件属性单位
+## 组件属性单位说明
 
 `iui` 会自动处理组件属性是否携带单位的情况，如果有传入单位，则以传入单位为准，否则以组件默认单位为准
 
@@ -58,7 +34,7 @@ iui 有依赖 scss，请务必有安装相关依赖项
 <i-icon name="success" size="100rpx" />
 ```
 
-都是表明一个大小
+都是表明同一个大小（请避免使用小数）
 
 ## 关于单位
 

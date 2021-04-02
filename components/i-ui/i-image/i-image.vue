@@ -40,7 +40,7 @@ import IIcon from '../i-icon/i-icon'
 import { addUnit, isNumber } from '../utils'
 var imagePlaceholder = ''
 // #ifdef APP-NVUE
-import { IMAGE } from '../common/config'
+import { IMAGE } from '../index'
 imagePlaceholder = IMAGE.placeHolder
 // #endif
 
@@ -152,8 +152,8 @@ export default {
     },
   },
   methods: {
-    onClick(event) {
-      this.$emit('click', event)
+    onClick() {
+      this.$emit('click')
     },
     onImgLoad(event) {
       this.loading = false

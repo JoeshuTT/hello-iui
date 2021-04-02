@@ -8,13 +8,11 @@
     </template>
   </view>
 </template>
-<!-- eslint-disable-next-line -->
-<script module="computed" lang="wxs" src="./index.wxs"></script>
-<!-- #endif -->
+
 <script>
 import { addUnit } from '../utils'
 import icon from './type'
-import { COLOR_PALETTE, iconFontFamily, iconFontSrc } from '../common/config'
+import { COLOR_PALETTE, iconFontFamily } from '../index'
 
 export default {
   name: 'IIcon',

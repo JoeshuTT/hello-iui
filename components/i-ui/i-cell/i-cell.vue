@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import IComponent from '../mixins/component'
 import IIcon from '../i-icon/i-icon'
 
 export default {
@@ -39,7 +38,6 @@ export default {
   components: {
     IIcon,
   },
-  mixins: [IComponent],
   props: {
     title: {
       type: null,

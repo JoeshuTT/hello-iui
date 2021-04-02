@@ -6,7 +6,7 @@
 
 <script>
 import { isObj } from '../common/validator'
-import { TRANSITION } from '../common/config'
+import { TRANSITION } from '../index'
 // #ifdef APP-NVUE
 const animation = uni.requireNativePlugin('animation')
 // #endif

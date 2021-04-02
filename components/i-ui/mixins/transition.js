@@ -3,7 +3,7 @@
  */
 
 import { isObj } from '../utils'
-import { TRANSITION } from '../common/config'
+import { TRANSITION } from '../index'
 
 const nextTick = () => new Promise(resolve => setTimeout(resolve, 1000 / 30))
 const getClassNames = name => ({

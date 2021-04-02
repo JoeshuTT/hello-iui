@@ -12,7 +12,7 @@
 <script>
 import { addUnit } from '../utils'
 import icon from './type'
-import { COLOR_PALETTE, iconFontFamily, iconFontSrc } from '../common/config'
+import { COLOR_PALETTE, iconFontFamily, iconFontSrc } from '../index'
 // #ifdef APP-NVUE
 const dom = weex.requireModule('dom')
 dom.addRule('fontFace', {
@@ -31,11 +31,11 @@ export default {
     },
     size: {
       type: [Number, String],
-      default: iconFontFamily,
+      default: '16px',
     },
     color: {
       type: String,
-      default: '',
+      default: iconFontFamily,
     },
     fontFamily: {
       type: String,

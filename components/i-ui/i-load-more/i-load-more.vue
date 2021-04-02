@@ -13,7 +13,7 @@
 
 <script>
 import ILoading from '../i-loading/i-loading'
-import { LOAD_MORE } from '../common/config'
+import { LOAD_MORE } from '../index'
 
 export default {
   name: 'ILoadMore',

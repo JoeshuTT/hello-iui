@@ -39,7 +39,16 @@
       <i-button class="demo-margin-right" color="linear-gradient(to right, #4bb0ff, #6149f6)" text="渐变色按钮" />
     </demo-block>
     <demo-block title="自定义样式" padding row>
-      <i-button :custom-style="{ width: '100px', height: '100px', borderRadius: '20rpx' }" text="自定义" />
+      <i-button
+        :custom-style="{
+          width: '100px',
+          height: '100px',
+          borderRadius: '20rpx',
+          color: '#fff',
+          backgroundColor: themeColor,
+        }"
+        text="自定义"
+      />
     </demo-block>
     <!-- #ifdef MP -->
     <demo-block title="开放能力" padding row>
