@@ -44,6 +44,7 @@
 - 在 nvue 上，元素样式不能传递
 - 在小程序平台上，是以`shadow-root`形式来展现自定义组件的，class 是作用在了`shadow-root`（而非模板中的根节点）上。
 - 在小程序平台上，如果发现在`shadow-root`上，部分样式不生效，可以加上`display`属性（shadow-root 有点摸不透）。
+- 还有种方案是将 class 当作属性传进入（即旧版本的 `custom-class`），但是该方案在在`app nvue`和小程序平台上，会存在样式类优先级不如组件内部样式类
 
 ## 在自定义组件上使用 `style`
 

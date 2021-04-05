@@ -8,7 +8,7 @@
 ## 修改组件样式
 
 `iui` 为每个组件都提供了 `custom-style` 属性，便于自定义样式（一般是指组件根元素上的样式）。  
-废弃了旧版本的 `custom-class`，该方案在在`app nvue`和小程序平台上，样式类优先级不如内部组件样式类
+废弃了旧版本的 `custom-class`，该方案在在`app nvue`和小程序平台上，样式类优先级不如组件内部样式类
 
 ```vue
 <i-button :custom-style="{ width: '100px', height: '100px', borderRadius: '20rpx' }" text="自定义" />
