@@ -6,16 +6,18 @@
   "author": "Joeshu <1442702103@qq.com>",
   "scripts": {
     "lint": "eslint --ext .vue",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write *.{js,vue,scss}",
+    "docs": "docsify serve docs"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "docsify-cli": "^4.4.3",
     "eslint": "^7.16.0",
-    "eslint-plugin-vue": "^7.4.0",
-    "prettier": "^2.2.1",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-vue": "^7.4.0",
     "node-sass": "^5.0.0",
+    "prettier": "^2.2.1",
     "sass-loader": "^10.1.0"
   }
 }

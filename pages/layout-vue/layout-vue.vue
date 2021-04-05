@@ -1,24 +1,24 @@
 <template>
   <view class="container">
     <demo-block title="基础用法" padding>
-      <i-row-vue :custom-style="{ 'margin-bottom': '20rpx' }">
-        <i-col-vue span="8"><text class="demo-col-text dark">span: 8</text></i-col-vue>
-        <i-col-vue span="8"><text class="demo-col-text dark">span: 8</text></i-col-vue>
-        <i-col-vue span="8"><text class="demo-col-text dark">span: 8</text></i-col-vue>
+      <i-row-vue class="mb20">
+        <i-col-vue span="8" class="demo-col dark">span: 8</i-col-vue>
+        <i-col-vue span="8" class="demo-col light">span: 8</i-col-vue>
+        <i-col-vue span="8" class="demo-col dark">span: 8</i-col-vue>
       </i-row-vue>
-      <i-row-vue :custom-style="{ 'margin-bottom': '20rpx' }">
-        <i-col-vue span="4"><text class="demo-col-text dark">span: 4</text></i-col-vue>
-        <i-col-vue span="10" offset="4"><text class="demo-col-text dark">offset: 4, span: 10</text></i-col-vue>
+      <i-row-vue class="mb20">
+        <i-col-vue span="4" class="demo-col dark">span: 4</i-col-vue>
+        <i-col-vue span="10" offset="4" class="demo-col dark">offset: 4, span: 10</i-col-vue>
       </i-row-vue>
-      <i-row-vue :custom-style="{ 'margin-bottom': '20rpx' }">
-        <i-col-vue offset="12" span="12"><text class="demo-col-text dark">offset: 12, span: 12</text></i-col-vue>
+      <i-row-vue class="mb20">
+        <i-col-vue offset="12" span="12" class="demo-col dark">offset: 12, span: 12</i-col-vue>
       </i-row-vue>
     </demo-block>
     <demo-block title="设置列元素间距" padding>
       <i-row-vue gutter="40">
-        <i-col-vue span="8"><text class="demo-col-text dark">span: 8</text></i-col-vue>
-        <i-col-vue span="8"><text class="demo-col-text light">span: 8</text></i-col-vue>
-        <i-col-vue span="8"><text class="demo-col-text dark">span: 8</text></i-col-vue>
+        <i-col-vue span="8" class="demo-col dark">span: 8</i-col-vue>
+        <i-col-vue span="8" class="demo-col light">span: 8</i-col-vue>
+        <i-col-vue span="8" class="demo-col dark">span: 8</i-col-vue>
       </i-row-vue>
     </demo-block>
   </view>
@@ -37,19 +37,10 @@ export default {
 </script>
 
 <style lang="scss">
-.demo-col {
+.mb20 {
   margin-bottom: 20rpx;
-
-  &-text {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
-
-.dark,
-.light {
+.demo-col {
   text-align: center;
   color: #fff;
   font-size: 14px;

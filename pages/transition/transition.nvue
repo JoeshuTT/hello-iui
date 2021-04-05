@@ -145,9 +145,9 @@ export default {
     },
     afterEnter() {
       console.log('afterEnter')
-      uni.showModal({
-        content: '过渡动画-已进入',
-        showCancel: false,
+      uni.showToast({
+        title: '过渡动画-已进入',
+        icon: 'none',
       })
     },
     beforeLeave() {
@@ -158,9 +158,9 @@ export default {
     },
     afterLeave() {
       console.log('afterLeave')
-      uni.showModal({
-        content: '过渡动画-已离开',
-        showCancel: false,
+      uni.showToast({
+        title: '过渡动画-已离开',
+        icon: 'none',
       })
     },
   },

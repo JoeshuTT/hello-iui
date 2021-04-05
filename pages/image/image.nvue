@@ -112,7 +112,7 @@ export default {
 
 .demo-col {
   align-items: center;
-  justify-items: center;
+  justify-content: center;
 
   &-media {
     margin-bottom: 20rpx;

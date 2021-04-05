@@ -3,7 +3,7 @@
     <demo-block title="基础图标" padding>
       <view class="i-row demo-row">
         <view v-for="(item, index) in list" :key="index" class="i-col-6 demo-col">
-          <i-icon size="32" color="#323233" :name="item.value" />
+          <i-icon size="32" color="#323233" :class="[item.class]" :name="item.value" />
           <text class="demo-col-txt">{{ item.label }}</text>
         </view>
       </view>
@@ -11,7 +11,10 @@
     <demo-block title="图标图片" padding>
       <view class="i-row demo-row">
         <view class="i-col-6 demo-col">
-          <i-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" size="50" />
+          <i-icon
+            name="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-386415c0-10b5-4a03-a868-8fb41b9e886e/807e328f-f2d8-42e1-b8b8-099ea2f2a20e.png"
+            size="50"
+          />
         </view>
       </view>
     </demo-block>
@@ -102,10 +105,15 @@ export default {
           label: 'circle',
           value: 'circle',
         },
+        {
+          label: 'replay',
+          value: 'replay',
+          class: 'i-rotate',
+        },
       ],
       list2: [
         {
-          label: 'wechat',
+          label: 'weichat',
           value: '\ue632',
         },
         {
@@ -156,6 +164,21 @@ export default {
   }
 }
 
+/* #ifndef APP-NVUE */
+.i-rotate {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* #endif */
 /* #ifndef APP-NVUE */
 /* 引入第三方或自定义的字体图标样式 */
 @font-face {

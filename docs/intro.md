@@ -1,31 +1,36 @@
-# iui - 一个基于 uni-app 的 UI 组件库（兼容NVUE）
+# iui - 一个基于 uni-app 的高质量 UI 组件库（兼容 NVUE）
 
 ## 介绍
 
-`iui` 是一款基于uni-app，面向移动端，兼顾NVUE的UI组件库，适用于跨端开发。
+`iui` 是一款基于 uni-app，面向移动端，兼顾 NVUE 的 UI 组件库，适用于跨端开发。
 
-目标
+## iui 是怎么来的？
 
-- 打造高性能表现，高质量代码的组件库
-- 完成上手简单，易于使用的目标 
-- 在不牺牲各平台特色的情况下，处理跨端
+> 来自一枚强迫症患者 Front-end Coder 的产物
 
-## 预览
+由个人开发者维护，对 `Vant` 组件库的致敬之作
 
-[Hello Iui 演示示例发布页面，点击跳转](https://dev.dcloud.net.cn/publish/app/preview?id=helloiui)
+## 特性
 
-记得帮我点个 [start !important](https://github.com/JoeshuTT/hello-iui)，鼓励鼓励我这个切图仔
-
-[文档在此，传送门](https://static-386415c0-10b5-4a03-a868-8fb41b9e886e.bspapp.com/docs/)
+- 极简、轻便、灵活
+- 代码质量高，源码可读，可扩，可学
+- 上手简单，Vant 组件接口
+- 优雅美观，Vant 设计体系
 
 ## 支持平台
 
-app | H5 | 微信小程序
----|---|---
-√  | √ | √
+| app | H5  | 微信小程序 |
+| --- | --- | ---------- |
+| √   | √   | √          |
 
-提示：其他平台的适配工作暂无打算。  
-吐槽：兼顾NVUE的过程就是不停的妥协，跟绥靖政策没什么两样。
+提示：其他平台的适配测试工作暂无打算。
+
+## 如何设计一个前端通用组件
+
+组件的形态(DOM 结构)永远是千变万化的，但是其行为(逻辑)是固定的，因此通用组件的秘诀之一
+就是将 DOM 结构的控制权交给开发者，组件只负责行为和最基本的 DOM 结构。
+
+将这句话放在末尾，也是为了着重强调，`iui` 是遵循该原则去设计的。
 
 ## 快速上手
 
@@ -33,19 +38,18 @@ app | H5 | 微信小程序
 
 ## 联系我
 
-QQ: `1442702103`，请备注iui
+QQ: `1442702103`，请备注 iui
 
 ## 致谢
 
-`iui`是基于 `uni-app` 开发的跨端UI组件库，感谢 `uni-app` 团队！！
+`iui`是基于 `uni-app` 开发的跨端 UI 组件库，感谢 `uni-app` 团队！！
 
-iui 的组件设计，使用接口有参考到uni-ui，vant，weexui的实现，可大幅减少开发者上手成本，感谢开源！！！
+iui 的组件设计，使用接口有参考到 uni-ui，vant，weexui 的实现，可大幅减少开发者上手成本，感谢开源！！！
 
 [uni-app](https://github.com/dcloudio/uni-app)
 [uni-ui](https://github.com/dcloudio/uni-ui)
 [vant](https://github.com/youzan/vant)
 [weex-ui](https://github.com/apache/incubator-weex-ui)
-
 
 ## 开源协议
 

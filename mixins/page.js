@@ -5,6 +5,7 @@ export default {
     return {
       pageQuery: {},
       pageTitle: '',
+      brandColor: '#42b983',
     }
   },
   onLoad(options) {

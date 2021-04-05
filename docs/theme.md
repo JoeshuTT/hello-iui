@@ -7,7 +7,7 @@ iui 提供了一套默认主题，CSS 命名采用类 BEM 的风格，方便使�
 ## 样式变量
 
 `iui` 内置了一系列全局/组件样式变量，你可以根据需求进行相应调整。
-组件的样式变量是由2处维护的
+组件的样式变量是由 2 处维护的
 
 [ scss 配置文件](https://github.com/JoeshuTT/hello-iui/blob/master/components/i-ui/styles/var.scss)，用于组件内部元素的 Class。
 
@@ -38,20 +38,20 @@ $green: #07c160 !default;
 ```js
 // Color Palette
 export const COLOR_PALETTE = {
-    'black': '#000',
-    'white': '#fff',
-    'gray-1': '#f7f8fa',
-    'gray-2': '#f2f3f5',
-    'gray-3': '#ebedf0',
-    'gray-4': '#dcdee0',
-    'gray-5': '#c8c9cc',
-    'gray-6': '#969799',
-    'gray-7': '#646566',
-    'gray-8': '#323233',
-    'red': '#ee0a24',
-    'blue': '#1989fa',
-    'orange': '#ff976a',
-    'green': '#07c160'
+  black: '#000',
+  white: '#fff',
+  'gray-1': '#f7f8fa',
+  'gray-2': '#f2f3f5',
+  'gray-3': '#ebedf0',
+  'gray-4': '#dcdee0',
+  'gray-5': '#c8c9cc',
+  'gray-6': '#969799',
+  'gray-7': '#646566',
+  'gray-8': '#323233',
+  red: '#ee0a24',
+  blue: '#1989fa',
+  orange: '#ff976a',
+  green: '#07c160',
 }
 ```
 
@@ -61,7 +61,7 @@ export const COLOR_PALETTE = {
 
 不同于其他家思路，`iui`是利用的官方提供的`uni.scss`来达到全局可用的目的。
 
-> uni.scss是一个特殊文件，在代码中无需 import 这个文件即可在scss代码中使用这里的样式变量。uni-app的编译器在webpack配置中特殊处理了这个uni.scss，使得每个scss文件都被注入这个uni.scss，达到全局可用的效果。
+> uni.scss 是一个特殊文件，在代码中无需 import 这个文件即可在 scss 代码中使用这里的样式变量。uni-app 的编译器在 webpack 配置中特殊处理了这个 uni.scss，使得每个 scss 文件都被注入这个 uni.scss，达到全局可用的效果。
 
 1.在项目根目录下新建 `styles/theme.scss`文件，来控制项目和`iui`的整体主题风格
 
@@ -71,7 +71,7 @@ export const COLOR_PALETTE = {
  * 还可以新增样式变量，来覆盖组件的默认样式变量，使得组件和项目的样式，保持一致。
  */
 
-$ui-color: #42b983;
+$brand-color: #42b983;
 $gray-8: #333;
 
 // Color Palette
@@ -88,7 +88,7 @@ $gray-8: #323233;
 $red: #ee0a24;
 $blue: #1989fa;
 $orange: #ff976a;
-$green: $ui-color;
+$green: $brand-color;
 ```
 
 2.在 `uni.scss`下引入自定义主题样式文件
@@ -105,30 +105,28 @@ $green: $ui-color;
 直接修改位于 `@/components/iui/common/` 下的 `config.js`
 
 ```js
-
 // Color Palette
 export const COLOR_PALETTE = {
-    'black': '#000',
-    'white': '#fff',
-    'gray-1': '#f7f8fa',
-    'gray-2': '#f2f3f5',
-    'gray-3': '#ebedf0',
-    'gray-4': '#dcdee0',
-    'gray-5': '#c8c9cc',
-    'gray-6': '#969799',
-    'gray-7': '#646566',
-    'gray-8': '#323233',
-    'red': '#42b983',
-    'blue': '#42b983',
-    'orange': '#42b983',
-    'green': '#42b983'
+  black: '#000',
+  white: '#fff',
+  'gray-1': '#f7f8fa',
+  'gray-2': '#f2f3f5',
+  'gray-3': '#ebedf0',
+  'gray-4': '#dcdee0',
+  'gray-5': '#c8c9cc',
+  'gray-6': '#969799',
+  'gray-7': '#646566',
+  'gray-8': '#323233',
+  red: '#42b983',
+  blue: '#42b983',
+  orange: '#42b983',
+  green: '#42b983',
 }
-
 ```
 
 ## 扩展
 
-> 动态切换主题方案（使用css 变量）[css-variables](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties)，注意浏览器兼容性
+> 动态切换主题方案（使用 css 变量）[css-variables](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties)，注意浏览器兼容性
 
 ```
 /**
@@ -138,7 +136,7 @@ export const COLOR_PALETTE = {
  * @param {String} $value CSS 属性值
  * @param {String} $var CSS 变量名
  */
-@mixin theme($property, $value, $var: 'ui-color') {
+@mixin theme($property, $value, $var: 'brand-color') {
     #{$property}: $value;
     /* #ifndef APP-NVUE */
     #{$property}: var(--#{$var}, $value);

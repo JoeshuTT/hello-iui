@@ -6,7 +6,7 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 Vue.use(myIui, {
-  themeColor: '#42b983',
+  brandColor: '#42b983',
 })
 
 const app = new Vue({

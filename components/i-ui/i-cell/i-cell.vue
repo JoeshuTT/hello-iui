@@ -16,8 +16,8 @@
         <text v-if="label" class="i-cell__label">{{ label }}</text>
       </slot>
     </view>
-    <view v-if="value" class="i-cell__value">
-      <slot>
+    <view v-if="value || $slots.default" class="i-cell__value">
+      <slot name="default">
         <text class="i-cell__value-text">{{ value }}</text>
       </slot>
     </view>

@@ -159,7 +159,7 @@ export default {
         // #ifndef APP-NVUE
         viewStyle.color = plain ? color : 'white'
         // #endif
-        if (color.indexOf('gradient') !== -1) {
+        if (~color.indexOf('gradient')) {
           if (!plain) {
             viewStyle.backgroundImage = color
           }
@@ -194,7 +194,7 @@ export default {
       }
 
       if (color) {
-        if (color.indexOf('gradient') !== -1) {
+        if (~color.indexOf('gradient')) {
           viewStyle.color = plain ? BUTTON.text.color : 'white'
         } else {
           viewStyle.color = plain ? color : 'white'

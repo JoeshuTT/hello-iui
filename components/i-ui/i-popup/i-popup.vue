@@ -34,10 +34,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    overlay: {
-      type: Boolean,
-      default: true,
-    },
     position: {
       type: String,
       default: 'center',
@@ -48,6 +44,10 @@ export default {
     duration: {
       type: null,
       default: 300,
+    },
+    overlay: {
+      type: Boolean,
+      default: true,
     },
     closeOnClickOverlay: {
       type: Boolean,
@@ -67,6 +67,8 @@ export default {
     },
   },
   data() {
+    const { windowWidth, windowHeight, windowTop = 0 } = getSystemInfoSync()
+    console.log(getSystemInfoSync(), windowTop)
     return {
       positionMap: {
         center: {
@@ -75,8 +77,8 @@ export default {
             position: 'relative',
           },
           wrapperStyle: {
-            width: `${getSystemInfoSync().windowWidth}px`,
-            height: `${getSystemInfoSync().windowHeight}px`,
+            width: `${windowWidth}px`,
+            height: `${windowHeight}px`,
           },
         },
         top: {
@@ -106,7 +108,7 @@ export default {
           style: {
             position: 'fixed',
             left: 0,
-            top: 0,
+            top: `${windowTop}px`,
             bottom: 0,
           },
         },
@@ -115,7 +117,7 @@ export default {
           style: {
             position: 'fixed',
             right: 0,
-            top: 0,
+            top: `${windowTop}px`,
             bottom: 0,
           },
         },
@@ -127,6 +129,9 @@ export default {
       const { positionMap, position } = this
       return positionMap[position] || 'center'
     },
+    aniName() {
+      return this.currentPosition.animate || 'fade'
+    },
     wrapperStyle() {
       const { rootStyle } = this
 
@@ -136,18 +141,12 @@ export default {
       const { customStyle } = this
 
       const positionStyle = {
-        'transition-timing-function': 'ease',
         'background-color': '#fff',
-        /* #ifndef APP-NVUE */
         'z-index': 999,
-        /* #endif */
         ...this.currentPosition.style,
       }
 
       return Object.assign({}, positionStyle, customStyle)
-    },
-    aniName() {
-      return this.currentPosition.animate || 'fade'
     },
   },
   methods: {

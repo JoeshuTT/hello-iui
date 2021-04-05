@@ -10,7 +10,7 @@
 //  * @param {String} $value CSS 属性值
 //  * @param {String} $var CSS 变量名
 //  */
-@mixin theme($property, $value, $var: 'ui-color') {
+@mixin theme($property, $value, $var: 'brand-color') {
   #{$property}: $value;
   /* #ifndef APP-NVUE */
   #{$property}: var(--#{$var}, $value);
@@ -18,7 +18,7 @@
 }
 
 // 项目主题色
-$ui-color: #42b983;
+$brand-color: #42b983;
 $gray-8: #333;
 
 // Color Palette
@@ -35,4 +35,4 @@ $gray-8: #323233;
 $red: #ee0a24;
 $blue: #1989fa;
 $orange: #ff976a;
-$green: $ui-color;
+$green: $brand-color;

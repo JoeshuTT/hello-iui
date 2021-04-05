@@ -5,10 +5,15 @@
 </template>
 
 <script>
-import { addUnit } from '../utils'
+import {} from '../utils'
 
 export default {
   name: 'IcolVue',
+  inject: {
+    gutter: {
+      default: 0,
+    },
+  },
   props: {
     span: {
       type: [Number, String],
@@ -19,14 +24,9 @@ export default {
       default: 0,
     },
   },
-  inject: {
-    gutter: {
-      default: 0,
-    },
-  },
   computed: {
     mergeStyle() {
-      const { gutter, customStyle, width } = this
+      const { gutter, customStyle } = this
       const style = {}
       if (gutter) {
         const padding = addUnit(

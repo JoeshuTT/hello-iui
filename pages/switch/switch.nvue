@@ -1,0 +1,52 @@
+<template>
+  <view class="container">
+    <demo-block title="基础用法" padding>
+      <i-switch v-model="checked" />
+    </demo-block>
+    <demo-block title="禁用状态" padding>
+      <i-switch v-model="checked" disabled />
+    </demo-block>
+    <demo-block title="自定义颜色" padding>
+      <i-switch v-model="checked" active-color="#ee0a24" inactive-color="#dcdee0" />
+    </demo-block>
+    <demo-block title="自定义大小" padding>
+      <i-switch v-model="checked" size="22px" />
+    </demo-block>
+    <demo-block title="自定义开关值1 和 0" padding>
+      <i-switch v-model="checked2" :active-value="1" :inactive-value="0" />
+    </demo-block>
+    <demo-block title="异步控制" padding>
+      <i-switch :value="checked3" @input="onInput" />
+    </demo-block>
+  </view>
+</template>
+
+<script>
+import pageMixin from '@/mixins/page'
+
+export default {
+  mixins: [pageMixin],
+  data() {
+    return {
+      checked: true,
+      checked2: 1,
+      checked3: true,
+    }
+  },
+  onLoad() {},
+  methods: {
+    async onInput(checked) {
+      const [err, res] = await uni.showModal({
+        title: '提醒',
+        content: '是否切换开关？',
+      })
+
+      if (!err && res.confirm) {
+        this.checked3 = checked
+      }
+    },
+  },
+}
+</script>
+
+<style lang="scss"></style>

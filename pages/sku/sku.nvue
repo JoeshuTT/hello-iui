@@ -1,0 +1,17 @@
+<template>
+  <view class="container">
+    <!-- <i-sku class="my-class your-class" /> -->
+    <i-sku custom-class="my-class your-class" style="height: 1200px" />
+  </view>
+</template>
+
+<style>
+.my-class {
+  height: 300px;
+  font-size: 66px;
+  text-align: center;
+  background: red;
+  color: #ff0000;
+  margin-bottom: 20px;
+}
+</style>

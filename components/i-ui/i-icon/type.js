@@ -1,5 +1,6 @@
 export default {
-  'replay-o': '\ue667',
+  photograph: '\ue668',
+  replay: '\ue667',
   'fire-o': '\ue665',
   'smile-o': '\ue666',
   'photo-fail': '\ue664',

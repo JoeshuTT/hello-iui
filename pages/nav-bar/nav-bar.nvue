@@ -12,6 +12,12 @@
           </template>
         </i-nav-bar>
       </demo-block>
+      <image
+        src="https://img.alicdn.com/tfs/TB1aks3PpXXXXcXXFXXXXXXXXXX-150-150.gif"
+        class="loading-trip-image"
+        resize="contain"
+        quality="original"
+      ></image>
     </view>
   </view>
 </template>

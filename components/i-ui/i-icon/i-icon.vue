@@ -35,11 +35,11 @@ export default {
     },
     color: {
       type: String,
-      default: iconFontFamily,
+      default: COLOR_PALETTE['gray-6'],
     },
     fontFamily: {
       type: String,
-      default: '',
+      default: iconFontFamily,
     },
     customStyle: {
       type: Object,
@@ -67,9 +67,9 @@ export default {
           console.error('image size is required')
         }
       } else {
-        style.fontFamily = fontFamily || iconFontFamily
+        style.fontFamily = fontFamily
         style.fontSize = size ? addUnit(size) : '16px'
-        style.color = color || COLOR_PALETTE['gray-6']
+        style.color = color
       }
 
       return Object.assign({}, style, customStyle)
@@ -88,7 +88,7 @@ export default {
 
 /* #ifndef APP-NVUE */
 @font-face {
-  font-family: $iconFontFamily;
+  font-family: iuiIconFont;
   src: url($iconFontUrl) format('truetype');
 }
 

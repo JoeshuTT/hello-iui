@@ -16,7 +16,7 @@ export default [
       },
       {
         name: 'Icon 图标 - vue',
-        path: '/pages/icon/icon-vue',
+        path: '/pages/icon-vue/icon-vue',
       },
       {
         name: 'Image 图片',
@@ -45,6 +45,23 @@ export default [
     ],
   },
   {
+    name: '表单组件',
+    children: [
+      {
+        name: 'Switch 开关',
+        path: '/pages/switch/switch',
+      },
+      {
+        name: 'Stepper 步进器',
+        path: '/pages/stepper/stepper',
+      },
+      {
+        name: 'Uploader 文件上传',
+        path: '/pages/uploader/uploader',
+      },
+    ],
+  },
+  {
     name: '反馈组件',
     children: [
       {
@@ -64,6 +81,10 @@ export default [
         name: 'loadMore 加载更多',
         path: '/pages/load-more/load-more',
       },
+      {
+        name: 'Popover 气泡弹出框',
+        path: '/pages/popover/popover',
+      },
     ],
   },
   {
@@ -72,6 +93,15 @@ export default [
       {
         name: 'NavBar 导航栏',
         path: '/pages/nav-bar/nav-bar',
+      },
+    ],
+  },
+  {
+    name: '业务组件',
+    children: [
+      {
+        name: 'Sku 商品规格',
+        path: '/pages/sku/sku',
       },
     ],
   },

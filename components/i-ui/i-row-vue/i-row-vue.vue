@@ -9,6 +9,11 @@ import { addUnit } from '../utils'
 
 export default {
   name: 'IRowVue',
+  provide() {
+    return {
+      gutter: this.gutter,
+    }
+  },
   props: {
     gutter: {
       type: [Number, String],
@@ -37,11 +42,6 @@ export default {
 
       return Object.assign({}, style, customStyle)
     },
-  },
-  provide() {
-    return {
-      gutter: this.gutter,
-    }
   },
   methods: {
     onClick() {

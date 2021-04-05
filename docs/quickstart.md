@@ -13,65 +13,62 @@
 然后在按照下面的方式使用组件，以 Button 为例。
 
 ## 使用
+
 ### `easycom` 方式（推荐）
 
 ```vue
 <template>
-    <view class="container">
-        <i-button type="default">默认按钮</i-button>
-    </view>
+  <view class="container">
+    <i-button type="default" text="默认按钮" />
+  </view>
 </template>
 
 <script>
-    // 这里不用import引入，也不需要在components内注册i-button组件。template里就可以直接用
-    export default {
-        data() {
-            return {
-
-            }
-        }
-    }
+// 这里不用import引入，也不需要在components内注册i-button组件。template里就可以直接用
+export default {
+  data() {
+    return {}
+  },
+}
 </script>
 ```
 
 配置方法如下
 
-在项目根目录下的 `pages.json` 中进行配置，完成后重启HX或者重新编译项目，即可正常使用。
+在项目根目录下的 `pages.json` 中进行配置，完成后重启 HX 或者重新编译项目，即可正常使用。
 
 ```json
 // pages.json
 "easycom": {
     "autoscan": true,
     "custom": {
-        "uni-(.*)": "@/components/uni-ui/uni-$1/uni-$1.vue",
-        "i-(.*)": "@/components/i-ui/i-$1/i-$1.vue"
+        "^uni-(.*)": "@/components/uni-ui/uni-$1/uni-$1.vue",
+        "^i-(.*)": "@/components/i-ui/i-$1/i-$1.vue"
     }
 }
 ```
 
-[想要了解更多easycom知识点](https://uniapp.dcloud.io/collocation/pages?id=easycom)
+[想要了解更多 easycom 知识点](https://uniapp.dcloud.io/collocation/pages?id=easycom)
 
 ### 手动按需引入
 
 ```vue
 <template>
-    <view class="container">
-        <i-button type="default">默认按钮</i-button>
-    </view>
+  <view class="container">
+    <i-button type="default" text="默认按钮" />
+  </view>
 </template>
 
-<script> 
-    import IButton from '@/components/i-ui/i-button/i-button'
-    export default {
-        components: {
-            IButton
-        },
-        data() {
-            return {
-
-            }
-        }
-    }
+<script>
+import IButton from '@/components/i-ui/i-button/i-button'
+export default {
+  components: {
+    IButton,
+  },
+  data() {
+    return {}
+  },
+}
 </script>
 ```
 

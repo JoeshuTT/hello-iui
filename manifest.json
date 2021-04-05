@@ -142,7 +142,7 @@
             }
         },
         "router" : {
-            "base" : "/h5/"
+            "base" : ""
         },
         "template" : "template.h5.html"
     },

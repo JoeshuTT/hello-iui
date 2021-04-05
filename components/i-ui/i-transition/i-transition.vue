@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import { isObj } from '../common/validator'
+import { isObj } from '../utils/validate'
 import { TRANSITION } from '../index'
 // #ifdef APP-NVUE
 const animation = uni.requireNativePlugin('animation')
 // #endif
-const nextTick = () => new Promise(resolve => setTimeout(resolve, 1000 / 30))
+const requestAnimationFrame = () => new Promise(resolve => setTimeout(resolve, 1000 / 30))
 const animationMap = TRANSITION.animationMap
 const getStyle = name => animationMap[name]
 
@@ -87,8 +87,8 @@ export default {
       const { name, duration } = this
       const currentDuration = isObj(duration) ? duration.enter : duration
       const currentStyle = getStyle(name) || this.animConfig
-
       this.$emit('beforeEnter')
+
       this.inited = true
 
       // #ifndef APP-NVUE
@@ -101,7 +101,7 @@ export default {
       this.$emit('enter')
 
       this.$nextTick()
-        .then(nextTick)
+        .then(requestAnimationFrame)
         .then(() => {
           this.aniStyle = Object.assign({}, this.aniStyle, currentStyle['enter-to'])
           this.$emit('afterEnter')
@@ -114,8 +114,9 @@ export default {
         ...currentStyle['enter'],
       }
       this.$emit('enter')
+
       this.$nextTick()
-        .then(nextTick)
+        .then(requestAnimationFrame)
         .then(() => {
           animation.transition(
             this.$refs.ani,
@@ -139,11 +140,10 @@ export default {
         return
       }
 
-      this.$emit('beforeLeave')
-
       const { name, duration } = this
       const currentDuration = isObj(duration) ? duration.leave : duration
       const currentStyle = getStyle(name) || this.animConfig
+      this.$emit('beforeLeave')
 
       // #ifndef APP-NVUE
       this.aniStyle = Object.assign({}, this.aniStyle, currentStyle['leave-to'], {
@@ -185,6 +185,6 @@ export default {
 @import '../styles/index.scss';
 
 .i-transition {
-  // transition-timing-function: ease;
+  transition-timing-function: ease;
 }
 </style>

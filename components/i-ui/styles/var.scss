@@ -163,17 +163,22 @@ $image-placeholder-background-color: $gray-1 !default;
 $image-placeholder-text-color: $gray-6 !default;
 
 // Switch
-$switch-width: 120rpx !default;
-$switch-height: 60rpx !default;
-$switch-border-color: rgba(0, 0, 0, 0.1) !default;
-$switch-node-size: 60rpx !default;
-$switch-node-z-index: 1 !default;
 $switch-node-background-color: $white !default;
-$switch-node-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !default;
-$switch-background-color: $white !default;
-$switch-on-background-color: $blue !default;
 $switch-transition-duration: $animation-duration-base !default;
 $switch-disabled-opacity: $disabled-opacity !default;
+
+// stepper
+$stepper-active-color: #e8e8e8 !default;
+$stepper-background-color: $active-color !default;
+$stepper-disabled-opacity: $disabled-opacity !default;
+$stepper-border-radius: $border-radius-md !default;
+$stepper-button-icon-color: $text-color !default;
+$stepper-button-disabled-color: $background-color !default;
+$stepper-input-width: 64rpx !default;
+$stepper-input-height: 56rpx !default;
+$stepper-input-font-size: $font-size-md !default;
+$stepper-input-text-color: $text-color !default;
+$stepper-input-disabled-text-color: $gray-5 !default;
 
 // Slider
 $slider-active-background-color: $blue !default;
@@ -185,7 +190,7 @@ $slider-button-height: 48rpx !default;
 $slider-button-border-radius: 24rpx !default;
 $slider-button-position-offset: -24rpx !default;
 $slider-button-background-color: $white !default;
-$slider-button-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !default;
+$slider-button-box-shadow: 0 3px 1px rgba(0, 0, 0, 0.3) !default;
 
 // Radio
 $radio-size: 20px !default;

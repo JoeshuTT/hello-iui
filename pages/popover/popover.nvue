@@ -1,0 +1,155 @@
+<template>
+  <view class="container">
+    <demo-block title="基础用法" row padding>
+      <i-button type="primary" class="mr20" text="浅色风格" @click="onToggle('show')" />
+      <i-button type="primary" class="mr20" text="深色风格" @click="onToggle('show2')" />
+      <i-button type="primary" text="显示遮罩层" @click="onToggle('show3')" />
+    </demo-block>
+    <demo-block title="弹出位置" padding>
+      <i-cell title="顶部弹出" is-link @click="onCellClick('top')" />
+      <i-cell title="底部弹出" is-link @click="onCellClick('bottom')" />
+      <i-cell title="左侧弹出" is-link @click="onCellClick('left')" />
+      <i-cell title="右侧弹出" is-link @click="onCellClick('right')" />
+    </demo-block>
+    <i-popover v-model="show" :position="position">
+      <view class="actions">
+        <text
+          v-for="(item, index) in actionList"
+          :key="index"
+          class="actions-text"
+          :class="[index === actionList.length - 1 ? 'actions-text--noborder' : '']"
+          @click="onActionClick(index)"
+          >{{ item.text }}</text
+        >
+      </view>
+    </i-popover>
+    <i-popover v-model="show2" :position="position2" theme="dark">
+      <view class="actions">
+        <text
+          v-for="(item, index) in actionList"
+          :key="index"
+          class="actions-text-dark"
+          :class="[index === actionList.length - 1 ? 'actions-text-dark--noborder' : '']"
+          @click="onActionClick(index)"
+          >{{ item.text }}</text
+        >
+      </view>
+    </i-popover>
+    <i-popover v-model="show3" :position="position3" overlay>
+      <view class="actions">
+        <text
+          v-for="(item, index) in actionList"
+          :key="index"
+          class="actions-text"
+          :class="[index === actionList.length - 1 ? 'actions-text-dark--noborder' : '']"
+          @click="onActionClick(index)"
+          >{{ item.text }}</text
+        >
+      </view>
+    </i-popover>
+    <!-- <i-popover v-model="show" :placement="placement" /> -->
+  </view>
+</template>
+
+<script>
+import pageMixin from '@/mixins/page'
+
+export default {
+  mixins: [pageMixin],
+  data() {
+    return {
+      show: false,
+      show2: false,
+      show3: false,
+      show_top: false,
+      show_bottom: false,
+      show_left: false,
+      show_right: false,
+      placement: 'bottom',
+      actionList: [{ text: '选项一' }, { text: '选项二' }, { text: '选项三' }],
+      position: {
+        x: 30,
+        // #ifndef H5
+        y: 220,
+        // #endif
+        // #ifdef H5
+        y: 300,
+        // #endif
+      },
+      position2: {
+        x: 200,
+        // #ifndef H5
+        y: 220,
+        // #endif
+        // #ifdef H5
+        y: 300,
+        // #endif
+      },
+      position3: {
+        x: -30,
+        // #ifndef H5
+        y: 220,
+        // #endif
+        // #ifdef H5
+        y: 300,
+        // #endif
+      },
+    }
+  },
+  onLoad() {},
+  methods: {
+    onToggle(field) {
+      this[field] = !this[field]
+    },
+    onCellClick(type) {
+      // this[`show_${type}`] = true
+      this.placement = type
+    },
+    onActionClick(index) {
+      uni.showToast({ icon: 'none', title: this.actionList[index].text })
+    },
+  },
+}
+</script>
+
+<style lang="scss">
+.mr20 {
+  margin-right: 20rpx;
+}
+
+.actions {
+  @include flex-box();
+  width: 120px;
+  padding: 0 30rpx;
+
+  &-text {
+    height: 88rpx;
+    font-size: 14px;
+    color: #323232;
+    line-height: 88rpx;
+    text-align: center;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #ebedf0;
+
+    &--noborder {
+      border-bottom-color: transparent;
+    }
+
+    &-dark {
+      height: 88rpx;
+      font-size: 14px;
+      color: #fff;
+      line-height: 88rpx;
+      text-align: center;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      border-bottom-color: #646566;
+
+      &--noborder {
+        border-bottom-color: transparent;
+      }
+    }
+  }
+}
+</style>

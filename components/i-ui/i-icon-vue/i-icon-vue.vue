@@ -1,25 +1,34 @@
 <template>
-  <view class="i-icon" @click="onClick">
-    <template v-if="isImage">
-      <image class="i-icon-block_img" :style="[mergeStyle]" :src="name" mode="aspectFit" />
-    </template>
-    <template v-else>
-      <text class="i-icon" :style="[mergeStyle]">{{ icon[name] || name }}</text>
-    </template>
+  <view :class="[classPrefix, classPrefix + '-' + name]" :style="[mergeStyle]" @click="onClick">
+    <image v-if="computed.isImage(name)" class="i-icon__image" :src="name" mode="aspectFit" />
   </view>
 </template>
+<!-- eslint-disable-next-line -->
+<script module="computed" lang="wxs">
+function isImage(name) {
+  return name.indexOf('/') !== -1;
+}
 
+module.exports = {
+  isImage: isImage,
+}
+</script>
+<!-- #endif -->
 <script>
 import { addUnit } from '../utils'
-import icon from './type'
 import { COLOR_PALETTE, iconFontFamily } from '../index'
 
 export default {
-  name: 'IIcon',
+  name: 'IIconVue',
   props: {
+    name: {
+      required: true,
+      type: String,
+      default: '',
+    },
     size: {
       type: [Number, String],
-      default: iconFontFamily,
+      default: '',
     },
     color: {
       type: String,
@@ -34,20 +43,12 @@ export default {
       default: () => ({}),
     },
   },
-  data() {
-    return {
-      icon,
-    }
-  },
   computed: {
-    isImage() {
-      return ~this.name.indexOf('/')
-    },
     mergeStyle() {
-      const { fontFamily, color, size, customStyle } = this
+      const { color, size, customStyle } = this
       const style = {}
 
-      if (this.isImage) {
+      if (~this.name.indexOf('/')) {
         if (size) {
           style.width = addUnit(size)
           style.height = addUnit(size)
@@ -55,9 +56,8 @@ export default {
           console.error('image size is required')
         }
       } else {
-        style.fontFamily = fontFamily || iconFontFamily
-        style.fontSize = size ? addUnit(size) : '16px'
-        style.color = color || COLOR_PALETTE['gray-6']
+        size && (style.fontSize = addUnit(size))
+        color && (style.color = color)
       }
 
       return Object.assign({}, style, customStyle)
@@ -74,16 +74,26 @@ export default {
 <style lang="scss">
 @import '../styles/index.scss';
 
+.i-icon__image {
+  width: 100%;
+  height: 100%;
+}
+
 @font-face {
-  font-family: $iconFontFamily;
+  font-family: iuiIconFont;
   src: url($iconFontUrl) format('truetype');
 }
 
 .i-icon {
+  position: relative;
+  font-family: iuiIconFont;
   line-height: inherit;
   font-weight: normal;
+  font-size: inherit;
+  text-rendering: auto;
   -webkit-font-smoothing: antialiased;
 }
+
 .i-icon,
 .i-icon:before {
   display: inline-block;

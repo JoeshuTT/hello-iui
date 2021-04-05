@@ -2,12 +2,12 @@
   <view class="container">
     <demo-block title="文字省略" padding>
       <text class="ellipsis i-ellipsis">这是一段最多显示一行的文字，多余的内容会被省略。</text>
-      <text class="ellipsis--2 i-ellipsis--2"
-        >这是一段最多显示两行的文字，多余的内容会被省略。这是一段最多显示两行的文字，多余的内容会被省略。</text
-      >
-      <text class="ellipsis--3 i-ellipsis--3"
-        >这是一段最多显示三行的文字，多余的内容会被省略。这是一段最多显示两行的文字，多余的内容会被省略。这是一段最多显示两行的文字，多余的内容会被省略。</text
-      >
+      <text class="ellipsis--2 i-ellipsis--2">
+        这是一段最多显示两行的文字，多余的内容会被省略。这是一段最多显示两行的文字，多余的内容会被省略。
+      </text>
+      <text class="ellipsis--3 i-ellipsis--3">
+        这是一段最多显示三行的文字，多余的内容会被省略。这是一段最多显示两行的文字，多余的内容会被省略。这是一段最多显示两行的文字，多余的内容会被省略。
+      </text>
     </demo-block>
     <demo-block title="Flex 布局" padding>
       <view class="flex-box"> flex 盒子 </view>
@@ -27,13 +27,9 @@
       </view>
     </demo-block>
     <!-- #ifndef APP-NVUE -->
-    <demo-block title="1px边框" padding>
-      <view class="layout-box i-hairline--top"> 上边框 </view>
-      <view class="layout-box i-hairline--bottom"> 下边框 </view>
-      <view class="layout-box i-hairline--left"> 左边框 </view>
-      <view class="layout-box i-hairline--right"> 右边框 </view>
-      <view class="layout-box i-hairline--top-bottom"> 上下边框 </view>
-      <view class="layout-box i-hairline--surround"> 全边框 </view>
+    <demo-block title="细线边框" padding>
+      <view class="layout-box i-hairline--top">上边框 </view>
+      <view class="layout-box i-hairline--bottom">下边框 </view>
     </demo-block>
     <!-- #endif -->
   </view>
@@ -55,11 +51,6 @@ export default {
 </script>
 
 <style lang="scss">
-/* #ifndef APP-NVUE */
-@import '@/components/i-ui/styles/hairline.scss';
-@import '@/components/i-ui/styles/ellipsis.scss';
-/* #endif */
-
 .ellipsis {
   /* #ifndef APP-NVUE */
   display: block;
@@ -124,12 +115,22 @@ export default {
 
 /* #ifndef APP-NVUE */
 .layout-box {
-  background-color: $ui-color;
-  color: #fff;
   margin-bottom: 20rpx;
-  &::after {
-    top: 5px;
-  }
+}
+
+[class*='i-hairline'] {
+  position: relative;
+  height: 44px;
+  line-height: 44px;
+  background: $brand-color;
+  text-align: center;
+}
+
+.i-hairline--top::after {
+  @include hairline-top(#000, 20px, 20px);
+}
+.i-hairline--bottom::after {
+  @include hairline-bottom(#000, 20px, 20px);
 }
 
 /* #endif */

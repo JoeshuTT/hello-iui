@@ -41,14 +41,15 @@
     <demo-block title="自定义样式" padding row>
       <i-button
         :custom-style="{
-          width: '100px',
+          width: '200px',
           height: '100px',
           borderRadius: '20rpx',
           color: '#fff',
-          backgroundColor: themeColor,
+          backgroundColor: brandColor,
         }"
-        text="自定义"
+        text="使用 custom-style"
       />
+      <!-- <i-button class="custom-class" text="class样式" /> -->
     </demo-block>
     <!-- #ifdef MP -->
     <demo-block title="开放能力" padding row>
@@ -92,6 +93,15 @@ export default {
 
   &-margin-right {
     margin-right: 20rpx;
+    // background-color: red;
   }
 }
+
+// .custom-class {
+//   width: 100px;
+//   height: 100px;
+//   border-radius: 20rpx;
+//   color: #fff;
+//   background-color: $brand-color;
+// }
 </style>

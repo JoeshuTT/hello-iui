@@ -1,0 +1,51 @@
+<template>
+  <view class="container">
+    <i-cell center title="基础用法">
+      <i-stepper v-model="value" />
+    </i-cell>
+    <i-cell center title="步长设置">
+      <i-stepper v-model="value2" step="2" />
+    </i-cell>
+    <i-cell center title="限制输入范围">
+      <i-stepper v-model="value3" min="5" max="8" />
+    </i-cell>
+    <i-cell title="禁用状态" padding>
+      <i-stepper v-model="value4" disabled />
+    </i-cell>
+    <i-cell title="禁用输入框" padding>
+      <i-stepper v-model="value5" disabled-input />
+    </i-cell>
+  </view>
+</template>
+
+<script>
+import pageMixin from '@/mixins/page'
+
+export default {
+  mixins: [pageMixin],
+  data() {
+    return {
+      value: 1,
+      value2: 1,
+      value3: 1,
+      value4: 1,
+      value5: 1,
+    }
+  },
+  onLoad() {},
+  methods: {
+    async onInput(checked) {
+      const [err, res] = await uni.showModal({
+        title: '提醒',
+        content: '是否切换开关？',
+      })
+
+      if (!err && res.confirm) {
+        this.checked3 = checked
+      }
+    },
+  },
+}
+</script>
+
+<style lang="scss"></style>

@@ -109,7 +109,7 @@ iui 中内置了一些常用的 `sass mixins`，方便开发者自由定义[详�
 }
 ```
 
-### 1px 边框(app-nvue 暂不支持)
+### 细线边框(app-nvue 暂不支持)
 
 为元素添加 Retina 屏幕下的 1px 边框（即 hairline），基于伪类 transform 实现。
 
@@ -120,60 +120,18 @@ iui 中内置了一些常用的 `sass mixins`，方便开发者自由定义[详�
 <!-- 下边框 -->
 <div class="i-hairline--bottom"></div>
 
-<!-- 左边框 -->
-<div class="i-hairline--left"></div>
-
-<!-- 右边框 -->
-<div class="i-hairline--right"></div>
-
-<!-- 上下边框 -->
-<div class="i-hairline--top-bottom"></div>
-
-<!-- 全边框 -->
-<div class="i-hairline--surround"></div>
 ```
 
 ```scss
 [class*='i-hairline'] {
-    &::after {
-        @include hairline();
-    }
+  position: relative;
 }
 
-.i-hairline {
-    &,
-    &--top,
-    &--left,
-    &--right,
-    &--bottom,
-    &--surround,
-    &--top-bottom {
-        position: relative;
-    }
-
-    &--top::after {
-        border-top-width: 1px;
-    }
-
-    &--left::after {
-        border-left-width: 1px;
-    }
-
-    &--right::after {
-        border-right-width: 1px;
-    }
-
-    &--bottom::after {
-        border-bottom-width: 1px;
-    }
-
-    &--top-bottom::after {
-        border-width: 1px 0;
-    }
-
-    &--surround::after {
-        border-width: 1px;
-    }
+.i-hairline--top::after {
+  @include hairline-top(#000, 20px, 20px);
+}
+.i-hairline--bottom::after {
+  @include hairline-bottom(#000, 20px, 20px);
 }
 
 ```

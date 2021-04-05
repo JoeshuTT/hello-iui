@@ -38,6 +38,15 @@
       }
     },
     {
+      "path": "pages/icon-vue/icon-vue",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
       "path": "pages/image/image",
       "style": {
         "app-plus": {
@@ -101,6 +110,33 @@
       }
     },
     {
+      "path": "pages/switch/switch",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/uploader/uploader",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/stepper/stepper",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
       "path": "pages/loading/loading",
       "style": {
         "app-plus": {
@@ -119,11 +155,29 @@
       }
     },
     {
+      "path": "pages/popover/popover",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
       "path": "pages/nav-bar/nav-bar",
       "style": {
         "navigationStyle": "custom",
         "app-plus": {
           "titleNView": false,
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/sku/sku",
+      "style": {
+        "app-plus": {
           "bounce": "none",
           "scrollIndicator": "none"
         }

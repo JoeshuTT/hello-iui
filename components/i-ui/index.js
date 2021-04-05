@@ -9,11 +9,6 @@ export const iconFontSrc =
 
 export const iconFontFamily = 'iuiIconFont'
 
-export const basic = {
-  version: '2.3.6',
-  zIndex: 999,
-}
-
 // Color Palette
 export const COLOR_PALETTE = {
   black: '#000',
@@ -143,18 +138,17 @@ export const PAGE = {
 
 export const myIui = {
   install(Vue, options = {}) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`i-ui 来啦来啦，您现在使用的是${basic.version}版本！`)
-      console.log('%c记得帮我点个 start，鼓励鼓励我这个切图仔：https://github.com/JoeshuTT/hello-iui', 'color:red')
-
-      Vue.mixin({
-        data() {
-          return {
-            ...basic,
-            ...options,
-          }
-        },
-      })
+    const config = {
+      version: '2.3.6',
+      zIndex: 999,
+      ...options,
     }
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`%ci-ui 来啦来啦，您现在使用的是${config.version}版本！`, `color:#2a53cd`)
+      console.log('%c记得帮我点个 start，鼓励鼓励我这个切图仔：https://github.com/JoeshuTT/hello-iui', 'color:#eb3941')
+    }
+
+    Vue.prototype.$iui = config
   },
 }
