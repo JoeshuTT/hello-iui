@@ -4,6 +4,8 @@ yarn.lock
 package-lock.json
 src/unpackage/dist
 unpackage/dist
+src/unpackage/debug
+unpackage/debug
 src/nativeplugins
 nativeplugins
 wxcomponents/**/*.vue
