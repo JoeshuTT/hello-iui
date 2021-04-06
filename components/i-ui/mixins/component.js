@@ -1,4 +1,12 @@
+/**
+ * 并未开启
+ */
 export default {
+  options: {
+    // #ifdef MP-WEIXIN
+    virtualHost: true,
+    // #endif
+  },
   props: {
     customStyle: {
       type: Object,
@@ -8,12 +16,5 @@ export default {
     //   type: String,
     //   default: '',
     // },
-  },
-  methods: {
-    noop() {},
-    // #ifdef MP
-    // 古古怪怪
-    // toJSON() {}
-    // #endif
   },
 }

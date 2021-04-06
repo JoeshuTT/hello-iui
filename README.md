@@ -32,7 +32,7 @@
 
 将这句话放在末尾，也是为了着重强调，`iui` 是遵循该原则去设计的。
 
-## 预览
+## 👀 预览
 
 [Hello Iui 演示示例发布页面，点击跳转](https://dev.dcloud.net.cn/publish/app/preview?id=helloiui)
 
@@ -40,7 +40,7 @@
 
 [使用文档在此，传送门](https://static-386415c0-10b5-4a03-a868-8fb41b9e886e.bspapp.com/docs/)
 
-## 快速上手
+## 🚀 快速上手
 
 1. 下载组件库
 
