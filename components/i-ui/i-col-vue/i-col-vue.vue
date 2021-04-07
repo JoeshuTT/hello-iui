@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {} from '../utils'
+import { addUnit } from '../utils'
 
 export default {
   name: 'IcolVue',

@@ -3,7 +3,7 @@
     <demo-block title="基础用法" padding>
       <i-uploader
         name="1"
-        :file-list="fileList"
+        :file-list="fileList1"
         @afterRead="afterRead"
         @delete="clickDelete"
         @click-preview="clickPreview"
@@ -28,7 +28,7 @@ export default {
   mixins: [pageMixin],
   data() {
     return {
-      fileList: [],
+      fileList1: [],
       fileList2: [{ url: 'https://img.yzcdn.cn/vant/leaf.jpg' }, { url: 'https://img.yzcdn.cn/vant/tree.jpg' }],
       fileList8: [
         {
@@ -47,9 +47,12 @@ export default {
   onLoad() {},
   methods: {
     afterRead(event) {
-      const { file, name } = event.detail
-      console.log(JSON.stringify(file, null, 2))
-      const fileList = this.data[`fileList${name}`]
+      console.log(event)
+      // const { file, name } = event.detail
+      // console.log(JSON.stringify(file, null, 2))
+      // const fileList = this.data[`fileList${name}`]
+      const fileList = this[`fileList${name}`]
+      this[`fileList${name}`] = fileList.concat(file)
     },
   },
 }

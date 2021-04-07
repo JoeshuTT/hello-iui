@@ -2,11 +2,14 @@
   <view class="i-uploader">
     <view v-for="(item, index) in fileList" :key="index" class="i-uploader__preview">
       <image class="i-uploader__preview-image" mode="scaleToFill" :src="item.url" />
+      <view class="i-uploader__preview-delete">
+        <text class="i-icon i-uploader__preview-delete-icon">{{ iconType['cross'] }}</text>
+      </view>
       <!-- <view class="i-uploader__upload">
         <text class="i-icon i-icon-photograph">{{ iconType['photograph'] }}</text>
       </view> -->
     </view>
-    <view class="i-uploader__preview">
+    <view class="i-uploader__preview" @click="startUpload">
       <view class="i-uploader__upload">
         <slot>
           <text class="i-icon i-uploader__upload-icon">{{ iconType['photograph'] }}</text>
@@ -19,6 +22,7 @@
 
 <script>
 import iconType from '../i-icon/type'
+import { getExtName } from '../utils'
 
 export default {
   name: 'IUploader',
@@ -28,6 +32,10 @@ export default {
       default: () => [],
     },
     name: {
+      type: String,
+      default: '',
+    },
+    sizeType: {
       type: String,
       default: '',
     },
@@ -100,6 +108,38 @@ export default {
     },
   },
   methods: {
+    formatFile(res) {
+      return res.tempFiles.map(item => {
+        const file = {
+          url: item.path,
+          type: getExtName(item.path), // H5 返回的是blob对象，没有后缀名
+          // #ifndef H5
+          size: res.size,
+          // #endif
+        }
+
+        return file
+      })
+    },
+    getDetail(index) {
+      return {
+        name: this.name,
+        index: index == null ? this.fileList.length : index,
+      }
+    },
+    startUpload() {
+      // const { multiple } = this
+      uni.chooseImage({
+        count: 6, //默认9
+        // sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album'], //从相册选择
+        success: res => {
+          console.log(JSON.stringify(res))
+          console.log(JSON.stringify(res.tempFiles))
+          this.$emit('afterRead', Object.assign({ file: this.formatFile(res) }, this.getDetail()))
+        },
+      })
+    },
     onOverlayClick() {
       this.$emit('clickOverlay')
       if (this.closeOnClickOverlay) {
