@@ -33,18 +33,7 @@ export default {
     }
   },
   onLoad() {},
-  methods: {
-    async onInput(checked) {
-      const [err, res] = await uni.showModal({
-        title: '提醒',
-        content: '是否切换开关？',
-      })
-
-      if (!err && res.confirm) {
-        this.checked3 = checked
-      }
-    },
-  },
+  methods: {},
 }
 </script>
 

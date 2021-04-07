@@ -1,7 +1,18 @@
 <template>
   <view class="i-uploader">
-    <view v-for="(item, index) in lists" :key="index" class="i-uploader__preview">
-      <text class="i-icon i-icon-photograph">{{ iconType['photograph'] }}</text>
+    <view v-for="(item, index) in fileList" :key="index" class="i-uploader__preview">
+      <image class="i-uploader__preview-image" mode="scaleToFill" :src="item.url" />
+      <!-- <view class="i-uploader__upload">
+        <text class="i-icon i-icon-photograph">{{ iconType['photograph'] }}</text>
+      </view> -->
+    </view>
+    <view class="i-uploader__preview">
+      <view class="i-uploader__upload">
+        <slot>
+          <text class="i-icon i-uploader__upload-icon">{{ iconType['photograph'] }}</text>
+          <text v-if="uploadText" class="i-icon i-uploader__upload-text">{{ uploadText }}</text>
+        </slot>
+      </view>
     </view>
   </view>
 </template>
@@ -12,32 +23,45 @@ import iconType from '../i-icon/type'
 export default {
   name: 'IUploader',
   props: {
-    value: {
+    fileList: {
+      type: Array,
+      default: () => [],
+    },
+    name: {
+      type: String,
+      default: '',
+    },
+    previewImage: {
+      type: Boolean,
+      default: true,
+    },
+    multiple: {
       type: Boolean,
       default: false,
     },
-    overlay: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    deletable: {
       type: Boolean,
       default: true,
     },
-    position: {
+    maxSize: {
+      type: Number,
+      default: 0,
+    },
+    maxCount: {
+      type: Number,
+      default: 0,
+    },
+    imageFit: {
       type: String,
-      default: 'center',
-      validator(value) {
-        return ~['top', 'right', 'bottom', 'left', 'center'].indexOf(value)
-      },
+      default: 'scaleToFill',
     },
-    duration: {
-      type: null,
-      default: 300,
-    },
-    closeOnClickOverlay: {
-      type: Boolean,
-      default: true,
-    },
-    overlayStyle: {
-      type: Object,
-      default: () => ({}),
+    uploadText: {
+      type: String,
+      default: '选择图片',
     },
     customStyle: {
       type: Object,
@@ -51,65 +75,9 @@ export default {
   data() {
     return {
       iconType,
-      positionMap: {
-        center: {
-          animate: 'fade',
-          style: {
-            position: 'relative',
-          },
-          wrapperStyle: {
-            width: `${getSystemInfoSync().windowWidth}px`,
-            height: `${getSystemInfoSync().windowHeight}px`,
-          },
-        },
-        top: {
-          animate: 'slide-down',
-          style: {
-            position: 'fixed',
-            left: 0,
-            right: 0,
-            // #ifndef H5
-            top: 0,
-            // #endif
-          },
-        },
-        bottom: {
-          animate: 'slide-up',
-          style: {
-            position: 'fixed',
-            left: 0,
-            right: 0,
-            // #ifndef H5
-            bottom: 0,
-            // #endif
-          },
-        },
-        left: {
-          animate: 'slide-left',
-          style: {
-            position: 'fixed',
-            left: 0,
-            top: 0,
-            bottom: 0,
-          },
-        },
-        right: {
-          animate: 'slide-right',
-          style: {
-            position: 'fixed',
-            right: 0,
-            top: 0,
-            bottom: 0,
-          },
-        },
-      },
     }
   },
   computed: {
-    currentPosition() {
-      const { positionMap, position } = this
-      return positionMap[position] || 'center'
-    },
     wrapperStyle() {
       const { rootStyle } = this
 
@@ -165,23 +133,37 @@ export default {
   }
 }
 
-/* #ifdef H5 */
-.i-popup {
-  &--top {
-    top: var(--window-top);
+.i-uploader {
+  @include flex-box('row');
+
+  &__preview {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    &-image {
+      width: $uploader-size;
+      height: $uploader-size;
+    }
   }
 
-  &--bottom {
-    bottom: var(--window-bottom);
-  }
+  &__upload {
+    position: relative;
+    @include flex-box();
+    align-items: center;
+    justify-content: center;
+    width: $uploader-size;
+    height: $uploader-size;
+    background-color: $uploader-upload-background-color;
 
-  &--safe-bottom {
-    @include safe-area-inset-bottom();
-  }
+    &-icon {
+      font-size: $uploader-icon-size;
+      color: $uploader-icon-color;
+    }
 
-  &--safe-top {
-    @include safe-area-inset-top();
+    &-text {
+      margin-top: 8rpx;
+      font-size: $uploader-text-font-size;
+      color: $uploader-text-color;
+    }
   }
 }
-/* #endif */
 </style>

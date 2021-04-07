@@ -85,17 +85,4 @@ export default {
 
 <style lang="scss">
 @import '../styles/index.scss';
-
-/* #ifndef APP-NVUE */
-@font-face {
-  font-family: iuiIconFont;
-  src: url($iconFontUrl) format('truetype');
-}
-
-.i-icon {
-  line-height: inherit;
-  font-weight: normal;
-  -webkit-font-smoothing: antialiased;
-}
-/* #endif */
 </style>

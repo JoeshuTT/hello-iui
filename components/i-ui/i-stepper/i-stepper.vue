@@ -30,7 +30,7 @@ export default {
   props: {
     value: {
       type: [Number, String],
-      default: 0,
+      default: 1,
     },
     min: {
       type: [Number, String],
@@ -41,6 +41,10 @@ export default {
       default: '',
     },
     step: {
+      type: [Number, String],
+      default: 1,
+    },
+    name: {
       type: [Number, String],
       default: 1,
     },
@@ -86,8 +90,9 @@ export default {
     },
   },
   watch: {
-    value() {
-      this.currentValue = this.value
+    value(val) {
+      this.currentValue = val
+      this.$emit('change', val, { name: this.name })
     },
   },
   created() {
@@ -103,18 +108,22 @@ export default {
     onChange(type) {
       const { step, disabled, currentValue, max, min } = this
       if (disabled) {
+        this.$emit('overlimit')
         return
       }
       const diff = type === 'minus' ? -step : +step
       const newValue = currentValue + diff
       if (type === 'plus' && max && newValue > max) {
+        this.$emit('overlimit')
         return
       }
 
       if (type === 'minus' && min > 0 && newValue < min) {
+        this.$emit('overlimit')
         return
       }
 
+      this.$emit(type)
       this.$emit('input', newValue)
     },
     onInput(e) {
@@ -124,10 +133,12 @@ export default {
     onFocus(e) {
       const value = e.detail.value
       this.currentValue = this.format(value)
+      this.$emit('focus', e)
     },
     onBlur(e) {
       const value = e.detail.value
       this.currentValue = this.format(value)
+      this.$emit('blur', e)
     },
     format(value) {
       const { max, min } = this

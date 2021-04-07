@@ -1,22 +1,22 @@
 <template>
   <view class="container">
     <demo-block title="基础用法" padding>
-      <van-stepper v-model="value" />
+      <i-uploader
+        name="1"
+        :file-list="fileList"
+        @afterRead="afterRead"
+        @delete="clickDelete"
+        @click-preview="clickPreview"
+      />
     </demo-block>
-    <demo-block title="禁用状态" padding>
-      <i-switch v-model="checked" disabled />
-    </demo-block>
-    <demo-block title="自定义颜色" padding>
-      <i-switch v-model="checked" active-color="#07c160" inactive-color="#cccccc" />
-    </demo-block>
-    <demo-block title="自定义大小" padding>
-      <i-switch v-model="checked" size="22px" active-color="#07c160" inactive-color="#cccccc" />
-    </demo-block>
-    <demo-block title="自定义开关值1 和 0" padding>
-      <i-switch v-model="checked2" :active-value="1" :inactive-value="0" />
-    </demo-block>
-    <demo-block title="异步控制" padding>
-      <i-switch :value="checked3" @input="onInput" />
+    <demo-block title="文件预览" padding>
+      <i-uploader
+        name="2"
+        :file-list="fileList2"
+        @afterRead="afterRead"
+        @delete="clickDelete"
+        @click-preview="clickPreview"
+      />
     </demo-block>
   </view>
 </template>
@@ -28,22 +28,28 @@ export default {
   mixins: [pageMixin],
   data() {
     return {
-      value: 1,
-      checked2: 1,
-      checked3: true,
+      fileList: [],
+      fileList2: [{ url: 'https://img.yzcdn.cn/vant/leaf.jpg' }, { url: 'https://img.yzcdn.cn/vant/tree.jpg' }],
+      fileList8: [
+        {
+          url: 'https://img.yzcdn.cn/vant/leaf.jpg',
+          status: 'uploading',
+          message: '上传中',
+        },
+        {
+          url: 'https://img.yzcdn.cn/vant/tree.jpg',
+          status: 'failed',
+          message: '上传失败',
+        },
+      ],
     }
   },
   onLoad() {},
   methods: {
-    async onInput(checked) {
-      const [err, res] = await uni.showModal({
-        title: '提醒',
-        content: '是否切换开关？',
-      })
-
-      if (!err && res.confirm) {
-        this.checked3 = checked
-      }
+    afterRead(event) {
+      const { file, name } = event.detail
+      console.log(JSON.stringify(file, null, 2))
+      const fileList = this.data[`fileList${name}`]
     },
   },
 }

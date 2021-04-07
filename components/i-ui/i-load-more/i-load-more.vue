@@ -13,7 +13,7 @@
 
 <script>
 import ILoading from '../i-loading/i-loading'
-import { LOAD_MORE } from '../index'
+import { LOAD_MORE, COLOR_PALETTE } from '../index'
 
 export default {
   name: 'ILoadMore',
@@ -39,9 +39,13 @@ export default {
     },
     color: {
       type: String,
-      default: '',
+      default: COLOR_PALETTE['gray-6'],
     },
     customStyle: {
+      type: Object,
+      default: () => ({}),
+    },
+    textStyle: {
       type: Object,
       default: () => ({}),
     },

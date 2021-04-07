@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  // #ifdef MP
+  // #ifdef MP-WEIXIN
   // options: {
   //   styleIsolation: 'apply-shared',
   // },

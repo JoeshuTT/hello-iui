@@ -1,19 +1,19 @@
 # 定制主题
 
-### 背景知识
+## 介绍
 
-iui 提供了一套默认主题，CSS 命名采用类 BEM 的风格，方便使用者覆盖样式。如果你想完全替换主题色或者其他样式，可以使用下面提供的方法。
+iui 默认提供一套 UI 主题，同时允许在一定程度上定制新的主题，以满足业务的多样化视觉需求
 
 ## 样式变量
 
-`iui` 内置了一系列全局/组件样式变量，你可以根据需求进行相应调整。
+`iui` 的样式是基于 SCSS 开发的，定义了一套默认样式变量，通过替换样式变量即可定制你自己需要的主题。
 组件的样式变量是由 2 处维护的
 
 [ scss 配置文件](https://github.com/JoeshuTT/hello-iui/blob/master/components/i-ui/styles/var.scss)，用于组件内部元素的 Class。
 
 [ JS 配置文件](https://github.com/JoeshuTT/hello-iui/blob/master/components/i-ui/common/config.js)，用于组件内部元素的 Style。
 
-下面是一些基本的样式变量，所有样式变量都可以在 [var.scss](https://github.com/JoeshuTT/hello-iui/blob/master/components/i-ui/styles/var.scss) 里找到。
+下面是一些与颜色相关基本样式变量，所有可用的变量请参考 [var.scss](https://github.com/JoeshuTT/hello-iui/blob/master/components/i-ui/styles/var.scss)。
 
 ```scss
 // Color Palette
@@ -63,7 +63,7 @@ export const COLOR_PALETTE = {
 
 > uni.scss 是一个特殊文件，在代码中无需 import 这个文件即可在 scss 代码中使用这里的样式变量。uni-app 的编译器在 webpack 配置中特殊处理了这个 uni.scss，使得每个 scss 文件都被注入这个 uni.scss，达到全局可用的效果。
 
-1.在项目根目录下新建 `styles/theme.scss`文件，来控制项目和`iui`的整体主题风格
+1.在项目根目录下新建 `styles/theme.scss`文件，自定义变量覆盖默认值，来全局定制项目和`iui`的主题
 
 ```scss
 /**
@@ -71,7 +71,7 @@ export const COLOR_PALETTE = {
  * 还可以新增样式变量，来覆盖组件的默认样式变量，使得组件和项目的样式，保持一致。
  */
 
-$brand-color: #42b983;
+$brand-color: #42b983; // 品牌色
 $gray-8: #333;
 
 // Color Palette
