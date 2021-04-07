@@ -1,10 +1,32 @@
 <template>
-  <view class="container">
-    <!-- <i-sku class="my-class your-class" /> -->
-    <i-sku custom-class="my-class your-class" style="height: 1200px" />
+  <view class="container"> 
+    <i-sku  v-model="show"  />
   </view>
 </template>
+<script>
+import pageMixin from '@/mixins/page'
 
+export default {
+  mixins: [pageMixin],
+  data() {
+    return {
+      show:true,
+      show_center: false,
+      show_top: false,
+      show_bottom: false,
+      show_left: false,
+      show_right: false,
+      show_round: false,
+    }
+  },
+  onLoad() {},
+  methods: {
+    onCellClick(type) {
+      this[`show_${type}`] = true
+    },
+  },
+}
+</script>
 <style>
 .my-class {
   height: 300px;
