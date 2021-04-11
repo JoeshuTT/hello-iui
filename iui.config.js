@@ -103,6 +103,14 @@ export default [
         name: 'Sku 商品规格',
         path: '/pages/sku/sku',
       },
+      {
+        name: 'dragger 拖拽排序',
+        path: '/pages/dragger/dragger',
+      },
+      {
+        name: 'index-list 索引列表',
+        path: '/pages/index-list/index-list',
+      },
     ],
   },
 ]

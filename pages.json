@@ -182,6 +182,24 @@
           "scrollIndicator": "none"
         }
       }
+    },
+    {
+      "path": "pages/dragger/dragger",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/index-list/index-list",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
     }
   ],
   "globalStyle": {

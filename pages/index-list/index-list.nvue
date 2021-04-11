@@ -1,0 +1,87 @@
+<template>
+  <view>
+    <view class="area">
+      <view
+        class="movable"
+        :prop="propValue"
+        :change:prop="test.propObserver"
+        @touchstart="test.touchstart"
+        @touchmove="test.touchmove"
+        >{{ test.msg }}</view
+      >
+    </view>
+  </view>
+</template>
+<script module="test" lang="wxs">
+var startX = 0
+var startY = 0
+var lastLeft = 50; var lastTop = 50
+function touchstart(event, ins) {
+  var touch = event.touches[0] || event.changedTouches[0]
+  startX = touch.pageX
+  startY = touch.pageY
+    console.log("touchstart",startX,startY)
+}
+function touchmove(event, ins) {
+  var touch = event.touches[0] || event.changedTouches[0]
+  var pageX = touch.pageX
+  var pageY = touch.pageY
+  var left = pageX - startX + lastLeft
+  var top = pageY - startY + lastTop
+  startX = pageX
+  startY = pageY
+  lastLeft = left
+  lastTop = top
+     console.log("touchstart",pageX,pageY)
+  ins.selectComponent('.movable').setStyle({
+    left: left + 'px',
+    top: top + 'px'
+  })
+    return false
+}
+
+  function propObserver(newValue, oldValue, ownerInstance, instance) {
+        console.log('prop observer', newValue, oldValue)
+    }
+module.exports = {
+    msg: 'Hello',
+  touchstart: touchstart,
+  touchmove: touchmove,
+  propObserver: propObserver,
+}
+</script>
+
+<script>
+export default {
+  data() {
+    return {
+      propValue: '',
+    }
+  },
+  onReady() {
+    setTimeout(() => {
+      this.propValue = '1111'
+    }, 1000)
+  },
+  methods: {},
+}
+</script>
+
+<style>
+.area {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.movable {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 50px;
+  top: 50px;
+  color: white;
+  text-align: center;
+  line-height: 100px;
+  background-color: red;
+}
+</style>

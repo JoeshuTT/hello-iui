@@ -1,0 +1,233 @@
+var startX = 0
+var startY = 0
+var curIndex = 0
+var hitIndex = -1
+var propsData = {}
+var move = {}
+
+// 判断点是否在矩形内
+function isHit(point, rect, index) {
+  var x = point.x
+  var y = point.y
+  var left = rect.left
+  var top = rect.top
+  var right = rect.right
+  var bottom = rect.bottom
+
+  return !(x < left || x > right || y < top || y > bottom)
+}
+
+// 获得元素相对于父元素的位置
+function getPosOfParent(data, index) {
+  var columns = data.columns
+  var parentRect = {
+    width: data.wrapWidth,
+    height: data.wrapHeight,
+    top: data.wrapTop,
+    left: data.wrapLeft,
+  }
+
+  var childRect = {
+    width: data.itemWidth,
+    height: data.itemHeight,
+  }
+  // 该死的不能调用 getBoundingClientRect
+  var left = childRect.width * (index % columns)
+  var top = childRect.height * Math.floor(index / columns)
+  var right = childRect.width * (index % columns === 0 ? 1 : (index % columns) + 1)
+  var bottom = childRect.height * (index % columns === 0 ? index / columns + 1 : Math.ceil(index / columns))
+  var centerX = left + childRect.width / 2
+  var centerY = top + childRect.height / 2
+
+  return {
+    width: data.itemWidth,
+    height: data.itemHeight,
+    index: index,
+    centerX: centerX,
+    centerY: centerY,
+    left: left,
+    top: top,
+    right: right,
+    bottom: bottom,
+  }
+}
+var sortCore = function (list, oldIndex, newIndex) {
+  var columns = 4
+  // 先获取到 endKey 对应的 realKey, 防止下面排序过程中该 realKey 被修改
+  var endRealKey = -1
+  list.forEach(function (item) {
+    if (item.sortKey === newIndex) endRealKey = item.realKey
+  })
+
+  return list.map(function (item) {
+    var cKey = item.sortKey
+    var rKey = item.realKey
+
+    if (oldIndex < newIndex) {
+      // 正序拖动
+      if (cKey > oldIndex && cKey <= newIndex) {
+        --rKey
+        cKey = --cKey
+      } else if (cKey === oldIndex) {
+        rKey = endRealKey
+        cKey = newIndex
+      }
+    } else if (oldIndex > newIndex) {
+      // 倒序拖动
+      if (cKey >= newIndex && cKey < oldIndex) {
+        ++rKey
+        cKey = ++cKey
+      } else if (cKey === oldIndex) {
+        rKey = endRealKey
+        cKey = newIndex
+      }
+    }
+
+    if (item.sortKey !== cKey) {
+      item.tranX = (cKey % columns) * 100 + '%'
+      item.tranY = Math.floor(cKey / columns) * 100 + '%'
+      item.sortKey = cKey
+      item.realKey = rKey
+    }
+    return item
+  })
+}
+function longPress(event) {
+  console.log('longPress', event)
+}
+
+function touchStart(event, ownerInstance) {
+  var touch = event.touches[0] || event.changedTouches[0]
+  var instance = event.instance
+  var ownerState = ownerInstance.getState()
+  var dataset = instance.getDataset()
+  var pageX = touch.pageX
+  var pageY = touch.pageY
+
+  startX = pageX
+  startY = pageY
+  curIndex = dataset.index
+  console.log('touchStart', curIndex)
+
+  // instance.removeClass('tran')
+  instance.addClass('cur')
+
+  move = getPosOfParent(propsData, dataset.index)
+
+  ownerState.itemsInstance.forEach(function (item, index) {
+    item.removeClass('tran').removeClass('cur')
+    item.addClass(index === curIndex ? 'cur' : 'tran')
+  })
+
+  // ownerInstance.callMethod('dragStatus', 'start')
+  //   event.instance.getDataset()
+}
+
+function touchMove(event, ownerInstance) {
+  // H5 平台 阻止页面滚动
+  if (event.preventDefault) {
+    event.preventDefault()
+  }
+  var ownerState = ownerInstance.getState()
+  var touch = event.touches[0] || event.changedTouches[0]
+  var instance = event.instance
+  var pageX = touch.pageX
+  var pageY = touch.pageY
+
+  var deltaX = pageX - startX
+  var deltaY = pageY - startY
+  console.log('onTouchMove', deltaX, deltaY, curIndex)
+  // 设置当前拖动元素偏移量
+  console.log(move.left + deltaX, move.top + deltaY)
+  instance.setStyle({
+    transform: 'translate3d(' + (move.left + deltaX) + 'px,' + (move.top + deltaY) + 'px, 0)',
+  })
+  // 找到当前拖动元素中心点在哪个盒子
+  // var hitIndex = -1
+  for (var i = 0; i < propsData.total; i++) {
+    if (isHit({ x: move.centerX + deltaX, y: move.centerY + deltaY }, propsData.rectList[i], i)) {
+      hitIndex = i
+      break
+    }
+  }
+
+  // console.log(hitIndex)
+  if (hitIndex == -1) return false
+  if (hitIndex == curIndex) return false
+  // 惰性操作，hitIndex无变化，不对逻辑层发送通知
+  if (ownerState.hitIndex == hitIndex) return false
+  ownerState.hitIndex = hitIndex
+  console.log(hitIndex)
+  // if (curIndex === ownerState.preStartKey) return false
+  // ownerState.preStartKey = curIndex
+  // ownerState.hitIndex = hitIndex
+  // ownerInstance.callMethod('dragEnter', { oldIndex: +curIndex, newIndex: +hitIndex })
+  // ownerInstance.callMethod('dragStatus', 'end')
+
+  var list = sortCore(ownerState.list, +curIndex, +hitIndex)
+  ownerState.itemsInstance.forEach(function (itemIns, index) {
+    var item = list[index]
+    if (index !== +curIndex) {
+      itemIns.setStyle({
+        transform: 'translate3d(' + item.tranX + ',' + item.tranY + ', 0)',
+      })
+    }
+  })
+  // MP-WEIXIN 平台 相当于调用了同时调用了stopPropagation和preventDefault， 必须return，否则小程序真机跟手卡顿
+  return false
+}
+
+function touchEnd(event, ownerInstance) {
+  var ownerState = ownerInstance.getState()
+  var instance = event.instance
+  instance.removeClass('cur')
+  instance.addClass('tran')
+  ownerState.hitIndex = -1
+  // curIndex = -1
+  console.log('touchEnd')
+  // ownerInstance.callMethod('dragEnter', { oldIndex: +curIndex, newIndex: +hitIndex })
+  // 设置当前激活元素偏移量
+  // {
+  //   transform: 'translate3d(' + 0 + 'px, ' + 0 + 'px, 0)',
+  // }
+
+  instance.setStyle({
+    transform: 'translate3d(' + ownerState.list[curIndex].tranX + ',' + ownerState.list[curIndex].tranY + ', 0)',
+  })
+}
+
+function propsObserver(newValue, oldValue, ownerInstance, instance) {
+  // var state = ownerInstance.getState()
+  console.log('propsObserver', newValue)
+  propsData = newValue
+  propsData.rectList = []
+  // state.hitIndex = newValue.hitIndex
+  for (var i = 0; i < propsData.total; i++) {
+    propsData.rectList.push(getPosOfParent(propsData, i))
+  }
+}
+
+function listObserver(newValue, oldValue, ownerInstance, instance) {
+  var ownerState = ownerInstance.getState()
+  ownerState.itemsInstance = ownerInstance.selectAllComponents('.list-item')
+
+  ownerState.list = newValue || []
+  // console.log(JSON.stringify(ownerState.list))
+  ownerState.list.forEach(function (item, index) {
+    var itemIns = ownerState.itemsInstance[index]
+    if (item && itemIns) {
+      itemIns.setStyle({
+        transform: 'translate3d(' + item.tranX + ',' + item.tranY + ', 0)',
+      })
+    }
+  })
+}
+
+module.exports = {
+  longPress: longPress,
+  touchStart: touchStart,
+  touchMove: touchMove,
+  touchEnd: touchEnd,
+  propsObserver: propsObserver,
+  listObserver: listObserver,
+}
