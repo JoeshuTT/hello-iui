@@ -1,5 +1,5 @@
 @mixin ellipsis($lines: 1) {
-  /* #ifndef APP-NVUE */
+  /* #ifndef APP-PLUS-NVUE */
   @if $lines <=1 {
     overflow: hidden;
     white-space: nowrap;
@@ -12,7 +12,7 @@
     -webkit-box-orient: vertical;
   }
   /* #endif */
-  /* #ifdef APP-NVUE */
+  /* #ifdef APP-PLUS-NVUE */
   lines: $lines;
   text-overflow: ellipsis;
   /* #endif */

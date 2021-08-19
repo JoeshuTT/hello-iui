@@ -1,13 +1,17 @@
 <script>
 export default {
   onLaunch: function () {
-    console.log('App Launch', uni.getSystemInfoSync())
+    console.log('App Launch')
+
+    setTimeout(() => {
+      console.info('sysInfo', uni.getSystemInfoSync())
+    }, 3000)
   },
   onShow: function () {
     console.log('App Show')
   },
   onHide: function () {
-    console.log('App Hide')  
+    console.log('App Hide')
   },
 }
 </script>

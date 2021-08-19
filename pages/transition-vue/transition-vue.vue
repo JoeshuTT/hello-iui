@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <demo-block title="基础用法" padding>
+    <demo-block title="基础用法" card>
       <i-cell v-for="(item, index) in list" :key="index" :title="item.label" is-link @click="onClick(item)" />
       <!-- transition -->
       <i-transition-vue :show="show" :name="name" custom-class="custom-class" />

@@ -1,40 +1,63 @@
 <template>
   <view class="container">
     <demo-block title="基础用法" row padding>
-      <i-button type="primary" class="mr20" text="浅色风格" @click="onToggle('show')" />
-      <i-button type="primary" class="mr20" text="深色风格" @click="onToggle('show2')" />
-      <i-button type="primary" text="显示遮罩层" @click="onToggle('show3')" />
+      <i-button type="primary" class="mr20" text="浅色风格" @click="onPopoverShow()" />
+      <i-button type="primary" class="mr20" text="深色风格" @click="onPopoverShow('theme')" />
+      <i-button type="primary" text="显示遮罩层" @click="onPopoverShow('overlay')" />
     </demo-block>
-    <demo-block title="弹出位置" padding>
-      <i-cell title="顶部弹出" is-link @click="onCellClick('top')" />
-      <i-cell title="底部弹出" is-link @click="onCellClick('bottom')" />
-      <i-cell title="左侧弹出" is-link @click="onCellClick('left')" />
-      <i-cell title="右侧弹出" is-link @click="onCellClick('right')" />
+    <demo-block title="弹出位置" card>
+      <i-cell title="选择弹出位置">
+        <view class="picker-wrapper">
+          <picker :value="arrayIndex" :range="array" range-key="code" @change="bindPickerChange">
+            <text v-if="array[arrayIndex]" class="picker-text">{{ array[arrayIndex].code }}</text>
+            <text v-else class="picker-text-gray">请选择</text>
+          </picker>
+          <i-icon name="arrow" />
+        </view>
+      </i-cell>
+      <div class="demo-popover-wrapper">
+        <div class="demo-popover-row">
+          <view class="demo-popover-refer" @click="onReferClick">
+            <text class="demo-popover-refer-text">Click</text>
+          </view>
+        </div>
+      </div>
     </demo-block>
-    <i-popover v-model="show" :position="position">
-      <view class="actions">
-        <text
-          v-for="(item, index) in actionList"
-          :key="index"
-          class="actions-text"
-          :class="[index === actionList.length - 1 ? 'actions-text--noborder' : '']"
-          @click="onActionClick(index)"
-          >{{ item.text }}</text
-        >
+    <demo-block title="自定义内容" row padding>
+      <i-button type="primary" class="mr20" text="自定义内容" @click="onPopoverShow3" />
+    </demo-block>
+    <!-- 基础用法 -->
+    <i-popover
+      v-model="show"
+      :position="position"
+      :arrow-position="arrowPosition"
+      :actions="actionList"
+      :theme="theme"
+      :overlay="overlay"
+    ></i-popover>
+    <!-- 弹出位置 -->
+    <i-popover
+      v-model="show2"
+      :position="position2"
+      :arrow-position="arrowPosition2"
+      :actions="actionList"
+      theme="dark"
+    ></i-popover>
+    <!-- 自定义内容 -->
+    <i-popover v-model="show3" :position="position3" :arrow-position="arrowPosition3">
+      <view class="my-actions">
+        <view v-for="(item, index) in actionList" :key="index" class="my-actions-item">
+          <i-icon name="smile-o" class="mr20" />
+          <text
+            class="actions-text"
+            :class="[index === actionList.length - 1 ? 'actions-text-dark--noborder' : '']"
+            @click="onActionClick(index)"
+            >{{ item.text }}</text
+          >
+        </view>
       </view>
     </i-popover>
-    <i-popover v-model="show2" :position="position2" theme="dark">
-      <view class="actions">
-        <text
-          v-for="(item, index) in actionList"
-          :key="index"
-          class="actions-text-dark"
-          :class="[index === actionList.length - 1 ? 'actions-text-dark--noborder' : '']"
-          @click="onActionClick(index)"
-          >{{ item.text }}</text
-        >
-      </view>
-    </i-popover>
+    <!-- <i-popover v-model="show2" :position="position2" theme="dark" :actions="actionList"></i-popover>
     <i-popover v-model="show3" :position="position3" overlay>
       <view class="actions">
         <text
@@ -46,64 +69,106 @@
           >{{ item.text }}</text
         >
       </view>
-    </i-popover>
+    </i-popover> -->
     <!-- <i-popover v-model="show" :placement="placement" /> -->
   </view>
 </template>
 
 <script>
 import pageMixin from '@/mixins/page'
-
+let last = 0
 export default {
   mixins: [pageMixin],
   data() {
     return {
+      // 基础用法
       show: false,
+      position: {},
+      arrowPosition: {},
+      actionList: [{ text: '选项一', disabled: Math.random() > 0.5 }, { text: '选项二' }, { text: '选项三' }],
+      theme: 'light',
+      overlay: false,
+      // 弹出位置
       show2: false,
+      array: [
+        {
+          code: 'top',
+          position: { x: 240, y: 90 },
+          arrowPosition: { pos: 'bottom', x: 120 },
+        },
+        {
+          code: 'left',
+          position: { x: 30, y: 320 },
+          arrowPosition: { pos: 'right', y: 120 },
+        },
+        {
+          code: 'bottom',
+          position: { x: 240, y: 520 },
+          arrowPosition: { pos: 'top', x: 120 },
+        },
+        {
+          code: 'right',
+          position: { x: -30, y: 320 },
+          arrowPosition: { pos: 'left', y: 120 },
+        },
+      ],
+      arrayIndex: 0,
+      // 自定义内容
       show3: false,
-      show_top: false,
-      show_bottom: false,
-      show_left: false,
-      show_right: false,
-      placement: 'bottom',
-      actionList: [{ text: '选项一' }, { text: '选项二' }, { text: '选项三' }],
-      position: {
-        x: 30,
-        // #ifndef H5
-        y: 220,
-        // #endif
-        // #ifdef H5
-        y: 300,
-        // #endif
-      },
-      position2: {
-        x: 200,
-        // #ifndef H5
-        y: 220,
-        // #endif
-        // #ifdef H5
-        y: 300,
-        // #endif
-      },
-      position3: {
-        x: -30,
-        // #ifndef H5
-        y: 220,
-        // #endif
-        // #ifdef H5
-        y: 300,
-        // #endif
-      },
+      position3: {},
+      arrowPosition3: {},
     }
+  },
+  computed: {
+    position2() {
+      return this.array[this.arrayIndex].position
+    },
+    arrowPosition2() {
+      return this.array[this.arrayIndex].arrowPosition
+    },
   },
   onLoad() {},
   methods: {
-    onToggle(field) {
-      this[field] = !this[field]
+    onPopoverShow(prop) {
+      this.show = !this.show
+
+      if (prop === 'theme') {
+        this.theme = 'dark'
+        this.overlay = false
+        this.position = { x: 190, y: 180 }
+        this.arrowPosition = { pos: 'top', x: 120 }
+      } else if (prop === 'overlay') {
+        this.theme = 'light'
+        this.overlay = true
+        this.position = { x: 440, y: 180 }
+        this.arrowPosition = { pos: 'top', x: 40 }
+      } else {
+        this.theme = 'light'
+        this.overlay = false
+        this.position = { x: 20, y: 180 }
+        this.arrowPosition = { pos: 'top', x: 40 }
+      }
     },
-    onCellClick(type) {
-      // this[`show_${type}`] = true
-      this.placement = type
+    onPopoverShow3() {
+      this.show3 = true
+      this.position3 = { x: 20, y: 710 }
+      this.arrowPosition3 = { pos: 'top', x: 40 }
+    },
+    bindPickerChange(e) {
+      console.log('picker发送选择改变，携带值为', e.detail.value)
+      const index = e.detail.value
+      this.arrayIndex = index
+      this.show2 = !this.show2
+    },
+    onReferClick() {
+      const now = +new Date()
+      const index = this.arrayIndex
+      this.show2 = !this.show2
+      if (now - last > 1500) {
+        this.arrayIndex = index > 2 ? 0 : index + 1
+      }
+
+      last = now
     },
     onActionClick(index) {
       uni.showToast({ icon: 'none', title: this.actionList[index].text })
@@ -117,39 +182,77 @@ export default {
   margin-right: 20rpx;
 }
 
-.actions {
-  @include flex-box();
-  width: 120px;
-  padding: 0 30rpx;
+.demo-popover {
+  &-wrapper {
+    @include flex-box('column');
+    align-items: center;
+    justify-content: center;
+    padding: 20rpx;
+  }
+
+  &-row {
+    width: 600rpx;
+    @include flex-box('row');
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-refer {
+    @include flex-box();
+    align-items: center;
+    justify-content: center;
+    width: 120rpx;
+    height: 120rpx;
+    background-color: #1989fa;
+    border-radius: 8px;
+    margin: 10rpx;
+
+    &-text {
+      color: #fff;
+      font-size: 12px;
+    }
+  }
+}
+
+.picker {
+  &-wrapper {
+    @include flex-box('row');
+    align-items: center;
+  }
 
   &-text {
-    height: 88rpx;
+    margin-right: 5px;
     font-size: 14px;
-    color: #323232;
-    line-height: 88rpx;
-    text-align: center;
+
+    &-gray {
+      font-size: 14px;
+      color: #999;
+    }
+  }
+}
+
+.my-actions {
+  @include flex-box();
+  width: 240rpx;
+  padding: 0 30rpx;
+
+  &-item {
+    @include flex-box('row');
+    align-items: center;
+    height: 88rpx;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: #ebedf0;
+    border-bottom-color: $border-color;
 
     &--noborder {
       border-bottom-color: transparent;
     }
+  }
 
-    &-dark {
-      height: 88rpx;
-      font-size: 14px;
-      color: #fff;
-      line-height: 88rpx;
-      text-align: center;
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
-      border-bottom-color: #646566;
-
-      &--noborder {
-        border-bottom-color: transparent;
-      }
-    }
+  &-text {
+    font-size: $font-size-md;
+    color: $gray-8;
+    text-align: center;
   }
 }
 </style>

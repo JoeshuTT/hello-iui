@@ -13,7 +13,7 @@ const getClassNames = name => ({
   'leave-to': `i-${name}-leave-to i-${name}-leave-active`,
 })
 
-// #ifdef APP-NVUE
+// #ifdef APP-PLUS-NVUE
 const animation = uni.requireNativePlugin('animation')
 const animationMap = TRANSITION.animationMap
 const getStyle = name => animationMap[name]
@@ -62,7 +62,7 @@ export default {
     mergeStyle() {
       const { viewStyle, customStyle } = this
       return {
-        // #ifndef APP-NVUE
+        // #ifndef APP-PLUS-NVUE
         transitionDuration: `${this.currentDuration}ms`,
         display: `${this.display ? '' : 'none'}`,
         // #endif
@@ -78,10 +78,10 @@ export default {
           return
         }
 
-        // #ifndef APP-NVUE
+        // #ifndef APP-PLUS-NVUE
         value ? this.enter() : this.leave()
         // #endif
-        // #ifdef APP-NVUE
+        // #ifdef APP-PLUS-NVUE
         value ? this.enter2() : this.leave2()
         // #endif
       },
@@ -92,7 +92,7 @@ export default {
     onClick() {
       this.$emit('click')
     },
-    // #ifndef APP-NVUE
+    // #ifndef APP-PLUS-NVUE
     enter() {
       const { name, duration } = this
       const classNames = getClassNames(name)
@@ -145,7 +145,7 @@ export default {
         .catch(() => {})
     },
     // #endif
-    // #ifdef APP-NVUE
+    // #ifdef APP-PLUS-NVUE
     enter2() {
       const { name, duration } = this
       const currentStyle = getStyle(name) || this.animConfig
@@ -232,7 +232,7 @@ export default {
       const { show, display } = this
       if (!show && display) {
         this.display = false
-        // #ifdef APP-NVUE
+        // #ifdef APP-PLUS-NVUE
         this.inited = false
         // #endif
       }

@@ -1,15 +1,15 @@
 <template>
   <view class="container">
-    <demo-block title="基础用法" padding>
+    <demo-block title="基础用法" card>
       <i-cell title="展示弹出层" is-link @click="onCellClick('center')" />
     </demo-block>
-    <demo-block title="弹出位置" padding>
+    <demo-block title="弹出位置" card>
       <i-cell title="顶部弹出" is-link @click="onCellClick('top')" />
       <i-cell title="底部弹出" is-link @click="onCellClick('bottom')" />
       <i-cell title="左侧弹出" is-link @click="onCellClick('left')" />
       <i-cell title="右侧弹出" is-link @click="onCellClick('right')" />
     </demo-block>
-    <demo-block title="自定义样式" padding>
+    <demo-block title="自定义样式" card>
       <i-cell title="圆角弹窗" is-link @click="onCellClick('round')" />
     </demo-block>
     <i-popup v-model="show_center">

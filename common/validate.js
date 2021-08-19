@@ -1,8 +1,4 @@
 /**
- * util 工具方法
- */
-
-/**
  * 是否有值
  * @param {*} value
  * @return {Boolean}

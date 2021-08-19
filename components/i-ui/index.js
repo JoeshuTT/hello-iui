@@ -9,7 +9,8 @@ export const imagePlaceholder =
 export const iconFontSrc = '/static/iuiIconFont.ttf'
 
 export const iconFontFamily = 'iuiIconFont'
-
+export const OVERLAY_BACKGROUND_COLOR = 'rgba(0, 0, 0, 0.7)'
+export const Z_INDEX = 999
 // Color Palette
 export const COLOR_PALETTE = {
   black: '#000',

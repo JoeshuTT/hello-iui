@@ -53,12 +53,12 @@ export default {
   }
 
   &--border {
-    /* #ifndef APP-NVUE */
+    /* #ifndef APP-PLUS-NVUE */
     &::after {
       @include hairline-bottom();
     }
     /* #endif */
-    /* #ifdef APP-NVUE */
+    /* #ifdef APP-PLUS-NVUE */
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-bottom-color: $cell-border-color;

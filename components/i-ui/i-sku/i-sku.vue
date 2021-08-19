@@ -1,15 +1,9 @@
 <template>
-  <i-popup v-model="show" position="bottom" :custom-style="mergeStyle"  >
+  <i-popup v-model="show" position="bottom" :custom-style="mergeStyle">
     <view class="sku-container">
-<view class="sku-header">
-  header
-</view>
-<view class="sku-body">
-  body
-</view>
-<view class="sku-action">
-  action
-</view>
+      <view class="sku-header"> header </view>
+      <view class="sku-body"> body </view>
+      <view class="sku-action"> action </view>
     </view>
     <view class="sku-close">
       <i-icon size="32" color="#323233" class="sku-close-icon" name="cross" />
@@ -34,16 +28,16 @@ export default {
       default: '',
     },
   },
-  computed:{
-mergeStyle() {
+  computed: {
+    mergeStyle() {
       const { customStyle } = this
 
       const style = {
         // #ifdef H5
-        height:'80vh',
+        height: '80vh',
         // #endif
         'background-color': '#fff',
-        'z-index': 999, 
+        'z-index': 999,
       }
 
       return Object.assign({}, style, customStyle)
@@ -55,7 +49,7 @@ mergeStyle() {
     },
     noop(e) {
       console.log('noop', e)
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       e.stopPropagation()
       // #endif
     },

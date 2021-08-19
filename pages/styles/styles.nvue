@@ -26,7 +26,7 @@
         >
       </view>
     </demo-block>
-    <!-- #ifndef APP-NVUE -->
+    <!-- #ifndef APP-PLUS-NVUE -->
     <demo-block title="细线边框" padding>
       <view class="layout-box i-hairline--top">上边框 </view>
       <view class="layout-box i-hairline--bottom">下边框 </view>
@@ -52,7 +52,7 @@ export default {
 
 <style lang="scss">
 .ellipsis {
-  /* #ifndef APP-NVUE */
+  /* #ifndef APP-PLUS-NVUE */
   display: block;
   /* #endif */
   margin-bottom: 40rpx;
@@ -113,7 +113,7 @@ export default {
   margin-bottom: 20rpx;
 }
 
-/* #ifndef APP-NVUE */
+/* #ifndef APP-PLUS-NVUE */
 .layout-box {
   margin-bottom: 20rpx;
 }

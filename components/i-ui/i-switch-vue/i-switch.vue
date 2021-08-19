@@ -82,7 +82,7 @@ export default {
 @import '../styles/index.scss';
 
 .i-switch {
-  /* #ifndef APP-NVUE */
+  /* #ifndef APP-PLUS-NVUE */
   box-sizing: border-box;
   /* #endif */
   position: relative;
@@ -100,7 +100,7 @@ export default {
   }
 
   &__node {
-    /* #ifndef APP-NVUE */
+    /* #ifndef APP-PLUS-NVUE */
     box-sizing: border-box;
     /* #endif */
     &--on {
@@ -111,7 +111,7 @@ export default {
     top: 0;
     left: 0;
     transform: translateX(0);
-    /* #ifndef APP-NVUE */
+    /* #ifndef APP-PLUS-NVUE */
     z-index: $switch-node-z-index;
     /* #endif */
     width: $switch-node-size;
@@ -119,9 +119,9 @@ export default {
     background-color: $switch-node-background-color;
     border-radius: $switch-node-size;
     box-shadow: $switch-node-box-shadow;
-    /* #ifndef APP-NVUE */
+    /* #ifndef APP-PLUS-NVUE */
     /* #endif */
-    /* #ifdef APP-NVUE */
+    /* #ifdef APP-PLUS-NVUE */
     // border-width: 1px;
     // border-style: solid;
     // border-color: #dfdfdf;

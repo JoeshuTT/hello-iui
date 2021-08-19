@@ -7,7 +7,7 @@
 <script>
 import { isObj } from '../utils/validate'
 import { TRANSITION } from '../index'
-// #ifdef APP-NVUE
+// #ifdef APP-PLUS-NVUE
 const animation = uni.requireNativePlugin('animation')
 // #endif
 const requestAnimationFrame = () => new Promise(resolve => setTimeout(resolve, 1000 / 30))
@@ -54,14 +54,14 @@ export default {
   computed: {
     currentDisplay() {
       let display = 'block'
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       display = 'flex'
       // #endif
       return this.customStyle.display || display
     },
     mergeStyle() {
       const { customStyle, aniStyle } = this
-      // #ifndef APP-NVUE
+      // #ifndef APP-PLUS-NVUE
       delete customStyle.display
       // #endif
       return Object.assign({}, aniStyle, customStyle)
@@ -91,7 +91,7 @@ export default {
 
       this.inited = true
 
-      // #ifndef APP-NVUE
+      // #ifndef APP-PLUS-NVUE
       this.aniStyle = {
         ...currentStyle['enter'],
         transitionTimingFunction: 'ease',
@@ -109,7 +109,7 @@ export default {
         .catch(() => {})
       // #endif
 
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       this.aniStyle = {
         ...currentStyle['enter'],
       }
@@ -139,13 +139,12 @@ export default {
       if (!this.inited) {
         return
       }
-
       const { name, duration } = this
       const currentDuration = isObj(duration) ? duration.leave : duration
       const currentStyle = getStyle(name) || this.animConfig
       this.$emit('beforeLeave')
 
-      // #ifndef APP-NVUE
+      // #ifndef APP-PLUS-NVUE
       this.aniStyle = Object.assign({}, this.aniStyle, currentStyle['leave-to'], {
         transitionDuration: `${currentDuration}ms`,
       })
@@ -159,7 +158,7 @@ export default {
       }, currentDuration)
       // #endif
 
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       this.$emit('leave')
       animation.transition(
         this.$refs.ani,

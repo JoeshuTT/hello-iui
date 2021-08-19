@@ -148,7 +148,7 @@ export default {
       }
     },
     noop(e) {
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       e.stopPropagation()
       // #endif
     },
@@ -165,7 +165,7 @@ export default {
   &--center {
     top: 0;
     left: 0;
-    /* #ifndef APP-NVUE */
+    /* #ifndef APP-PLUS-NVUE */
     display: flex;
     /* #endif */
     align-items: center;

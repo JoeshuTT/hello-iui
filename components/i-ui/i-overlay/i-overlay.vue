@@ -13,9 +13,10 @@
 
 <script>
 const nextTick = () => new Promise(resolve => setTimeout(resolve, 1000 / 30))
-// #ifdef APP-NVUE
+// #ifdef APP-PLUS-NVUE
 const animation = uni.requireNativePlugin('animation')
 // #endif
+import { OVERLAY_BACKGROUND_COLOR } from '../index'
 
 export default {
   name: 'IOverlay',
@@ -38,7 +39,8 @@ export default {
       inited: false,
       overlayStyle: {
         opacity: 0,
-        // #ifndef APP-NVUE
+        backgroundColor: OVERLAY_BACKGROUND_COLOR,
+        // #ifndef APP-PLUS-NVUE
         transitionDuration: `${this.duration}ms`,
         display: this.customStyle.display || 'block', // 起到v-show的效果，.vue页面可用
         // #endif
@@ -48,14 +50,14 @@ export default {
   computed: {
     currentDisplay() {
       let display = 'block'
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       display = 'flex'
       // #endif
       return this.customStyle.display || display
     },
     mergeStyle() {
       const { customStyle, overlayStyle } = this
-      // #ifndef APP-NVUE
+      // #ifndef APP-PLUS-NVUE
       delete customStyle.display
       // #endif
       return Object.assign({}, overlayStyle, customStyle)
@@ -81,7 +83,7 @@ export default {
       this.inited = true
       this.overlayStyle.opacity = 0
 
-      // #ifndef APP-NVUE
+      // #ifndef APP-PLUS-NVUE
       this.overlayStyle.display = this.currentDisplay
       this.overlayStyle.transitionDuration = `${this.duration}ms`
 
@@ -93,7 +95,7 @@ export default {
         .catch(() => {})
       // #endif
 
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       this.$nextTick()
         .then(nextTick)
         .then(() => {
@@ -117,14 +119,14 @@ export default {
 
       this.overlayStyle.transitionDuration = `${this.duration}ms`
 
-      // #ifndef APP-NVUE
+      // #ifndef APP-PLUS-NVUE
       this.overlayStyle.opacity = 0
       setTimeout(() => {
         this.overlayStyle.display = 'none'
       }, this.duration)
       // #endif
 
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       animation.transition(
         this.$refs.iOverlay,
         {
@@ -143,7 +145,7 @@ export default {
       // #endif
     },
     noop(e) {
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       e.stopPropagation()
       // #endif
     },
@@ -160,11 +162,10 @@ export default {
   left: 0;
   bottom: 0;
   right: 0;
-  /* #ifndef APP-NVUE */
+  /* #ifndef APP-PLUS-NVUE */
   z-index: $z-index;
   transition-property: opacity;
   transition-timing-function: ease;
   /* #endif */
-  background-color: $overlay-background-color;
 }
 </style>

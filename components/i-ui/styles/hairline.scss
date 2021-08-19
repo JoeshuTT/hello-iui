@@ -1,7 +1,7 @@
 @import './var';
 @import './mixins/hairline';
 
-/* #ifndef APP-NVUE */
+/* #ifndef APP-PLUS-NVUE */
 [class*='i-hairline'] {
   &::after {
     @include hairline();

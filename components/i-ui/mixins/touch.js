@@ -27,11 +27,11 @@ export default {
     touchStart(event) {
       // console.log('touchStart')
       this.resetTouchStatus()
-      // #ifndef APP-NVUE
+      // #ifndef APP-PLUS-NVUE
       this.startX = event.touches[0].clientX
       this.startY = event.touches[0].clientY
       // #endif
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       this.startX = event.touches[0].screenX
       this.startY = event.touches[0].screenY
       // #endif
@@ -39,11 +39,11 @@ export default {
     touchMove(event) {
       // console.log('touchMove')
       const touch = event.touches[0]
-      // #ifndef APP-NVUE
+      // #ifndef APP-PLUS-NVUE
       this.deltaX = touch.clientX - this.startX
       this.deltaY = touch.clientY - this.startY
       // #endif
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       this.deltaX = touch.screenX - this.startX
       this.deltaY = touch.screenY - this.startY
       // #endif

@@ -49,7 +49,7 @@ export default {
   width: 300rpx;
   height: 300rpx;
   background-color: #fff;
-  // #ifndef APP-NVUE
+  // #ifndef APP-PLUS-NVUE
   display: flex;
   // #endif
   align-items: center;

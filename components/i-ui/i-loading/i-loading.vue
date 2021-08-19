@@ -1,13 +1,13 @@
 <template>
   <view class="i-loading" :class="['i-loading--' + type, vertical && 'i-loading--vertical']">
-    <!-- #ifndef APP-NVUE -->
+    <!-- #ifndef APP-PLUS-NVUE -->
     <view v-if="!webviewHide" :class="['i-loading__spinner', 'i-loading__spinner--' + type]" :style="[mergeStyle]">
       <template v-if="type === 'spinner'">
         <view v-for="(item, index) in array12" :key="index" class="i-loading__dot" />
       </template>
     </view>
     <!-- #endif -->
-    <!-- #ifdef APP-NVUE -->
+    <!-- #ifdef APP-PLUS-NVUE -->
     <loading-indicator v-if="!webviewHide" :animating="true" class="i-loading-indicator" :style="[mergeStyle]" />
     <!-- #endif -->
     <text v-if="tip" class="i-loading__text" :class="[vertical && 'i-loading__text--vertical']">{{ tip }}</text>
@@ -86,7 +86,7 @@ export default {
   @include flex-box('row');
   align-items: center;
   justify-content: center;
-  // #ifndef APP-NVUE
+  // #ifndef APP-PLUS-NVUE
   color: $loading-spinner-color;
   // #endif
   &--vertical {
@@ -109,7 +109,7 @@ export default {
       margin: $padding-xs 0 0;
     }
   }
-  // #ifndef APP-NVUE
+  // #ifndef APP-PLUS-NVUE
   &__spinner {
     position: relative;
     @include flex-box('row');
@@ -149,7 +149,7 @@ export default {
   }
   // #endif
 }
-// #ifndef APP-NVUE
+// #ifndef APP-PLUS-NVUE
 @for $i from 1 through 12 {
   .i-loading__dot:nth-of-type(#{$i}) {
     transform: rotate($i * 30deg);

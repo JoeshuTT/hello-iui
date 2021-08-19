@@ -132,7 +132,7 @@ export default {
     @include flex-box('row');
     justify-content: center;
     padding-right: 110px;
-    /* #ifndef APP-NVUE */
+    /* #ifndef APP-PLUS-NVUE */
     max-width: 45%;
     /* #endif */
 

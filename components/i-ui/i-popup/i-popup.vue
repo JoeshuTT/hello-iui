@@ -1,20 +1,30 @@
 <template>
-  <view
-    v-if="value"
-    :class="['i-popup-wrapper', 'i-popup-wrapper--' + position]"
-    :style="[wrapperStyle]"
-    @touchmove.stop.prevent="noop"
-  >
-    <i-overlay :show="overlay" :custom-style="overlayStyle" @click="onOverlayClick" />
+  <view class="i-popup-wrapper" :style="[wrapperStyle]" @touchmove.stop.prevent="noop">
+    <!-- #ifdef APP-PLUS-NVUE -->
+    <i-overlay :show="value" :custom-style="overlayStyle" class="i-popup-mask" @click="onOverlayClick">
+      <i-transition
+        :class="['i-popup--' + position]"
+        :show="value"
+        :duration="duration"
+        :name="aniName"
+        :custom-style="mergeStyle"
+      >
+        <slot />
+      </i-transition>
+    </i-overlay>
+    <!-- #endif -->
+    <!-- #ifndef APP-PLUS-NVUE -->
+    <i-overlay :show="overlay && value" :custom-style="overlayStyle" @click="onOverlayClick"></i-overlay>
     <i-transition
       :class="['i-popup--' + position]"
-      :show="true"
+      :show="value"
       :duration="duration"
       :name="aniName"
       :custom-style="mergeStyle"
     >
       <slot />
     </i-transition>
+    <!-- #endif -->
   </view>
 </template>
 
@@ -47,7 +57,7 @@ export default {
     },
     overlay: {
       type: Boolean,
-      default: true,
+      default: true, // 为了使用最少的 DOM来实现, nvue下不能使用该属性
     },
     closeOnClickOverlay: {
       type: Boolean,
@@ -67,18 +77,19 @@ export default {
     },
   },
   data() {
-    const { windowWidth, windowHeight, windowTop = 0 } = getSystemInfoSync()
-    console.log(getSystemInfoSync(), windowTop)
+    const { windowTop = 0, windowBottom = 0 } = getSystemInfoSync()
+
     return {
       positionMap: {
         center: {
           animate: 'fade',
           style: {
-            position: 'relative',
-          },
-          wrapperStyle: {
-            width: `${windowWidth}px`,
-            height: `${windowHeight}px`,
+            // #ifndef APP-PLUS-NVUE
+            position: 'fixed',
+            left: '50%',
+            top: '50%',
+            transform: 'translate3d(-50%, -50%, 0)',
+            // #endif
           },
         },
         top: {
@@ -87,9 +98,7 @@ export default {
             position: 'fixed',
             left: 0,
             right: 0,
-            // #ifndef H5
-            top: 0,
-            // #endif
+            top: `${windowTop}px`,
           },
         },
         bottom: {
@@ -98,9 +107,7 @@ export default {
             position: 'fixed',
             left: 0,
             right: 0,
-            // #ifndef H5
-            bottom: 0,
-            // #endif
+            bottom: `${windowBottom}px`,
           },
         },
         left: {
@@ -109,7 +116,7 @@ export default {
             position: 'fixed',
             left: 0,
             top: `${windowTop}px`,
-            bottom: 0,
+            bottom: `${windowBottom}px`,
           },
         },
         right: {
@@ -118,7 +125,7 @@ export default {
             position: 'fixed',
             right: 0,
             top: `${windowTop}px`,
-            bottom: 0,
+            bottom: `${windowBottom}px`,
           },
         },
       },
@@ -158,7 +165,7 @@ export default {
       }
     },
     noop(e) {
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       e.stopPropagation()
       // #endif
     },
@@ -169,37 +176,16 @@ export default {
 <style lang="scss">
 @import '../styles/index.scss';
 
+// #ifdef H5
 .i-popup-wrapper {
-  position: fixed;
-
-  &--center {
-    top: 0;
-    left: 0;
-    /* #ifndef APP-NVUE */
-    display: flex;
-    /* #endif */
-    align-items: center;
-    justify-content: center;
-  }
+  position: fixed; // 相对于uni-page-wrapper 左上角
 }
+// #endif
 
-/* #ifdef H5 */
-.i-popup {
-  &--top {
-    top: var(--window-top);
-  }
-
-  &--bottom {
-    bottom: var(--window-bottom);
-  }
-
-  &--safe-bottom {
-    @include safe-area-inset-bottom();
-  }
-
-  &--safe-top {
-    @include safe-area-inset-top();
-  }
+// #ifdef APP-PLUS-NVUE
+.i-popup-mask {
+  align-items: center;
+  justify-content: center;
 }
-/* #endif */
+// #endif
 </style>

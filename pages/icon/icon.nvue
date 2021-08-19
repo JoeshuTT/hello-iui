@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <demo-block title="基础图标" padding>
+    <demo-block title="基础图标" card>
       <view class="i-row demo-row">
         <view v-for="(item, index) in list" :key="index" class="i-col-6 demo-col">
           <i-icon size="32" color="#323233" :class="[item.class]" :name="item.value" />
@@ -8,7 +8,7 @@
         </view>
       </view>
     </demo-block>
-    <demo-block title="图标图片" padding>
+    <demo-block title="图标图片" card>
       <view class="i-row demo-row">
         <view class="i-col-6 demo-col">
           <i-icon
@@ -18,7 +18,7 @@
         </view>
       </view>
     </demo-block>
-    <demo-block title="图标颜色" padding>
+    <demo-block title="图标颜色" card>
       <view class="i-row demo-row">
         <view class="i-col-6 demo-col">
           <i-icon name="fire-o" size="32rpx" color="#1989fa" />
@@ -28,7 +28,7 @@
         </view>
       </view>
     </demo-block>
-    <demo-block title="图标大小" padding>
+    <demo-block title="图标大小" card>
       <view class="i-row demo-row">
         <view class="i-col-6 demo-col">
           <i-icon name="circle" size="32rpx" color="#1989fa" />
@@ -38,7 +38,7 @@
         </view>
       </view>
     </demo-block>
-    <demo-block title="使用 Unicode 方式，自定义图标" padding>
+    <demo-block title="使用 Unicode 方式，自定义图标" card>
       <view class="i-row demo-row">
         <view v-for="(item, index) in list2" :key="index" class="i-col-6 demo-col">
           <i-icon font-family="myIcon" :name="item.value" size="32" color="#323233" />
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-// #ifdef APP-NVUE
+// #ifdef APP-PLUS-NVUE
 const dom = weex.requireModule('dom')
 dom.addRule('fontFace', {
   fontFamily: 'myIcon',
@@ -147,11 +147,6 @@ export default {
   @include i-col(6, 0, 690);
 }
 
-.demo-row {
-  background-color: #fff;
-  border-radius: 4px;
-}
-
 .demo-col {
   padding: 15rpx 20rpx;
   align-items: center;
@@ -164,7 +159,7 @@ export default {
   }
 }
 
-/* #ifndef APP-NVUE */
+/* #ifndef APP-PLUS-NVUE */
 .i-rotate {
   animation: rotate 1s linear infinite;
 }
@@ -179,7 +174,7 @@ export default {
   }
 }
 /* #endif */
-/* #ifndef APP-NVUE */
+/* #ifndef APP-PLUS-NVUE */
 /* 引入第三方或自定义的字体图标样式 */
 @font-face {
   font-family: 'myIcon';

@@ -71,7 +71,7 @@ export default {
 .demo-home {
   // box-sizing: border-box;
   // width: 100%;
-  /* #ifndef APP-NVUE */
+  /* #ifndef APP-PLUS-NVUE */
   min-height: 100vh;
   /* #endif */
   padding: 46px 20px 20px;

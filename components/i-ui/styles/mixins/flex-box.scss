@@ -4,7 +4,7 @@
 //  * @param {Number} $direction 弹性盒子内部元素方向
 //  */
 @mixin flex-box($direction: 'column') {
-  /* #ifndef APP-NVUE */
+  /* #ifndef APP-PLUS-NVUE */
   box-sizing: border-box;
   display: flex;
   // line-height: 1.2;
@@ -35,10 +35,10 @@
 //  */
 @mixin i-col($span: 8, $space: 0, $rowWidth: 375) {
   @include flex-box();
-  /* #ifndef APP-NVUE */
+  /* #ifndef APP-PLUS-NVUE */
   width: $span * 100% / 24;
   /* #endif */
-  /* #ifdef APP-NVUE */
+  /* #ifdef APP-PLUS-NVUE */
   width: $span * ($rowWidth + $space) / 24 * 1rpx;
   /* #endif */
   @if ($space > 0) {

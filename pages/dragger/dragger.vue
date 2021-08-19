@@ -23,7 +23,7 @@
     </view>
   </view>
 </template>
-<!-- #ifndef APP-NVUE -->
+<!-- #ifndef APP-PLUS-NVUE -->
 <!-- eslint-disable-next-line -->
 <script module="handle" lang="wxs" src="./index.wxs"></script>
 <!-- #endif -->

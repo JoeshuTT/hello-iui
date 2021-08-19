@@ -98,12 +98,12 @@ export default {
   }
 
   &--border {
-    /* #ifndef APP-NVUE */
+    /* #ifndef APP-PLUS-NVUE */
     &::after {
       @include hairline-bottom($border-color, $padding-md, $padding-md);
     }
     /* #endif */
-    /* #ifdef APP-NVUE */
+    /* #ifdef APP-PLUS-NVUE */
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-bottom-color: $cell-border-color;
@@ -140,6 +140,7 @@ export default {
   &__value {
     @include flex-box('row');
     justify-content: flex-end;
+    align-items: center;
 
     &-text {
       font-size: $cell-font-size;

@@ -129,7 +129,7 @@ export default {
 .i-transition {
   transition-timing-function: ease;
 }
-/* #ifndef APP-NVUE */
+/* #ifndef APP-PLUS-NVUE */
 .i-fade-enter-active,
 .i-fade-leave-active {
   transition-property: opacity;

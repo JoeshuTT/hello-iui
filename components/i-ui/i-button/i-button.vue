@@ -1,5 +1,5 @@
 <template>
-  <!-- #ifndef APP-NVUE -->
+  <!-- #ifndef APP-PLUS-NVUE -->
   <button
     :class="[utils.bem('button', [type, { plain, round, square, disabled }])]"
     :hover-class="hoverClass"
@@ -31,7 +31,7 @@
     <text class="i-button__text" :style="[mergeTextStyle]">{{ text }}</text>
   </button>
   <!-- #endif -->
-  <!-- #ifdef APP-NVUE -->
+  <!-- #ifdef APP-PLUS-NVUE -->
   <!-- eslint-disable-next-line -->
   <view
     class="i-button"
@@ -55,7 +55,7 @@
   </view>
   <!-- #endif -->
 </template>
-<!-- #ifndef APP-NVUE -->
+<!-- #ifndef APP-PLUS-NVUE -->
 <!-- eslint-disable-next-line -->
 <script module="utils" lang="wxs" src="../wxs/utils.wxs"></script>
 <!-- #endif -->
@@ -147,7 +147,7 @@ export default {
       const viewStyle = {}
       const { color, plain, customStyle } = this
 
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       viewStyle.backgroundColor = BUTTON.type[this.type] || 'white'
       viewStyle.borderWidth = '1px'
       viewStyle.borderStyle = 'solid'
@@ -156,7 +156,7 @@ export default {
       // #endif
 
       if (color) {
-        // #ifndef APP-NVUE
+        // #ifndef APP-PLUS-NVUE
         viewStyle.color = plain ? color : 'white'
         // #endif
         if (~color.indexOf('gradient')) {
@@ -172,7 +172,7 @@ export default {
         }
       }
 
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       if (plain) {
         viewStyle.backgroundColor = 'white'
       }
@@ -184,7 +184,7 @@ export default {
       const viewStyle = {}
       const { text, color, type, icon, plain, loading, textStyle } = this
 
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
 
       viewStyle.fontSize = BUTTON.text.fontSize
       viewStyle.color = BUTTON.type[type] ? 'white' : BUTTON.text.color
@@ -230,7 +230,7 @@ export default {
   padding: 0 $padding-md;
   height: $button-default-height;
   line-height: $button-default-line-height;
-  /* #ifndef APP-NVUE */
+  /* #ifndef APP-PLUS-NVUE */
   margin-left: 0;
   margin-right: 0;
   text-align: center;
@@ -242,7 +242,7 @@ export default {
   opacity: 1;
   transition: opacity $animation-duration-fast;
   /* #endif */
-  /* #ifndef APP-NVUE */
+  /* #ifndef APP-PLUS-NVUE */
   &--default {
     color: $button-default-color;
     background-color: $button-default-background-color;
@@ -329,7 +329,7 @@ export default {
   &--active {
     opacity: $active-opacity;
   }
-  /* #ifdef APP-NVUE */
+  /* #ifdef APP-PLUS-NVUE */
   &:active {
     opacity: $active-opacity;
   }

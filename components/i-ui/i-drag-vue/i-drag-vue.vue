@@ -13,7 +13,7 @@
 import { addUnit } from '../utils'
 import icon from './type'
 import { COLOR_PALETTE, iconFontFamily, iconFontSrc } from '../index'
-// #ifdef APP-NVUE
+// #ifdef APP-PLUS-NVUE
 const dom = weex.requireModule('dom')
 dom.addRule('fontFace', {
   fontFamily: iconFontFamily,

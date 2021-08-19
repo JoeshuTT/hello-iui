@@ -1,6 +1,6 @@
 <template>
   <view class="i-image" :class="[round && 'i-image--round']">
-    <!-- #ifndef APP-NVUE -->
+    <!-- #ifndef APP-PLUS-NVUE -->
     <!--图片加载器 start -->
     <image style="width: 0; height: 0; display: none" :src="src" @load="onImgLoad" @error="onImgError" />
     <!--图片加载器 end -->
@@ -20,7 +20,7 @@
       <slot name="error"><i-icon name="photo-fail" size="24" color="#dcdee0" /></slot>
     </view>
     <!-- #endif -->
-    <!-- #ifdef APP-NVUE -->
+    <!-- #ifdef APP-PLUS-NVUE -->
     <image
       :style="[mergeStyle]"
       :src="src"
@@ -39,7 +39,7 @@
 import IIcon from '../i-icon/i-icon'
 import { addUnit, isNumber } from '../utils'
 var imagePlaceholder = ''
-// #ifdef APP-NVUE
+// #ifdef APP-PLUS-NVUE
 import { IMAGE } from '../index'
 imagePlaceholder = IMAGE.placeHolder
 // #endif
@@ -122,12 +122,12 @@ export default {
         viewStyle.width = addUnit(width, 'rpx')
         viewStyle.height = addUnit(height, 'rpx')
       } else {
-        // #ifdef APP-NVUE
+        // #ifdef APP-PLUS-NVUE
         // viewStyle = { width: '300px', height: '225px' }
         // #endif
       }
 
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       if (round) {
         if (isNumber(width)) {
           viewStyle.borderRadius = addUnit(width / 2, 'rpx')
@@ -164,7 +164,7 @@ export default {
     onImgError(event) {
       this.loading = false
       this.error = true
-      // #ifdef APP-NVUE
+      // #ifdef APP-PLUS-NVUE
       // eslint-disable-next-line vue/no-mutating-props
       this.src = imagePlaceholder
       // #endif
@@ -179,7 +179,7 @@ export default {
 
 .i-image {
   position: relative;
-  /* #ifndef APP-NVUE */
+  /* #ifndef APP-PLUS-NVUE */
   overflow: hidden;
 
   &--round {
@@ -188,7 +188,7 @@ export default {
   /* #endif */
 }
 
-/* #ifndef APP-NVUE */
+/* #ifndef APP-PLUS-NVUE */
 .i-image__img {
   position: relative;
   transition-property: opacity;
